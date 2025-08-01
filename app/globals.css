@@ -252,30 +252,29 @@
   font-family: var(--font-clash-display), sans-serif;
 }
 
-.flicker-effect {
-  animation: flicker 0.16s infinite;
-}
-
 .initial-offscreen-top {
   transform: translateY(-100px);
 }
 
+/* Flicker Effect */
+.flicker-effect {
+  animation: flicker 0.16s infinite;
+}
+
 /* CRT Effect */
 @keyframes flicker {
-    0%, 100% {
-        filter: brightness(2.5);
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow:
+        0 0 2px #fff,
+        0 0 4px #fff,
+        0 0 6px #ccc,
+        0 0 10px #ccc,
+        0 0 12px #ccc,
+        0 0 15px #ccc,
+        0 0 20px #ccc;
     }
-    20% {
-        filter: brightness(1);
-    }
-    40% {
-        filter: brightness(2.5);
-    }
-    60% {
-        filter: brightness(1);
-    }
-    80% {
-        filter: brightness(2.5);
+    20%, 24%, 55% {        
+        text-shadow: none;
     }
 }
 
@@ -370,7 +369,7 @@
 }
 
 
-.partner-card {
+.partner-.flicker-effect {
   background-color: rgb(9,9,9);
   border: 1px solid rgb(22,22,22);
   border-radius: 10px;
