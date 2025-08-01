@@ -26,16 +26,16 @@ export default function NickSpanosLanding() {
             </Badge>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in-up animation-delay-200">
-            Nick Spanos
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in-up animation-delay-200 font-title">
+            NICK SPANOS
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed animate-fade-in-up animation-delay-400">
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed animate-fade-in-up animation-delay-400 font-content">
             Founder of Bitcoin Center NYC • Early Bitcoin Adopter • Crypto Visionary
           </p>
 
           <div className="bg-black/40 backdrop-blur-sm border border-orange-500/20 rounded-lg p-6 mb-8 animate-fade-in-up animation-delay-600">
-            <blockquote className="text-lg md:text-xl italic text-orange-300">
+            <blockquote className="text-lg md:text-xl italic text-orange-300 font-content">
               "Bitcoin isn't just a currency, it's a revolution. I've dedicated my life to building the infrastructure
               that makes this revolution accessible to everyone."
             </blockquote>
@@ -76,8 +76,8 @@ export default function NickSpanosLanding() {
               <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
                 Founding Story
               </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Bitcoin Center NYC</h2>
-              <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">Bitcoin Center NYC</h2>
+              <p className="text-gray-300 text-lg mb-6 leading-relaxed font-content">
                 In 2013, I founded the world's first Bitcoin Center in the heart of New York's Financial District.
                 Located across from the NYSE, it became the epicenter of Bitcoin education, trading, and community
                 building.
@@ -119,8 +119,8 @@ export default function NickSpanosLanding() {
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
               In The Spotlight
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Media Appearances</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">Media Appearances</h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto font-content">
               Featured across major media outlets sharing insights on Bitcoin, cryptocurrency, and the future of
               finance.
             </p>
@@ -186,10 +186,10 @@ export default function NickSpanosLanding() {
                       </Badge>
                     </div>
                   </div>
-                  <h3 className="font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors">
-                    {item.outlet}
-                  </h3>
-                  <p className="text-gray-300 text-sm mb-3">{item.title}</p>
+                                          <h3 className="font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors font-title">
+                          {item.outlet}
+                        </h3>
+                        <p className="text-gray-300 text-sm mb-3 font-content">{item.title}</p>
                   <p className="text-gray-500 text-xs">{item.date}</p>
                 </CardContent>
               </Card>
@@ -201,11 +201,11 @@ export default function NickSpanosLanding() {
       {/* Quote Section */}
       <section className="py-20 px-4 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
-          <blockquote className="text-2xl md:text-3xl font-light italic text-white mb-6 leading-relaxed">
+          <blockquote className="text-2xl md:text-3xl font-light italic text-white mb-6 leading-relaxed font-content">
             "The future belongs to those who understand that Bitcoin is more than technology—it's the foundation of a
             new economic paradigm. Every day, we're building that future."
           </blockquote>
-          <cite className="text-orange-400 font-semibold">— Nick Spanos</cite>
+          <cite className="text-orange-400 font-semibold font-title">— Nick Spanos</cite>
         </div>
       </section>
 
@@ -216,8 +216,8 @@ export default function NickSpanosLanding() {
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4 animate-bounce">
               Speaking Engagements
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white animate-fade-in-up">Conferences & Events</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up animation-delay-200">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white animate-fade-in-up font-title">Conferences & Events</h2>
+            <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up animation-delay-200 font-content">
               Sharing knowledge and insights at premier Bitcoin and cryptocurrency conferences worldwide.
             </p>
           </div>
@@ -229,7 +229,7 @@ export default function NickSpanosLanding() {
 
             {/* Upcoming Events */}
             <div className="mb-12">
-              <h3 className="text-2xl font-bold text-orange-400 text-center mb-8 animate-fade-in-left">
+              <h3 className="text-2xl font-bold text-orange-400 text-center mb-8 animate-fade-in-left font-title">
                 Upcoming Events
               </h3>
 
@@ -266,16 +266,16 @@ export default function NickSpanosLanding() {
                           </Badge>
                           <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/20">{event.role}</Badge>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{event.name}</h3>
+                        <h3 className="text-xl font-bold text-white mb-2 font-title">{event.name}</h3>
                         <div className="flex items-center gap-2 text-gray-400 mb-1">
                           <MapPin className="h-4 w-4" />
-                          <span className="text-sm">{event.location}</span>
+                          <span className="text-sm font-content">{event.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-gray-400 mb-3">
                           <Calendar className="h-4 w-4" />
-                          <span className="text-sm">{event.date}</span>
+                          <span className="text-sm font-content">{event.date}</span>
                         </div>
-                        <p className="text-gray-300 mb-4">{event.topic}</p>
+                        <p className="text-gray-300 mb-4 font-content">{event.topic}</p>
                         <Button
                           size="sm"
                           className="bg-orange-600 hover:bg-orange-700 transform hover:scale-105 transition-all duration-300"
@@ -295,7 +295,7 @@ export default function NickSpanosLanding() {
 
             {/* Past Events */}
             <div>
-              <h3 className="text-2xl font-bold text-gray-400 text-center mb-8 animate-fade-in-right">Past Events</h3>
+              <h3 className="text-2xl font-bold text-gray-400 text-center mb-8 animate-fade-in-right font-title">Past Events</h3>
 
               <div className="space-y-8">
                 {[
@@ -344,16 +344,16 @@ export default function NickSpanosLanding() {
                           <Badge className="bg-gray-500/10 text-gray-400 border-gray-500/20">Past</Badge>
                           <Badge className="bg-orange-500/10 text-orange-400 border-orange-500/20">{event.role}</Badge>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-2">{event.name}</h3>
+                        <h3 className="text-xl font-bold text-white mb-2 font-title">{event.name}</h3>
                         <div className="flex items-center gap-2 text-gray-400 mb-1">
                           <MapPin className="h-4 w-4" />
-                          <span className="text-sm">{event.location}</span>
+                          <span className="text-sm font-content">{event.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-gray-400 mb-3">
                           <Calendar className="h-4 w-4" />
-                          <span className="text-sm">{event.date}</span>
+                          <span className="text-sm font-content">{event.date}</span>
                         </div>
-                        <p className="text-gray-300 mb-4">{event.topic}</p>
+                        <p className="text-gray-300 mb-4 font-content">{event.topic}</p>
                         <Button
                           variant="outline"
                           size="sm"
@@ -380,10 +380,10 @@ export default function NickSpanosLanding() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-title">
                 Nick Spanos
               </h3>
-              <p className="text-gray-400 mb-4">
+              <p className="text-gray-400 mb-4 font-content">
                 Bitcoin pioneer, educator, and community builder dedicated to advancing cryptocurrency adoption
                 worldwide.
               </p>
@@ -413,8 +413,8 @@ export default function NickSpanosLanding() {
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
+              <h4 className="text-lg font-semibold text-white mb-4 font-title">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400 font-content">
                 <li>
                   <Link href="#" className="hover:text-orange-400 transition-colors">
                     About
@@ -439,8 +439,8 @@ export default function NickSpanosLanding() {
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">Contact</h4>
-              <ul className="space-y-2 text-gray-400">
+              <h4 className="text-lg font-semibold text-white mb-4 font-title">Contact</h4>
+              <ul className="space-y-2 text-gray-400 font-content">
                 <li>Speaking Inquiries</li>
                 <li>Media Requests</li>
                 <li>Collaboration</li>
@@ -452,7 +452,7 @@ export default function NickSpanosLanding() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-500">
+            <p className="text-gray-500 font-content">
               © {new Date().getFullYear()} Nick Spanos. All rights reserved. | Building the future of Bitcoin, one block
               at a time.
             </p>

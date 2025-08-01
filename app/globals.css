@@ -238,3 +238,12 @@
   animation-delay: 0.7s;
   opacity: 0;
 }
+
+/* Custom Font Classes */
+.font-content {
+  font-family: var(--font-proto-mono), monospace;
+}
+
+.font-title {
+  font-family: var(--font-lomo-copy), serif;
+}
