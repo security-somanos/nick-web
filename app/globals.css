@@ -247,3 +247,90 @@
 .font-title {
   font-family: var(--font-lomo-copy), serif;
 }
+
+.font-impact {
+  font-family: var(--font-clash-display), sans-serif;
+}
+
+.flicker-effect {
+  animation: flicker 0.16s infinite;
+}
+
+.initial-offscreen-top {
+  transform: translateY(-100px);
+}
+
+/* CRT Effect */
+@keyframes flicker {
+    0%, 100% {
+        filter: brightness(2.5);
+    }
+    20% {
+        filter: brightness(1);
+    }
+    40% {
+        filter: brightness(2.5);
+    }
+    60% {
+        filter: brightness(1);
+    }
+    80% {
+        filter: brightness(2.5);
+    }
+}
+
+@keyframes crt-scanline {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 10%;
+    }
+}
+
+.crt::after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.3) 50%);
+    background-size: 100% 4px;
+    z-index: 1;
+    pointer-events: none;
+    animation: crt-scanline 10s linear infinite;
+}
+
+@keyframes crt-flicker {
+    0%   { opacity: 0.9; }
+    50%  { opacity: 0.8; }
+    100% { opacity: 0.9; }
+}
+
+@keyframes crt-noise-anim {
+    0%   { clip-path: inset(10% 0 80% 0); }
+    20%  { clip-path: inset(50% 0 10% 0); }
+    40%  { clip-path: inset(20% 0 30% 0); }
+    60%  { clip-path: inset(70% 0 5% 0); }
+    80%  { clip-path: inset(30% 0 40% 0); }
+    100% { clip-path: inset(60% 0 25% 0); }
+}
+
+.crt::before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 1;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    animation: crt-flicker 0.15s infinite, crt-noise-anim 2s linear infinite alternate-reverse;
+}

@@ -1,58 +1,102 @@
+"use client"
+import BitcoinCenterScrollSequence from "@/components/bitcoin-center-scroll-sequence";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import * as THREE from 'three'
+import { useEffect } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function NickSpanosLanding() {
+  
+  useEffect(() => {
+    // Timeline for hero animations
+    const tl = gsap.timeline();
+    
+    // 1a. Nick Spanos falls from above (cut off initially)
+    // 1b. Founder text rises from below (simultaneously)
+    tl.set("#nick-title", { y: -100, opacity: 0, overflow: "hidden", immediateRender: false })
+      .set("#founder-text", { y: 100, opacity: 0, immediateRender: false })
+      .set("#buttons-container", { y: 50, opacity: 0, immediateRender: false })
+      .set("#badge-container", { opacity: 0, immediateRender: false })
+      
+      // Animate Nick Spanos falling down and founder text rising up simultaneously
+      .to("#nick-title", { 
+        y: 0, 
+        duration: 0.8, 
+        opacity: 1,
+        ease: "power2.out" 
+      })
+      .to("#founder-text", { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.6, 
+        ease: "power2.out" 
+      }, "-=0.6") // Start at the same time
+      
+      // 2. Buttons start rising (with delay)
+      .to("#buttons-container", { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power2.out" 
+      }, "-=0.4") // Start 0.4s before the previous animation ends
+      
+      // 3. Badge fades in after everything else
+      .to("#badge-container", { 
+        opacity: 1, 
+        duration: 0.6, 
+        ease: "power2.out" 
+      }, "-=0.2");
+      
+      
+  }, []);
+  
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
+      <section className="crt relative h-screen flex items-center justify-center overflow-hidden ">
+        {/* Glitch Background Effect */}
         <div className="absolute inset-0 z-0">
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-30">
-            <source src="/placeholder-video.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+            {/* Fallback background */}
+            <div className=" absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 text-left px-4 max-w-6xl mx-auto">
-          <div className="mb-6 animate-fade-in-up">
-            <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4 animate-pulse">
+        <div className="crt relative z-10 text-center px-4 max-w-6xl mx-auto">
+          <div className="mb-6 opacity-0" id="badge-container">
+            <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
               Bitcoin Pioneer Since 2013
             </Badge>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white animate-fade-in-up animation-delay-200 font-title">
-            NICK SPANOS
-          </h1>
+          <div className="overflow-hidden">
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 text-white font-title initial-offscreen-top" id="nick-title">
+              NICK SPANOS
+            </h1>
+          </div>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed animate-fade-in-up animation-delay-400 font-content">
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed font-content opacity-0" id="founder-text">
             Founder of Bitcoin Center NYC • Early Bitcoin Adopter • Crypto Visionary
           </p>
 
-          <div className="bg-black/40 backdrop-blur-sm border border-orange-500/20 rounded-lg p-6 mb-8 animate-fade-in-up animation-delay-600">
-            <blockquote className="text-lg md:text-xl italic text-orange-300 font-content">
-              "Bitcoin isn't just a currency, it's a revolution. I've dedicated my life to building the infrastructure
-              that makes this revolution accessible to everyone."
-            </blockquote>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-800">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
             <Button
               size="lg"
-              className="bg-orange-600 hover:bg-orange-700 text-white transform hover:scale-105 transition-all duration-300"
+              variant="outlineTech"
             >
               <Play className="mr-2 h-5 w-5" />
               Watch My Story
             </Button>
             <Button
               size="lg"
-              variant="outline"
-              className="border-orange-500 text-orange-400 hover:bg-orange-500/10 bg-transparent transform hover:scale-105 transition-all duration-300"
+              variant="outlineTech"
             >
               <ExternalLink className="mr-2 h-5 w-5" />
               Contact Me
@@ -60,140 +104,121 @@ export default function NickSpanosLanding() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-orange-500 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-orange-500 rounded-full mt-2 animate-pulse" />
-          </div>
-        </div>
+
       </section>
 
-      {/* Bitcoin Center NYC Section */}
-      <section className="py-20 px-4 bg-gray-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in-left">
-              <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
-                Founding Story
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">Bitcoin Center NYC</h2>
-              <p className="text-gray-300 text-lg mb-6 leading-relaxed font-content">
-                In 2013, I founded the world's first Bitcoin Center in the heart of New York's Financial District.
-                Located across from the NYSE, it became the epicenter of Bitcoin education, trading, and community
-                building.
-              </p>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-orange-500" />
-                  <span className="text-gray-300">40 Broad Street, Financial District, NYC</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-orange-500" />
-                  <span className="text-gray-300">Thousands of visitors and Bitcoin enthusiasts</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Award className="h-5 w-5 text-orange-500" />
-                  <span className="text-gray-300">First physical Bitcoin trading floor</span>
-                </div>
-              </div>
-              <Button className="bg-orange-600 hover:bg-orange-700">Learn More About Bitcoin Center</Button>
-            </div>
-            <div className="relative animate-fade-in-right">
-              <Image
-                src="/placeholder.svg?height=400&width=600"
-                alt="Bitcoin Center NYC"
-                width={600}
-                height={400}
-                className="rounded-lg shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg" />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Time is Money & Bitcoin Center Section */}
+      <BitcoinCenterScrollSequence />
 
       {/* Media Appearances Section */}
       <section className="py-20 px-4 bg-black">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
               In The Spotlight
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">Media Appearances</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">On the news</h2>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto font-content">
               Featured across major media outlets sharing insights on Bitcoin, cryptocurrency, and the future of
               finance.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-0">
             {[
               {
-                type: "TV",
                 outlet: "CNBC",
-                title: "Bitcoin's Future in Traditional Finance",
-                date: "2024",
-                icon: Tv,
+                description: "NICK SPANOS LAUNCHES MIAMI BITCOIN CENTER 2017",
+                link: "#"
               },
               {
-                type: "Podcast",
-                outlet: "The Bitcoin Podcast",
-                title: "Building Bitcoin Infrastructure",
-                date: "2024",
-                icon: Radio,
+                outlet: "FORBES",
+                description: "NICK SPANOS IN FORBES 10 TIMES IN 5 WEEKS",
+                link: "#"
               },
               {
-                type: "Article",
-                outlet: "CoinDesk",
-                title: "The Evolution of Bitcoin Centers",
-                date: "2023",
-                icon: Newspaper,
+                outlet: "CNN",
+                description: "CNN SPECIAL ON THE BITCOIN CENTER (2015)",
+                link: "#"
               },
               {
-                type: "TV",
-                outlet: "Bloomberg",
-                title: "Cryptocurrency Regulation Discussion",
-                date: "2023",
-                icon: Tv,
+                outlet: "POLITICO",
+                description: "FEATURE IN POLITICO MAGAZINE",
+                link: "#"
               },
               {
-                type: "Podcast",
-                outlet: "Unchained",
-                title: "Early Bitcoin Adoption Stories",
-                date: "2023",
-                icon: Radio,
+                outlet: "NETFLIX",
+                description: "BANKING ON BITCOIN (NETFLIX DOCUMENTARY)",
+                link: "#"
               },
               {
-                type: "Article",
-                outlet: "Bitcoin Magazine",
-                title: "The NYC Bitcoin Scene",
-                date: "2023",
-                icon: Newspaper,
+                outlet: "REASON MAGAZINE",
+                description: "INSIDE BITCOIN CENTER NYC JANUARY 2014",
+                link: "#"
               },
+              {
+                outlet: "BITCOIN MIAMI",
+                description: "CBDC'S AND FEDNOW VS BITCOIN AT BITCOIN MIAMI QUANTUM 2023",
+                link: "#"
+              },
+              {
+                outlet: "NORTH AMERICAN BITCOIN CONFERENCE",
+                description: "THE NORTH AMERICAN BITCOIN CONFERENCE 2022 KEYNOTE",
+                link: "#"
+              }
             ].map((item, index) => (
-              <Card
+              <div 
                 key={index}
-                className={`bg-black/50 border-gray-800 hover:border-orange-500/50 transition-all duration-500 group cursor-pointer transform hover:scale-105 animate-fade-in-up animation-delay-${index * 100}`}
+                className="group cursor-pointer transition-all duration-350 hover:bg-white overflow-hidden"
               >
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 bg-orange-500/10 rounded-lg group-hover:bg-orange-500/20 transition-colors">
-                      <item.icon className="h-5 w-5 text-orange-500" />
+                <div className="border-t border-white/20 group-hover:border-black/40 transition-colors">
+                  <div className="flex items-center justify-between py-6 px-4 relative">
+                    <div className="flex-1 relative overflow-hidden h-12">
+                      {/* Title Container */}
+                      <div className="overflow-hidden h-6 relative">
+                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
+                          {/* Title - Original */}
+                          <div className="text-white font-semibold text-lg tracking-wide h-6 flex items-center">
+                            {item.outlet}
+                          </div>
+                          {/* Title - Duplicate */}
+                          <div className="text-black font-semibold text-lg tracking-wide h-6 flex items-center">
+                            {item.outlet}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Description Container */}
+                      <div className="overflow-hidden h-6 relative mt-1">
+                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
+                          {/* Description - Original */}
+                          <div className="text-white/70 text-sm tracking-wide h-6 flex items-center">
+                            {item.description}
+                          </div>
+                          {/* Description - Duplicate */}
+                          <div className="text-black/70 text-sm tracking-wide h-6 flex items-center">
+                            {item.description}
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <Badge variant="secondary" className="bg-gray-800 text-gray-300">
-                        {item.type}
-                      </Badge>
+                    <div className="ml-6">
+                      <svg 
+                        className="w-5 h-5 text-white/60 group-hover:text-black transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
                     </div>
                   </div>
-                                          <h3 className="font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors font-title">
-                          {item.outlet}
-                        </h3>
-                        <p className="text-gray-300 text-sm mb-3 font-content">{item.title}</p>
-                  <p className="text-gray-500 text-xs">{item.date}</p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
+            
+            {/* Bottom border for last item */}
+            <div className="border-t border-white/20"></div>
           </div>
         </div>
       </section>

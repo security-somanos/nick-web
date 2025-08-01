@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { protoMono, lomoCopy } from '@/lib/fonts'
+import { protoMono, lomoCopy, clashDisplay } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -14,17 +14,20 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${protoMono.variable} ${lomoCopy.variable}`}>
+    <html lang="en" className={`${protoMono.variable} ${lomoCopy.variable} ${clashDisplay.variable}`}>
       <head>
         <style>{`
 html {
   font-family: var(--font-proto-mono), monospace;
   --font-content: var(--font-proto-mono);
   --font-title: var(--font-lomo-copy);
+  --font-impact: var(--font-clash-display);
 }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+      </body>
     </html>
   )
 }
