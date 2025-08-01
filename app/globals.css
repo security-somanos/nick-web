@@ -334,3 +334,44 @@
     pointer-events: none;
     animation: crt-flicker 0.15s infinite, crt-noise-anim 2s linear infinite alternate-reverse;
 }
+
+/* Noise Effect - Base styles only */
+.noise-overlay {
+  /* Base styles handled in component */
+}
+
+/* Partners Scroll Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+}
+
+.marquee-mask {
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 12.5%, rgb(0, 0, 0) 87.5%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Responsive animation speeds */
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation-duration: 25s;
+  }
+}
+
+.partners-logo {
+  transition: opacity 0.3s ease;
+}
+
+.partners-logo:hover {
+  opacity: 0.8;
+}
+
+
+.partner-card {
+  background-color: rgb(9,9,9);
+  border: 1px solid rgb(22,22,22);
+  border-radius: 10px;
+}

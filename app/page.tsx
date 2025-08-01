@@ -1,5 +1,6 @@
 "use client"
 import BitcoinCenterScrollSequence from "@/components/bitcoin-center-scroll-sequence";
+import NoiseEffect from "@/components/noise-effect";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -7,9 +8,10 @@ import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Awar
 import Link from "next/link"
 import Image from "next/image"
 import * as THREE from 'three'
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import PartnersSection from "@/components/partners-section";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -71,8 +73,8 @@ export default function NickSpanosLanding() {
         {/* Hero Content */}
         <div className="crt relative z-10 text-center px-4 max-w-6xl mx-auto">
           <div className="mb-6 opacity-0" id="badge-container">
-            <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
-              Bitcoin Pioneer Since 2013
+            <Badge variant="outline" className="border-gray-400 text-gray-300 mb-0 py-1 px-3">
+              Bitcoin Pioneer
             </Badge>
           </div>
 
@@ -82,8 +84,8 @@ export default function NickSpanosLanding() {
             </h1>
           </div>
 
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed font-content opacity-0" id="founder-text">
-            Founder of Bitcoin Center NYC • Early Bitcoin Adopter • Crypto Visionary
+          <p className="text-lg md:text-lg text-gray-300 mb-8 leading-relaxed font-content opacity-0" id="founder-text">
+            Founder of Bitcoin Center NYC • Inventor • Serial Entrepreneur • Blockchain Visionary <br /> Philosopher • Activist
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
@@ -107,6 +109,9 @@ export default function NickSpanosLanding() {
 
       </section>
 
+      {/* Noise Effect - Applied to everything except hero */}
+      <NoiseEffect />
+      
       {/* Time is Money & Bitcoin Center Section */}
       <BitcoinCenterScrollSequence />
 
@@ -117,8 +122,8 @@ export default function NickSpanosLanding() {
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
               In The Spotlight
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white font-title">On the news</h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto font-content">
+            <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title">ON THE NEWS</h2>
+            <p className="text-gray-300 text-md max-w-2xl mx-auto font-content">
               Featured across major media outlets sharing insights on Bitcoin, cryptocurrency, and the future of
               finance.
             </p>
@@ -173,30 +178,30 @@ export default function NickSpanosLanding() {
               >
                 <div className="border-t border-white/20 group-hover:border-black/40 transition-colors">
                   <div className="flex items-center justify-between py-6 px-4 relative">
-                    <div className="flex-1 relative overflow-hidden h-12">
+                    <div className="flex-1 relative overflow-hidden h-16">
                       {/* Title Container */}
                       <div className="overflow-hidden h-6 relative">
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
                           {/* Title - Original */}
-                          <div className="text-white font-semibold text-lg tracking-wide h-6 flex items-center">
+                          <div className="text-white font-semibold text-lg tracking-wide h-6 flex items-center text-nowrap">
                             {item.outlet}
                           </div>
                           {/* Title - Duplicate */}
-                          <div className="text-black font-semibold text-lg tracking-wide h-6 flex items-center">
+                          <div className="text-black font-semibold text-lg tracking-wide h-6 flex items-center text-nowrap">
                             {item.outlet}
                           </div>
                         </div>
                       </div>
 
                       {/* Description Container */}
-                      <div className="overflow-hidden h-6 relative mt-1">
+                      <div className="overflow-hidden h-10 relative mt-1">
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
                           {/* Description - Original */}
-                          <div className="text-white/70 text-sm tracking-wide h-6 flex items-center">
+                          <div className="text-white/70 text-sm tracking-wide h-10 flex items-center">
                             {item.description}
                           </div>
                           {/* Description - Duplicate */}
-                          <div className="text-black/70 text-sm tracking-wide h-6 flex items-center">
+                          <div className="text-black/70 text-sm tracking-wide h-10 flex items-center">
                             {item.description}
                           </div>
                         </div>
@@ -222,6 +227,9 @@ export default function NickSpanosLanding() {
           </div>
         </div>
       </section>
+      
+      {/* Partners Section - positioned after the scroll sequence */}
+      <PartnersSection />
 
       {/* Quote Section */}
       <section className="py-20 px-4 bg-gray-900">
