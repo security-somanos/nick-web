@@ -25,7 +25,7 @@ html {
 }
         `}</style>
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         {children}
       </body>
     </html>
