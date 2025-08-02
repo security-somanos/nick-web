@@ -1,0 +1,81 @@
+/* components/hover-trigger/styles.css */
+.button-hold {
+    position: absolute;
+    top: 4rem;
+    right: 8rem;
+    width: 165px; /* 170px */
+    height: 165px; /* 170px */
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.trigger-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('/images/sprite.png');
+    background-repeat: no-repeat;
+    background-size: cover; /* Adjust as needed */
+    opacity: 1;
+    width: 100px;
+    height: 100px;
+    background-position-x: 0;
+}
+
+
+.hold_text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.hold_mask {
+    position: absolute;
+    width: 165px;
+    height: 165px;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.mobile-svg {
+    display: none;
+}
+
+.desktop-svg {
+    display: block;
+}
+
+/* On mobile devices, show mobile svg and hide desktop svg */
+@media (max-width: 768px) {
+    .button-hold {
+        top: 2rem;
+        right: 2rem;
+        width: 130px;
+        height: 130px;
+    }
+    
+    .trigger-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .hold_mask {
+        width: 130px;
+        height: 130px;
+    }
+    
+    .mobile-svg {
+        display: block;
+    }
+    .desktop-svg {
+        display: none;
+    }
+}
