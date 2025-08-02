@@ -59,7 +59,14 @@ export default function NickSpanosLanding() {
         opacity: 1, 
         duration: 0.6, 
         ease: "power2.out" 
-      }, "-=0.2");
+      }, "-=0.6")
+      
+      // 4. HoverTrigger fades in last
+      .to(".button-hold", { 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: "power2.out" 
+      }, "-=0.4");
       
   }, []);
 

@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 0; /* Start hidden */
 }
 
 .trigger-container {
