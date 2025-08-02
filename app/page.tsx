@@ -1,6 +1,7 @@
 "use client"
 import BitcoinCenterScrollSequence from "@/components/bitcoin-center-scroll-sequence";
 import NoiseEffect from "@/components/noise-effect";
+import HoverTrigger from "@/components/hover-trigger";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -16,6 +17,9 @@ import PartnersSection from "@/components/partners-section";
 gsap.registerPlugin(ScrollTrigger)
 
 export default function NickSpanosLanding() {
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   
   useEffect(() => {
     // Timeline for hero animations
@@ -57,21 +61,79 @@ export default function NickSpanosLanding() {
         ease: "power2.out" 
       }, "-=0.2");
       
-      
   }, []);
+
+  // Video and audio control functions
+  const playVideo = () => {
+    if (desktopVideoRef.current && mobileVideoRef.current && audioRef.current) {
+      desktopVideoRef.current.style.opacity = "1";
+      mobileVideoRef.current.style.opacity = "1";
+      desktopVideoRef.current.play();
+      mobileVideoRef.current.play();
+      audioRef.current.play();
+    }
+  };
+
+  const stopVideo = () => {
+    if (desktopVideoRef.current && mobileVideoRef.current && audioRef.current) {
+      desktopVideoRef.current.style.opacity = "0";
+      mobileVideoRef.current.style.opacity = "0";
+      desktopVideoRef.current.pause();
+      mobileVideoRef.current.pause();
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  };
   
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hero Section */}
       <section className="crt relative h-screen flex items-center justify-center overflow-hidden ">
-        {/* Glitch Background Effect */}
+        {/* Video Background */}
         <div className="absolute inset-0 z-0">
-            {/* Fallback background */}
-            <div className=" absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+          {/* Desktop Video */}
+          <video
+            ref={desktopVideoRef}
+            className="absolute inset-0 w-full h-full object-cover opacity-0"
+            muted
+            playsInline
+            loop
+          >
+            <source src="/videos/hero-video.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Mobile Video */}
+          <video
+            ref={mobileVideoRef}
+            className="absolute inset-0 w-full h-full object-cover opacity-0 md:hidden"
+            muted
+            playsInline
+            loop
+          >
+            <source src="/videos/hero-video-responsive.mp4" type="video/mp4" />
+          </video>
+          
+          {/* Audio */}
+          <audio
+            ref={audioRef}
+            className="hidden"
+            loop
+          >
+            <source src="/sounds/brainjack.m4a" type="audio/mp4" />
+          </audio>
+          
+          {/* Fallback background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
         </div>
 
+        {/* Hover Trigger Component */}
+        <HoverTrigger 
+          onTriggerStart={playVideo}
+          onTriggerEnd={stopVideo}
+        />
+
         {/* Hero Content */}
-        <div className="crt relative z-10 text-center px-4 max-w-6xl mx-auto">
+        <div className="crt relative z-10 text-center px-4 max-w-6xl mx-auto py-6">
           <div className="mb-6 opacity-0" id="badge-container">
             <Badge variant="outline" className="border-gray-400 text-gray-300 mb-0 py-1 px-3">
               Bitcoin Pioneer
@@ -178,7 +240,7 @@ export default function NickSpanosLanding() {
               >
                 <div className="border-t border-white/20 group-hover:border-black/40 transition-colors">
                   <div className="flex items-center justify-between py-6 px-4 relative">
-                    <div className="flex-1 relative overflow-hidden h-16">
+                    <div className="flex-1 relative overflow-hidden h-16 md:h-12">
                       {/* Title Container */}
                       <div className="overflow-hidden h-6 relative">
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
@@ -194,14 +256,14 @@ export default function NickSpanosLanding() {
                       </div>
 
                       {/* Description Container */}
-                      <div className="overflow-hidden h-10 relative mt-1">
-                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
+                      <div className="overflow-hidden h-10 md:h-6 relative mt-1">
+                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-10 md:group-hover:-translate-y-6">
                           {/* Description - Original */}
-                          <div className="text-white/70 text-sm tracking-wide h-10 flex items-center">
+                          <div className="text-white/70 text-sm tracking-wide h-10 md:h-6 flex items-center">
                             {item.description}
                           </div>
                           {/* Description - Duplicate */}
-                          <div className="text-black/70 text-sm tracking-wide h-10 flex items-center">
+                          <div className="text-black/70 text-sm tracking-wide h-10 md:h-6 flex items-center">
                             {item.description}
                           </div>
                         </div>
@@ -232,7 +294,7 @@ export default function NickSpanosLanding() {
       <PartnersSection />
 
       {/* Quote Section */}
-      <section className="py-20 px-4 bg-gray-900">
+      <section className="hidden py-20 px-4 bg-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <blockquote className="text-2xl md:text-3xl font-light italic text-white mb-6 leading-relaxed font-content">
             "The future belongs to those who understand that Bitcoin is more than technology—it's the foundation of a
@@ -243,7 +305,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Conferences Timeline Section */}
-      <section className="py-20 px-4 bg-gray-900">
+      <section className="py-20 px-4 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4 animate-bounce">

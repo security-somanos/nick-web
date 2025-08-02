@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        outlineTech: "cursor-pointer border border-gray-500/60 bg-transparent text-gray-400 hover:bg-gray-500/10 hover:border-gray-500/80 px-4 py-2 rounded-[4px] font-mono text-sm transition-all duration-200",
+        outlineTech: "cursor-pointer border border-gray-400 bg-transparent text-gray-300 hover:bg-gray-500/10 hover:border-gray-200 px-4 py-2 rounded-[4px] font-mono text-sm transition-all duration-200",
         default:
           "bg-transparent text-primary-foreground shadow-xs hover:bg-primary/90",
         destructive:

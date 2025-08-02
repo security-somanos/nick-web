@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Marquee from "react-fast-marquee";
 
 const partners = [
   {
@@ -38,18 +39,20 @@ const partners = [
 ]
 
 export default function PartnersSection() {
-  const extendedPartners = [...partners, ...partners];
-
   return (
     <section className="w-full bg-black py-12 mb-20">
-      
-      <div className="mx-auto max-w-[1480px] marquee-mask">
-      <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title ps-12">MEDIA PARTNERS</h2>
-        <div className="flex animate-marquee whitespace-nowrap gap-[20px]">
-          {extendedPartners.map((partner, index) => (
+      <div className="mx-auto max-w-[1480px] marquee-container">
+        <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title ps-12">MEDIA PARTNERS</h2>
+        <Marquee
+          gradient={false}
+          speed={50}
+          pauseOnHover={false}
+          autoFill={true}
+        >
+          {partners.map((partner, index) => (
             <div 
               key={`${partner.name}-${index}`}
-              className="flex-shrink-0 flex items-center justify-center partner-card"
+              className="flex-shrink-0 flex items-center justify-center partner-card mr-[20px]"
               style={{ width: '240px', height: '180px' }}
             >
               <Image
@@ -61,7 +64,7 @@ export default function PartnersSection() {
               />
             </div>
           ))}
-        </div>
+        </Marquee>
       </div>
     </section>
   )
