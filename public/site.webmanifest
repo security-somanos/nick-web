@@ -1,0 +1,22 @@
+{
+  "name": "Nick Spanos - Bitcoin Pioneer",
+  "short_name": "Nick Spanos",
+  "description": "Bitcoin pioneer, inventor, serial entrepreneur, and founder of Bitcoin Center NYC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 
