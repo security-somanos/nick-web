@@ -18,7 +18,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-image: url('/images/sprite.png');
+    background-image: url('/images/sprite-min.png');
     background-repeat: no-repeat;
     background-size: cover; /* Adjust as needed */
     opacity: 1;
