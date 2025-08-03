@@ -47,7 +47,7 @@ export default function NoiseEffect({ className = "" }: NoiseEffectProps) {
         left: '-25vw',
         width: '150vw',
         height: '150vh',
-        zIndex: 9999,
+        zIndex: 100,
         backgroundImage: 'url("/images/noise.png")',
         backgroundSize: '200px 200px',
         backgroundRepeat: 'repeat',

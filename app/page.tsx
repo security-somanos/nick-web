@@ -7,9 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
-import * as THREE from 'three'
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
@@ -20,6 +18,14 @@ export default function NickSpanosLanding() {
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Menu refs
+  const menuRef = useRef<HTMLDivElement>(null);
+  const menuItemsRef = useRef<HTMLDivElement>(null);
+  const contactButtonRef = useRef<HTMLDivElement>(null);
+  const bottomLeftRef = useRef<HTMLDivElement>(null);
+  const bottomRightRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     // Timeline for hero animations
@@ -70,6 +76,55 @@ export default function NickSpanosLanding() {
       
   }, []);
 
+  // Menu animations
+  useEffect(() => {
+    if (isMenuOpen && menuRef.current) {
+      // Block scroll when menu is open
+      document.body.style.overflow = 'hidden';
+      
+      const tl = gsap.timeline();
+      
+      // Set initial states
+      gsap.set(menuRef.current, { y: "100%", opacity: 0 });
+      gsap.set(menuItemsRef.current?.children || [], { y: 50, opacity: 0 });
+      gsap.set(contactButtonRef.current, { y: -100, opacity: 0 });
+      gsap.set(bottomLeftRef.current, { y: 100, opacity: 0 });
+      gsap.set(bottomRightRef.current, { y: 100, opacity: 0 });
+      
+      // 1. Menu slides up with opacity
+      tl.to(menuRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      })
+      
+      // 2. After menu is complete, animate all other elements simultaneously
+      .to(menuItemsRef.current?.children || [], {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.1
+      }, "-=0.2")
+      .to(contactButtonRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.8")
+      .to([bottomLeftRef.current, bottomRightRef.current], {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out"
+      }, "-=0.8");
+    } else {
+      // Restore scroll when menu is closed
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMenuOpen]);
+
   // Video and audio control functions
   const playVideo = () => {
     if (desktopVideoRef.current && mobileVideoRef.current && audioRef.current) {
@@ -91,9 +146,141 @@ export default function NickSpanosLanding() {
       audioRef.current.currentTime = 0;
     }
   };
+
+  // Menu close function with animation
+  const closeMenu = () => {
+    if (menuRef.current) {
+      const tl = gsap.timeline({
+        onComplete: () => setIsMenuOpen(false)
+      });
+      
+      // Animate menu sliding down with opacity
+      tl.to(menuRef.current, {
+        y: "100%",
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
+  };
   
   return (
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Header with 4 dots */}
+      <header 
+        className="fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 z-50 mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
+        onClick={() => setIsMenuOpen(true)}
+      >
+        <div className="w-[18px] h-[18px] flex flex-col justify-between">
+          {/* Top row - 2 dots */}
+          <div className="flex justify-between">
+            <div className="w-1 h-1 bg-white rounded-full"></div>
+            <div className="w-1 h-1 bg-white rounded-full"></div>
+          </div>
+          {/* Bottom row - 2 dots */}
+          <div className="flex justify-between">
+            <div className="w-1 h-1 bg-white rounded-full"></div>
+            <div className="w-1 h-1 bg-white rounded-full"></div>
+          </div>
+        </div>
+      </header>
+
+      {/* Menu Overlay */}
+      {isMenuOpen && (
+        <div ref={menuRef} className="fixed inset-0 bg-black z-101">
+          <div className="relative w-full h-full max-w-[1480px] mx-auto">
+            {/* Background Pattern */}
+            <div 
+              className="absolute inset-0 opacity-[0.08]"
+              style={{
+                backgroundImage: 'url(/images/bg-menu.svg)',
+                backgroundRepeat: 'repeat',
+                backgroundPosition: 'left top',
+                backgroundSize: '13px'
+              }}
+            ></div>
+            
+            {/* Content */}
+            <div className="relative z-10 h-full flex flex-col">
+              {/* Close Button */}
+              <div className="flex justify-center pt-16 md:pt-8">
+                <button 
+                  onClick={closeMenu}
+                  className="w-12 h-12 bg-[#0f0f0f] rounded-full flex items-center justify-center hover:bg-white transition-colors cursor-pointer"
+                >
+                  <svg 
+                    className="w-6 h-6 text-[rgb(128,128,128)] hover:text-black" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Main Menu Items */}
+              <div className="flex-1 flex items-center justify-center overflow-hidden">
+                <div ref={menuItemsRef} className="text-center space-y-4 overflow-hidden">
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                    HOME
+                  </div>
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                    WORK
+                  </div>
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                    CONTACT
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Section */}
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-center md:justify-between items-end pb-8 px-8 mt-auto">
+                {/* Copyright */}
+                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-lg md:text-xl font-impact">
+                  © {new Date().getFullYear()} ALL RIGHTS RESERVED
+                </div>
+
+                {/* Social Links */}
+                <div ref={bottomRightRef} className="flex space-y-4 md:space-y-0 mx-auto md:mx-0 flex-col md:flex-row space-x-6 text-white font-impact">
+                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
+                    <span className="text-lg md:text-xl me-2">Instagram</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                    </svg>
+                  </div>
+                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
+                    <span className="text-lg md:text-xl me-2">Twitter</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
+                    </svg>
+                  </div>
+                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
+                    <span className="text-lg md:text-xl me-2">LinkedIn</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          {/* Contact Now Button - Positioned relative to 1480px container */}
+          <div ref={contactButtonRef} className="absolute top-8 right-8 z-[102] hidden md:block">
+            <a href="#contact">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="cursor-pointer border-white text-white bg-transparent hover:bg-white hover:text-black transition-colors font-impact"
+              >
+                CONTACT NOW
+              </Button>
+            </a>
+          </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="crt relative h-screen flex items-center justify-center overflow-hidden ">
         {/* Video Background */}

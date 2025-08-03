@@ -78,12 +78,12 @@ export default function BitcoinCenterScrollSequence() {
             duration: 8,
           }, "-=2");
 
-          tl.to({}, { duration: durationDelay });
+          // tl.to({}, { duration: durationDelay });
 
           tl.to(paragraph1El, {
             opacity: 1,
             duration: fadeInDuration,
-          });
+          }, "-=2");
 
           tl.to({}, { duration: durationDelay });
           
@@ -95,7 +95,7 @@ export default function BitcoinCenterScrollSequence() {
           tl.to(paragraph2El, {
             opacity: 1,
             duration: fadeInDuration,
-          });
+          }, "-=2");
 
           tl.to({}, { duration: durationDelay });
           
@@ -107,7 +107,7 @@ export default function BitcoinCenterScrollSequence() {
           tl.to(paragraph3El, {
             opacity: 1,
             duration: fadeInDuration,
-          });
+          }, "-=2");
 
           tl.to({}, { duration: durationDelay });
           
@@ -119,7 +119,7 @@ export default function BitcoinCenterScrollSequence() {
           tl.to(paragraph4El, {
             opacity: 1,
             duration: fadeInDuration,
-          });
+          }, "-=2");
 
           tl.to({}, { duration: durationDelay });
           
@@ -128,7 +128,7 @@ export default function BitcoinCenterScrollSequence() {
             duration: fadeInDuration,
           });
 
-          tl.to({}, { duration: durationDelay });
+          // tl.to({}, { duration: durationDelay / 3});
         }
       }
 
