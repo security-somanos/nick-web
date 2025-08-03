@@ -80,7 +80,7 @@ export default function NickSpanosLanding() {
   useEffect(() => {
     if (isMenuOpen && menuRef.current) {
       // Block scroll when menu is open
-      document.body.style.overflow = 'hidden';
+      // document.body.style.overflow = 'hidden';
       
       const tl = gsap.timeline();
       
@@ -121,7 +121,7 @@ export default function NickSpanosLanding() {
       }, "-=0.8");
     } else {
       // Restore scroll when menu is closed
-      document.body.style.overflow = 'unset';
+      //document.body.style.overflow = 'unset';
     }
   }, [isMenuOpen]);
 
@@ -237,26 +237,26 @@ export default function NickSpanosLanding() {
               {/* Bottom Section */}
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-center md:justify-between items-end pb-8 px-8 mt-auto">
                 {/* Copyright */}
-                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-lg md:text-xl font-impact">
+                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-xl md:text-2xl font-impact">
                   © {new Date().getFullYear()} ALL RIGHTS RESERVED
                 </div>
 
                 {/* Social Links */}
                 <div ref={bottomRightRef} className="flex space-y-4 md:space-y-0 mx-auto md:mx-0 flex-col md:flex-row space-x-6 text-white font-impact">
                   <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-lg md:text-xl me-2">Instagram</span>
+                    <span className="text-xl md:text-2xl me-2">Instagram</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                     </svg>
                   </div>
                   <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-lg md:text-xl me-2">Twitter</span>
+                    <span className="text-xl md:text-2xl me-2">Twitter</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
                     </svg>
                   </div>
                   <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-lg md:text-xl me-2">LinkedIn</span>
+                    <span className="text-xl md:text-2xl me-2">LinkedIn</span>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
                     </svg>
