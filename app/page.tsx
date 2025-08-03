@@ -72,7 +72,7 @@ export default function NickSpanosLanding() {
         opacity: 1, 
         duration: 0.8, 
         ease: "power2.out" 
-      }, "-=0.4");
+      }, "-=0.6");
       
   }, []);
 
@@ -168,7 +168,7 @@ export default function NickSpanosLanding() {
     <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header with 4 dots */}
       <header 
-        className="fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 z-50 mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
+        className="fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
         onClick={() => setIsMenuOpen(true)}
       >
         <div className="w-[18px] h-[18px] flex flex-col justify-between">
@@ -389,48 +389,51 @@ export default function NickSpanosLanding() {
             {[
               {
                 outlet: "CNBC",
-                description: "NICK SPANOS LAUNCHES MIAMI BITCOIN CENTER 2017",
-                link: "#"
+                description: "CBDC'S AND FEDNOW VS BITCOIN AT BITCOIN MIAMI QUANTUM 2023",
+                link: "https://www.youtube.com/watch?v=VnHPcCXTbh8"
               },
               {
                 outlet: "FORBES",
                 description: "NICK SPANOS IN FORBES 10 TIMES IN 5 WEEKS",
-                link: "#"
+                link: "https://bit.ly/32U0Qsx"
               },
               {
                 outlet: "CNN",
                 description: "CNN SPECIAL ON THE BITCOIN CENTER (2015)",
-                link: "#"
+                link: "https://www.youtube.com/watch?v=aEo6WP_Ttr0"
               },
               {
                 outlet: "POLITICO",
                 description: "FEATURE IN POLITICO MAGAZINE",
-                link: "#"
+                link: "https://www.politico.com/news/magazine/2022/04/05/ron-paul-crypto-00022354"
               },
               {
                 outlet: "NETFLIX",
                 description: "BANKING ON BITCOIN (NETFLIX DOCUMENTARY)",
-                link: "#"
+                link: "https://www.youtube.com/watch?v=tmxqlSevtkQ"
               },
               {
                 outlet: "REASON MAGAZINE",
                 description: "INSIDE BITCOIN CENTER NYC JANUARY 2014",
-                link: "#"
+                link: "https://www.youtube.com/watch?v=DS29SnLaKJs"
               },
               {
                 outlet: "BITCOIN MIAMI",
-                description: "CBDC'S AND FEDNOW VS BITCOIN AT BITCOIN MIAMI QUANTUM 2023",
-                link: "#"
+                description: "NICK SPANOS LAUNCHES MIAMI BITCOIN CENTER 2017",
+                link: "https://www.youtube.com/watch?v=bQhOD0Qa6No"
               },
               {
                 outlet: "NORTH AMERICAN BITCOIN CONFERENCE",
                 description: "THE NORTH AMERICAN BITCOIN CONFERENCE 2022 KEYNOTE",
-                link: "#"
+                link: "https://www.youtube.com/watch?v=Ut-mWQOMKZU"
               }
             ].map((item, index) => (
-              <div 
+              <a 
                 key={index}
-                className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden"
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden block"
               >
                                   <div className="border-t border-white/20 group-hover:border-black/40 group-active:border-black/40 transition-colors">
                   <div className="flex items-center justify-between py-6 px-4 relative">
@@ -475,7 +478,7 @@ export default function NickSpanosLanding() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
             
             {/* Bottom border for last item */}
