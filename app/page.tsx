@@ -222,13 +222,13 @@ export default function NickSpanosLanding() {
               {/* Main Menu Items */}
               <div className="flex-1 flex items-center justify-center overflow-hidden">
                 <div ref={menuItemsRef} className="text-center space-y-4 overflow-hidden">
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
                     HOME
                   </div>
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
                     WORK
                   </div>
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] overflow-hidden leading-[30px] md:leading-[90px]">
+                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
                     CONTACT
                   </div>
                 </div>
@@ -430,14 +430,14 @@ export default function NickSpanosLanding() {
             ].map((item, index) => (
               <div 
                 key={index}
-                className="group cursor-pointer transition-all duration-350 hover:bg-white overflow-hidden"
+                className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden"
               >
-                <div className="border-t border-white/20 group-hover:border-black/40 transition-colors">
+                                  <div className="border-t border-white/20 group-hover:border-black/40 group-active:border-black/40 transition-colors">
                   <div className="flex items-center justify-between py-6 px-4 relative">
                     <div className="flex-1 relative overflow-hidden h-16 md:h-12">
                       {/* Title Container */}
                       <div className="overflow-hidden h-6 relative">
-                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6">
+                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6 group-active:-translate-y-6">
                           {/* Title - Original */}
                           <div className="text-white font-semibold text-lg tracking-wide h-6 flex items-center text-nowrap">
                             {item.outlet}
@@ -451,7 +451,7 @@ export default function NickSpanosLanding() {
 
                       {/* Description Container */}
                       <div className="overflow-hidden h-10 md:h-6 relative mt-1">
-                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-10 md:group-hover:-translate-y-6">
+                        <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-10 md:group-hover:-translate-y-6 group-active:-translate-y-10 md:group-active:-translate-y-6">
                           {/* Description - Original */}
                           <div className="text-white/70 text-sm tracking-wide h-10 md:h-6 flex items-center">
                             {item.description}
@@ -465,7 +465,7 @@ export default function NickSpanosLanding() {
                     </div>
                     <div className="ml-6">
                       <svg 
-                        className="w-5 h-5 text-white/60 group-hover:text-black transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1" 
+                        className="w-5 h-5 text-white/60 group-hover:text-black group-active:text-black transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1 group-active:translate-x-1 group-active:-translate-y-1" 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
