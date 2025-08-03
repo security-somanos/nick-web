@@ -228,9 +228,12 @@ export default function NickSpanosLanding() {
                   <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
                     WORK
                   </div>
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
+                  <Link
+                    href="/contact"
+                    className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px] block"
+                  >
                     CONTACT
-                  </div>
+                  </Link>
                 </div>
               </div>
 
@@ -265,18 +268,18 @@ export default function NickSpanosLanding() {
               </div>
             </div>
           
-          {/* Contact Now Button - Positioned relative to 1480px container */}
-          <div ref={contactButtonRef} className="absolute top-8 right-8 z-[102] hidden md:block">
-            <a href="#contact">
-              <Button 
-                variant="outline" 
-                size="lg"
-                className="cursor-pointer border-white text-white bg-transparent hover:bg-white hover:text-black transition-colors font-impact"
-              >
-                CONTACT NOW
-              </Button>
-            </a>
-          </div>
+                      {/* Contact Now Button - Positioned relative to 1480px container */}
+            <div ref={contactButtonRef} className="absolute top-8 right-8 z-[102] hidden md:block">
+              <Link href="/contact">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="cursor-pointer border-white text-white bg-transparent hover:bg-white hover:text-black transition-colors font-impact"
+                >
+                  CONTACT NOW
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       )}
@@ -352,13 +355,15 @@ export default function NickSpanosLanding() {
               <Play className="mr-2 h-5 w-5" />
               Watch My Story
             </Button>
-            <Button
-              size="lg"
-              variant="outlineTech"
-            >
-              <ExternalLink className="mr-2 h-5 w-5" />
-              Contact Me
-            </Button>
+            <Link href="/contact">
+              <Button
+                size="lg"
+                variant="outlineTech"
+              >
+                <ExternalLink className="mr-2 h-5 w-5" />
+                Contact Me
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -737,7 +742,9 @@ export default function NickSpanosLanding() {
                 <li>Media Requests</li>
                 <li>Collaboration</li>
                 <li>
-                  <Button className="mt-2 bg-orange-600 hover:bg-orange-700">Get In Touch</Button>
+                  <Link href="/contact">
+                    <Button className="mt-2 bg-orange-600 hover:bg-orange-700">Get In Touch</Button>
+                  </Link>
                 </li>
               </ul>
             </div>
