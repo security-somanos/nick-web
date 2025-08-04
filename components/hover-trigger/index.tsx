@@ -130,12 +130,12 @@ const HoverTrigger: React.FC<HoverTriggerProps> = ({ onTriggerStart, onTriggerEn
             <div ref={triggerContainerRef} className="trigger-container" />
 
             <div className="mobile-svg">
-                <ClickToActionSVG ref={mobileSvgRef} className="hold_text" />
+                <ClickToActionSVG ref={mobileSvgRef} className="hold_text hidden" />
             </div>
             <div className="desktop-svg">
-                <HoverToActionSVG ref={desktopSvgRef} className="hold_text" />
+                <HoverToActionSVG ref={desktopSvgRef} className="hold_text hidden" />
             </div>
-            <HoldMaskSVG className="hold_mask" />
+            <HoldMaskSVG className="hold_mask hidden" />
         </div>
     );
 };

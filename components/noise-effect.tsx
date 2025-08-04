@@ -51,7 +51,7 @@ export default function NoiseEffect({ className = "" }: NoiseEffectProps) {
         backgroundImage: 'url("/images/noise.png")',
         backgroundSize: '200px 200px',
         backgroundRepeat: 'repeat',
-        opacity: 0.1,
+        opacity: 0.07,
         willChange: 'transform'
       }}
     />

@@ -40,9 +40,9 @@ const partners = [
 
 export default function PartnersSection() {
   return (
-    <section className="w-full bg-black py-12 mb-20">
-      <div className="mx-auto max-w-[1480px] marquee-container">
-        <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title ps-12">MEDIA PARTNERS</h2>
+    <section className="w-full pb-12 mb-20">
+      <div className="mx-auto md:max-w-[96vw] marquee-container">
+        {/*<h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title ps-12">MEDIA PARTNERS</h2>*/}
         <Marquee
           gradient={false}
           speed={50}

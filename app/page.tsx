@@ -165,10 +165,10 @@ export default function NickSpanosLanding() {
   };
   
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen text-white overflow-x-hidden">
       {/* Header with 4 dots */}
       <header 
-        className="fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
+        className="rounded-xl p-3 fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 mt-4 md:mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
         onClick={() => setIsMenuOpen(true)}
       >
         <div className="w-[18px] h-[18px] flex flex-col justify-between">
@@ -285,7 +285,7 @@ export default function NickSpanosLanding() {
       )}
 
       {/* Hero Section */}
-      <section className="crt relative h-screen flex items-center justify-center overflow-hidden ">
+      <section className="mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden ">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           {/* Desktop Video */}
@@ -320,7 +320,7 @@ export default function NickSpanosLanding() {
           </audio>
           
           {/* Fallback background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/80" />
+          <div className="absolute inset-0 bg-transparent" />
         </div>
 
         {/* Hover Trigger Component */}
@@ -377,17 +377,118 @@ export default function NickSpanosLanding() {
       {/* Time is Money & Bitcoin Center Section */}
       <BitcoinCenterScrollSequence />
 
+      {/* Video Section */}
+      <section className="relative w-full h-[90vh] md:h-[180vh] mt-[-220px] md:mt-[0] overflow-hidden">
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            WebkitMaskImage: `
+              linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+              )
+            `,
+            maskImage: `
+              linear-gradient(
+                to bottom,
+                transparent 0%,
+                black 10%,
+                black 90%,
+                transparent 100%
+              )
+            `
+          }}
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/videos/video-section.webm" type="video/webm" />
+          <source src="/videos/video-section.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Title Overlay */}
+        <div className="absolute inset-0 flex items-center mt-[-10vh] justify-start px-8 md:px-16">
+          <div>
+            <h2 
+              className="text-3xl md:text-6xl lg:text-7xl text-[#dadada] uppercase font-mono font-bold leading-[0.9]"
+            >
+              Conferences,<br />
+              Key Links &<br />
+              Media Partners
+            </h2>
+            <p className="text-stone-400 text-md md:text-lg lg:text-xl mt-4 font-content">
+              A decentralized trail of ideas, alliances, and media shaping the future
+            </p>
+            
+            {/* Links */}
+            <div className="mt-8 space-y-4 space-x-4">
+              <Button
+                variant="outlineTech"
+                size="sm"
+                className="border-stone-400 text-stone-300 hover:bg-stone-400 hover:text-black transition-colors"
+                asChild
+              >
+                <a 
+                  href="https://tv.apple.com/us/movie/banking-on-bitcoin/umc.cmc.61gus6jq1w8py6echnpktyjan" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Play className="mr-2 h-4 w-4" />
+                  Watch Banking on Bitcoin
+                </a>
+              </Button>
+              
+              <Button
+                variant="outlineTech"
+                size="sm"
+                className="border-stone-400 text-stone-300 hover:bg-stone-400 hover:text-black transition-colors"
+                asChild
+              >
+                <a 
+                  href="https://scholar.google.com/citations?user=0aWFyQgAAAAJ" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  View Research Profile
+                </a>
+              </Button>
+              
+              <Button
+                variant="outlineTech"
+                size="sm"
+                className="border-stone-400 text-stone-300 hover:bg-stone-400 hover:text-black transition-colors"
+                asChild
+              >
+                <a 
+                  href="https://bitcoinwiki.org/wiki/nick-spanos" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  BitcoinWiki Profile
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Media Appearances Section */}
-      <section className="py-20 px-4 bg-black">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4">
+      <section className="py-20 px-0">
+        <div className="">
+          <div className="text-left mb-12 px-6">
+            <Badge variant="outline" className="border-gray-400 text-gray-300  mb-4">
               In The Spotlight
             </Badge>
-            <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title">ON THE NEWS</h2>
-            <p className="text-gray-300 text-md max-w-2xl mx-auto font-content">
-              Featured across major media outlets sharing insights on Bitcoin, cryptocurrency, and the future of
-              finance.
+            <h2 className="text-4xl md:text-3xl font-bold mb-6 text-white font-title">MEDIA PARTNERS</h2>
+            <p className="
+            text-right text-gray-300 text-md max-w-lg 2xl:max-w-lg md:ms-auto md:pe-10  font-content">
+              Featured across major media outlets sharing insights on Bitcoin, cryptocurrency
             </p>
           </div>
 
@@ -442,7 +543,7 @@ export default function NickSpanosLanding() {
                 className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden block"
               >
                                   <div className="border-t border-white/20 group-hover:border-black/40 group-active:border-black/40 transition-colors">
-                  <div className="flex items-center justify-between py-6 px-4 relative">
+                  <div className="flex items-center justify-between py-6 px-4 md:px-10 relative">
                     <div className="flex-1 relative overflow-hidden h-16 md:h-12">
                       {/* Title Container */}
                       <div className="overflow-hidden h-6 relative">
@@ -508,7 +609,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Conferences Timeline Section */}
-      <section className="py-20 px-4 bg-black">
+      <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4 animate-bounce">
@@ -555,7 +656,7 @@ export default function NickSpanosLanding() {
                     className={`flex items-center ${event.side === "left" ? "justify-start" : "justify-end"} animate-slide-in-${event.side} animation-delay-${(index + 1) * 200}`}
                   >
                     <Card
-                      className={`w-full max-w-md bg-black border-gray-800 hover:border-orange-500 transition-all duration-500 transform hover:scale-105 ${event.side === "right" ? "mr-8" : "ml-8"}`}
+                      className={`w-full max-w-md border-gray-800 hover:border-orange-500 transition-all duration-500 transform hover:scale-105 ${event.side === "right" ? "mr-8" : "ml-8"}`}
                     >
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between mb-4">
@@ -674,7 +775,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black py-12 px-4 border-t border-gray-800">
+      <footer className="py-12 px-4 border-t border-gray-800">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>

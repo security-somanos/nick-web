@@ -44,11 +44,17 @@ export default function BitcoinCenterScrollSequence() {
             },
           })
 
+          gsap.set(timeIsMoneyEl, { opacity: 0 });
           gsap.set(btcCenterTextEl, { opacity: 0 });
           gsap.set(paragraph1El, { opacity: 0 });
           gsap.set(paragraph2El, { opacity: 0 });
           gsap.set(paragraph3El, { opacity: 0 });
           gsap.set(paragraph4El, { opacity: 0 });
+
+          tl.to(timeIsMoneyEl, { 
+            opacity: 1,
+            duration: 8,
+          });
 
           tl.to({}, { duration: 12 });
 
@@ -148,20 +154,21 @@ export default function BitcoinCenterScrollSequence() {
     return () => ctx.revert()
   }, [])
 
+  const textClasses = "text-pretty text-gray-300 font-content text-lg max-w-[82vw] md:text-xl md:max-w-3xl  2xl:text-2xl 2xl:max-w-4xl";
+
   return (
     <div ref={component}>
       <div ref={triggerRef} style={{ height: '530vh' }} className="relative">
         <section ref={pinnedSectionRef} className="h-screen w-full overflow-hidden relative">
           <div 
             className="absolute top-0 left-0 w-full h-20 z-20"
-            style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)' }}
           ></div>
           <div ref={videoRef}>
             <VideoBackground />
           </div>
           <div className="absolute inset-0 flex items-center justify-center z-10">
             <div ref={timeIsMoneyRef} className="absolute text-center">
-              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-[90px] font-semibold text-[#dadada] font-impact leading-tight lg:leading-[70px]">
+              <h2 className="max-w-[92vw] md:max-w-full text-2xl sm:text-3xl lg:text-6xl 2xl:text-8xl 2xl:text-[90px] font-semibold text-[#dadada] font-impact leading-[0.9]">
                 <span>IF</span> <span>TIME</span> <span>IS</span> <span className="flicker-effect">MONEY</span>,
                 <br />
                 <span>AND</span> <span>THEY</span> <span>ARE</span> <span className="flicker-effect">PRINTING</span> <span>MORE</span> <span>MONEY.</span>
@@ -172,20 +179,20 @@ export default function BitcoinCenterScrollSequence() {
               </h2>
             </div>
             <div ref={btcCenterTextRef} className="py-32 absolute text-6xl max-w-6xl text-center text-gray-300 font-content opacity-0">
-              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-[90px] font-semibold text-[#dadada] font-impact leading-tight lg:leading-[70px]">
+              <h2 className="text-3xl sm:text-3xl lg:text-7xl 2xl:text-8xl 2xl:text-[90px] font-semibold text-[#dadada] font-impact leading-[0.9]">
                 <span>THIS</span> <span>IS</span> <span>A</span> <span>MONETARY</span> <span>REVOLUTION</span>
               </h2>
             </div>
-            <div ref={paragraph1Ref} className="py-32 absolute text-2xl max-w-4xl text-center text-gray-300 font-content opacity-0">
+            <div ref={paragraph1Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
               Nick Spanos is a pioneer in the bitcoin and blockchain technology space. In 2013, Spanos founded Bitcoin Center NYC -- the world's first-ever cryptocurrency trading floor, which initially opened directly across from the NYSE in 2013.
             </div>
-            <div ref={paragraph2Ref} className="py-32 absolute text-2xl max-w-4xl text-center text-gray-300 font-content opacity-0">
+            <div ref={paragraph2Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
               Spanos is also CEO of Blockchain Technologies Corp., which patented VoteWatcher, the first-ever blockchain voting platform.
             </div>
-            <div ref={paragraph3Ref} className="py-32 absolute text-2xl max-w-4xl text-center text-gray-300 font-content opacity-0">
+            <div ref={paragraph3Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
               He is a co-founder of Zap.org, which solves one of the biggest challenges for blockchain smart contracts, by allowing real-world data and events to trigger smart contract provisions for the first time.
             </div>
-            <div ref={paragraph4Ref} className="py-32 absolute text-2xl max-w-4xl text-center text-gray-300 font-content opacity-0">
+            <div ref={paragraph4Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
               Spanos was featured in the recent documentary, Banking on Bitcoin, and is a sought-after speaker at blockchain events worldwide.
             </div>
           </div>
