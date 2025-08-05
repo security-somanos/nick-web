@@ -833,7 +833,7 @@ export default function NickSpanosLanding() {
       </div>
 
       {/* Water Video Section */}
-      <section className="relative w-full h-[50vh] md:h-[72vh] 2xl:h-screen overflow-hidden mt-[-20%]">
+      <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-screen overflow-hidden mt-[-100px] md:mt-0">
         {/* Background phrase behind everything */}
         <span
           className="pointer-events-none text-md md:text-[1.4rem] top-[4%] md:top-[8%] md:max-w-2xl mx-auto select-none absolute inset-0 flex items-start justify-center z-0"
@@ -876,7 +876,7 @@ export default function NickSpanosLanding() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover filter grayscale-60 z-10"
+          className="absolute inset-0 w-full h-full object-cover filter grayscale-70 z-10"
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
