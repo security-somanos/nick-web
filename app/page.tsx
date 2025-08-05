@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award } from "lucide-react"
-import { FaFacebook, FaInstagram, FaYoutube, FaTelegram, FaXTwitter } from "react-icons/fa6"
+import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaTelegram, FaXTwitter } from "react-icons/fa6"
 import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
@@ -253,6 +253,9 @@ export default function NickSpanosLanding() {
                     </Link>
                     <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
                       <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
+                      <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
                     </Link>
                     <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
                       <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
@@ -848,7 +851,7 @@ export default function NickSpanosLanding() {
       </div>
 
       {/* Water Video Section */}
-      <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-screen overflow-hidden mt-0 md:mt-0">
+      <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-[720px] overflow-hidden mt-0 md:mt-0">
         {/* Background phrase behind everything */}
         <span
           className="pointer-events-none text-md md:text-[1.4rem] top-[4%] md:top-[8%] md:max-w-2xl mx-auto select-none absolute inset-0 flex items-start justify-center z-0"
@@ -925,6 +928,9 @@ export default function NickSpanosLanding() {
                 <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
                   <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
                 </Link>
+                <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
+                  <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
                 <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
                   <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
                 </Link>
@@ -974,7 +980,7 @@ export default function NickSpanosLanding() {
                 <li>Collaboration</li>
                 <li>
                   <Link href="/contact">
-                    <Button className="mt-2 bg-orange-600 hover:bg-orange-700">Get In Touch</Button>
+                    <Button variant="outlineTech" className="rounded-lg mt-2 border-gray-400 text-gray-300 ">Get In Touch</Button>
                   </Link>
                 </li>
               </ul>
