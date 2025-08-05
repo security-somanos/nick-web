@@ -5,7 +5,7 @@ import HoverTrigger from "@/components/hover-trigger";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award } from "lucide-react"
+import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award, Lightbulb } from "lucide-react"
 import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaTelegram, FaXTwitter } from "react-icons/fa6"
 import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
@@ -296,7 +296,15 @@ export default function NickSpanosLanding() {
       )}
 
       {/* Hero Section */}
-      <section className="mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden ">
+      <section
+        className="mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+          maskImage:
+            "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
+        }}
+      >
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           {/* Desktop Video */}
@@ -341,7 +349,7 @@ export default function NickSpanosLanding() {
         />
 
         {/* Hero Content */}
-        <div className="crt relative z-10 text-center px-4 max-w-6xl mx-auto py-6">
+        <div className="flex flex-col justify-center crt absolute z-10 text-center px-4  inset-0 py-6 bg-black/50">
           <div className="mb-6 opacity-0" id="badge-container">
             <Badge variant="outline" className="border-gray-400 text-gray-300 mb-0 py-1 px-3">
               Bitcoin Pioneer
@@ -360,7 +368,7 @@ export default function NickSpanosLanding() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
             <Link
-              href="https://x.com/nickspanos/status/1951124075826520256"
+              href="https://banned.video/watch?id=6887cd20fbec835b8f6e3e4a"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full md:w-auto"
@@ -490,6 +498,22 @@ export default function NickSpanosLanding() {
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   BitcoinWiki Profile
+                </a>
+              </Button>
+              
+              <Button
+                variant="outlineTech"
+                size="sm"
+                className="border-stone-400 text-stone-300 hover:bg-stone-400 hover:text-black transition-colors"
+                asChild
+              >
+                <a 
+                  href="https://www.youtube.com/watch?v=tepwPaYE0Ro" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <Lightbulb className="mr-2 h-4 w-4" />
+                  Inventor of slidechain
                 </a>
               </Button>
             </div>
@@ -907,7 +931,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t border-gray-800">
+      <footer className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
@@ -987,7 +1011,7 @@ export default function NickSpanosLanding() {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 pt-8 text-center">
+          <div className="border-t border-[#252525] pt-8 text-center">
             <p className="text-gray-500 font-content">
               © {new Date().getFullYear()} Nick Spanos. All rights reserved. | Building the future of Bitcoin, one block
               at a time.
