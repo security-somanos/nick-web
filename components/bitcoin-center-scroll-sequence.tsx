@@ -193,7 +193,7 @@ export default function BitcoinCenterScrollSequence() {
               He is a co-founder of Zap.org, which solves one of the biggest challenges for blockchain smart contracts, by allowing real-world data and events to trigger smart contract provisions for the first time.
             </div>
             <div ref={paragraph4Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Spanos was featured in the recent documentary, Banking on Bitcoin, and is a sought-after speaker at blockchain events worldwide.
+              Spanos was featured in the netflix documentary, Banking on Bitcoin, and is a sought-after speaker at blockchain events worldwide.
             </div>
           </div>
         </section>

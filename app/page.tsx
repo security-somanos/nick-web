@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
+import Image from "next/image"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -495,45 +496,80 @@ export default function NickSpanosLanding() {
           <div className="space-y-0">
             {[
               {
-                outlet: "CNBC",
-                description: "CBDC'S AND FEDNOW VS BITCOIN AT BITCOIN MIAMI QUANTUM 2023",
-                link: "https://www.youtube.com/watch?v=VnHPcCXTbh8"
-              },
-              {
                 outlet: "FORBES",
-                description: "NICK SPANOS IN FORBES 10 TIMES IN 5 WEEKS",
-                link: "https://bit.ly/32U0Qsx"
+                description: "BITCOIN BREAKS THROUGH $60,000, BUILDING MOMENTUM TO REACH FRESH HIGHS",
+                link: "https://www.forbes.com/sites/cbovaird/2021/10/15/bitcoin-breaks-through-60000-building-momentum-to-reach-fresh-highs/"
               },
               {
-                outlet: "CNN",
-                description: "CNN SPECIAL ON THE BITCOIN CENTER (2015)",
-                link: "https://www.youtube.com/watch?v=aEo6WP_Ttr0"
+                outlet: "BITCOINIS",
+                description: "BITCOIN CENTER NYC LAUNCHES A STARTUP INCUBATOR",
+                link: "https://bitcoinist.com/bitcoin-center-nyc-launches-startup-incubator/"
               },
               {
-                outlet: "POLITICO",
-                description: "FEATURE IN POLITICO MAGAZINE",
+                outlet: "COINTELEGRAPH",
+                description: "CHINA PROVES BITCOIN IS AN UNSTOPPABLE MACHINE: BITCOIN CENTER FOUNDER",
+                link: "https://cointelegraph.com/news/china-proves-bitcoin-is-an-unstoppable-machine-bitcoin-center-founder"
+              },
+              {
+                outlet: "BITWALA",
+                description: "BITCOIN VISIONARY NICK SPANOS ADVOCATES 'END THE FED' MOVEMENT",
+                link: "https://bitwala.com/blog/bitcoin-visionary-nick-spanos-advocates-end-the-fed-movement?utm_source=chatgpt.com"
+              },
+              {
+                outlet: "COINTELEGRAPH",
+                description: "HYBRID SMART CONTRACTS WILL REPLACE THE LEGAL SYSTEM",
+                link: "https://cointelegraph.com/news/hybrid-smart-contracts-will-replace-the-legal-system?utm_source=chatgpt.com"
+              },
+              {
+                outlet: "POLITICO MAGAZINE",
+                description: "RON PAUL'S REVENGE",
                 link: "https://www.politico.com/news/magazine/2022/04/05/ron-paul-crypto-00022354"
               },
               {
-                outlet: "NETFLIX",
-                description: "BANKING ON BITCOIN (NETFLIX DOCUMENTARY)",
-                link: "https://www.youtube.com/watch?v=tmxqlSevtkQ"
+                outlet: "PARK MAGAZINE NY",
+                description: "How to Embrace Innovation Like Spanos, Weiner & Gallagher",
+                link: "https://parkmagazineny.com/bitcoin-pioneer-nick-spanos-zack-weiner-joe-gallagher/?utm_source=chatgpt.com"
               },
               {
-                outlet: "REASON MAGAZINE",
-                description: "INSIDE BITCOIN CENTER NYC JANUARY 2014",
-                link: "https://www.youtube.com/watch?v=DS29SnLaKJs"
+                outlet: "BITCOIN MAGAZINE",
+                description: "NICK SPANOS'S ZAP JOLTS REAL ESTATE WITH BLOCKCHAIN-BASED SMART CONTRACTS",
+                link: "https://bitcoinmagazine.com/business/nick-spanoss-zap-jolts-real-estate-blockchain-based-smart-contracts?utm_source=chatgpt.com"
               },
               {
-                outlet: "BITCOIN MIAMI",
-                description: "NICK SPANOS LAUNCHES MIAMI BITCOIN CENTER 2017",
-                link: "https://www.youtube.com/watch?v=bQhOD0Qa6No"
+                outlet: "BITCOIN MAGAZINE",
+                description: "NICK SPANOS: SAUDI ARABIA IS 'KICKING THE TIRES — AND THAT'S HUGE'",
+                link: "https://bitcoinmagazine.com/culture/nick-spanos-saudi-arabia-kicking-tires-and-s-huge?utm_source=chatgpt.com"
               },
               {
-                outlet: "NORTH AMERICAN BITCOIN CONFERENCE",
-                description: "THE NORTH AMERICAN BITCOIN CONFERENCE 2022 KEYNOTE",
-                link: "https://www.youtube.com/watch?v=Ut-mWQOMKZU"
-              }
+                outlet: "BITCOIN MAGAZINE",
+                description: "OP-ED: BITCOIN DECLARATION OF OUR MONETARY INDEPENDENCE",
+                link: "https://bitcoinmagazine.com/culture/op-ed-bitcoin-declaration-our-monetary-independence?utm_source=chatgpt.com"
+              },
+              {
+                outlet: "NBE NEXT BLOCK EXPO",
+                description: "NICK SPANOS BITCOIN PIONEER, FOUNDER OF BITCOIN CENTER NYC",
+                link: "https://nextblockexpo.com/nick-spanos/?utm_source=chatgpt.com"
+              },
+              {
+                outlet: "THE NATIONAL NEWS",
+                description: "WORLD GOVERNMENT SUMMIT: WHERE DOES THE FUTURE LIE FOR BITCOIN?",
+                link: "https://www.thenationalnews.com/uae/science/world-government-summit-where-does-the-future-lie-for-bitcoin-1.704243"
+              },
+              /*{
+                outlet: "BAD CRYPTO PODCAST",
+                description: "BITCOIN CENTER NYC WITH NICK SPANOS",
+                link: "https://badcryptopodcast.com/2020/08/03/bcp-432-bitcoin-center-nyc-with-nick-spanos/?utm_source=chatgpt.com"
+              },*/
+              {
+                outlet: "MEDIUM",
+                description: "EMBRACING INNOVATION AND RISK: COVID ERA INTERVIEW",
+                link: "https://medium.com/%40nickspanos/embracing-innovation-and-risk-covid-era-interview-3883dad34087"
+              },
+              {
+                outlet: "MEDIUM",
+                description: "EXPLORING THE INSIGHTS OF NICK SPANOS: A BITCOIN PIONEER",
+                link: "https://medium.com/%40nickspanos/exploring-the-insights-of-nick-spanos-a-bitcoin-pioneer-dda881e8d570"
+              },
             ].map((item, index) => (
               <a 
                 key={index}
@@ -543,17 +579,17 @@ export default function NickSpanosLanding() {
                 className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden block"
               >
                                   <div className="border-t border-white/20 group-hover:border-black/40 group-active:border-black/40 transition-colors">
-                  <div className="flex items-center justify-between py-6 px-4 md:px-10 relative">
-                    <div className="flex-1 relative overflow-hidden h-16 md:h-12">
+                  <div className="flex items-center justify-between py-4 md:py-6 px-3 md:px-10 relative">
+                    <div className="flex-1 relative overflow-hidden h-18 md:h-12 pr-2 md:pr-0">
                       {/* Title Container */}
                       <div className="overflow-hidden h-6 relative">
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-6 group-active:-translate-y-6">
                           {/* Title - Original */}
-                          <div className="text-white font-semibold text-lg tracking-wide h-6 flex items-center text-nowrap">
+                          <div className="text-white font-semibold text-base md:text-lg tracking-wide h-6 flex items-center text-nowrap">
                             {item.outlet}
                           </div>
                           {/* Title - Duplicate */}
-                          <div className="text-black font-semibold text-lg tracking-wide h-6 flex items-center text-nowrap">
+                          <div className="text-black font-semibold text-base md:text-lg tracking-wide h-6 flex items-center text-nowrap">
                             {item.outlet}
                           </div>
                         </div>
@@ -563,26 +599,32 @@ export default function NickSpanosLanding() {
                       <div className="overflow-hidden h-10 md:h-6 relative mt-1">
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-10 md:group-hover:-translate-y-6 group-active:-translate-y-10 md:group-active:-translate-y-6">
                           {/* Description - Original */}
-                          <div className="text-white/70 text-sm tracking-wide h-10 md:h-6 flex items-center">
+                          <div className="text-white/70 text-xs md:text-sm tracking-wide h-10 md:h-6 flex items-center">
                             {item.description}
                           </div>
                           {/* Description - Duplicate */}
-                          <div className="text-black/70 text-sm tracking-wide h-10 md:h-6 flex items-center">
+                          <div className="text-black/70 text-xs md:text-sm tracking-wide h-10 md:h-6 flex items-center">
                             {item.description}
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="ml-6">
+                    <Button 
+                      variant="outlineTech" 
+                      size="sm"
+                      className="ml-2 md:ml-6 !bg-transparent !border-gray-400 !text-gray-300 group-hover:!bg-[#3f3f3f] group-hover:!border-gray-200 group-hover:!text-white group-active:!bg-[#101010] group-active:!border-gray-200 group-active:!text-white text-xs md:text-sm px-2 md:px-4"
+                    >
+                      <span className="hidden sm:inline">READ ARTICLE</span>
+                      <span className="sm:hidden">READ</span>
                       <svg 
-                        className="w-5 h-5 text-white/60 group-hover:text-black group-active:text-black transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1 group-active:translate-x-1 group-active:-translate-y-1" 
+                        className="w-3 h-3 md:w-4 md:h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-active:translate-x-1 group-active:-translate-y-1" 
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
                       >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
-                    </div>
+                    </Button>
                   </div>
                 </div>
               </a>
@@ -609,7 +651,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Conferences Timeline Section */}
-      <section className="py-20 px-4">
+      <section className="hidden py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <Badge variant="outline" className="border-orange-500 text-orange-400 mb-4 animate-bounce">
@@ -772,6 +814,78 @@ export default function NickSpanosLanding() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Conferences section with full width image and linear gradient mask */}
+      <div className="w-full my-16 relative hidden">
+        <Image
+          src="/images/conferences.png"
+          alt="Conferences"
+          width={1920}
+          height={600}
+          className="w-full h-auto object-cover rounded-xl shadow-lg"
+          priority
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+          }}
+        />
+      </div>
+
+      {/* Water Video Section */}
+      <section className="relative w-full h-[50vh] md:h-[72vh] 2xl:h-screen overflow-hidden mt-[-20%]">
+        {/* Background phrase behind everything */}
+        <span
+          className="pointer-events-none text-md md:text-[1.4rem] top-[4%] md:top-[8%] md:max-w-2xl mx-auto select-none absolute inset-0 flex items-start justify-center z-0"
+          aria-hidden="true"
+          style={{
+            opacity: 0.7,
+            letterSpacing: '0.05em',
+            left: 0,
+            right: 0,
+            fontWeight: 600,
+            textAlign: 'center',
+            textShadow: '0 2px 16px rgba(0,0,0,0.5)',
+            userSelect: 'none',
+            width: '100%',
+            lineHeight: 1.2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <span>
+            A beast you will never become unless you eat beasts
+          </span>
+          <span
+            className="text-sm md:text-[1rem]"
+            style={{
+              fontWeight: 400,
+              opacity: 0.7,
+              marginTop: '0.5em',
+              letterSpacing: '0.02em',
+              fontStyle: 'italic',
+              display: 'block',
+            }}
+          >
+            — George Manoli Spanos
+          </span>
+        </span>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover filter grayscale-60 z-10"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
+          }}
+        >
+          <source src="/videos/water.mp4" type="video/mp4" />
+          <source src="/videos/water.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
       </section>
 
       {/* Footer */}
