@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award } from "lucide-react"
+import { FaFacebook, FaInstagram, FaYoutube, FaTelegram, FaXTwitter } from "react-icons/fa6"
+import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
@@ -240,31 +242,36 @@ export default function NickSpanosLanding() {
 
               {/* Bottom Section */}
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-center md:justify-between items-end pb-8 px-8 mt-auto">
-                {/* Copyright */}
-                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-xl md:text-2xl font-impact">
-                  © {new Date().getFullYear()} ALL RIGHTS RESERVED
+                {/* Social Links - Centered on mobile, right on desktop */}
+                <div ref={bottomRightRef} className="flex flex-col mx-auto md:mx-0 md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 text-white order-1 md:order-2">
+                  <div className="flex items-center space-x-4">
+                    <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
+                      <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
+                      <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
+                      <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
+                      <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
+                      <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                    <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
+                      <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    </Link>
+                  </div>
+                  <p className="text-gray-400 text-sm italic font-content">
+                    I will never DM you first
+                  </p>
                 </div>
 
-                {/* Social Links */}
-                <div ref={bottomRightRef} className="flex space-y-4 md:space-y-0 mx-auto md:mx-0 flex-col md:flex-row space-x-6 text-white font-impact">
-                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-xl md:text-2xl me-2">Instagram</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
-                    </svg>
-                  </div>
-                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-xl md:text-2xl me-2">Twitter</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
-                    </svg>
-                  </div>
-                  <div className="flex items-center mx-auto md:mx-0 md:space-x-2 cursor-pointer hover:text-gray-300 transition-colors">
-                    <span className="text-xl md:text-2xl me-2">LinkedIn</span>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7V17" />
-                    </svg>
-                  </div>
+                {/* Copyright - At the end on mobile, left on desktop */}
+                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-xl md:text-2xl font-impact order-2 md:order-1">
+                  © {new Date().getFullYear()} ALL RIGHTS RESERVED
                 </div>
               </div>
             </div>
@@ -349,17 +356,25 @@ export default function NickSpanosLanding() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
-            <Button
-              size="lg"
-              variant="outlineTech"
+            <Link
+              href="https://x.com/nickspanos/status/1951124075826520256"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-auto"
             >
-              <Play className="mr-2 h-5 w-5" />
-              Watch My Story
-            </Button>
-            <Link href="/contact" className={'w-full md:w-auto'}>
               <Button
                 size="lg"
-                className={'w-full md:w-auto'}
+                className="w-full md:w-auto"
+                variant="outlineTech"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Latest interview
+              </Button>
+            </Link>
+            <Link href="/contact" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                className="w-full md:w-auto"
                 variant="outlineTech"
               >
                 <ExternalLink className="mr-2 h-5 w-5" />
@@ -833,7 +848,7 @@ export default function NickSpanosLanding() {
       </div>
 
       {/* Water Video Section */}
-      <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-screen overflow-hidden mt-[-100px] md:mt-0">
+      <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-screen overflow-hidden mt-0 md:mt-0">
         {/* Background phrase behind everything */}
         <span
           className="pointer-events-none text-md md:text-[1.4rem] top-[4%] md:top-[8%] md:max-w-2xl mx-auto select-none absolute inset-0 flex items-start justify-center z-0"
@@ -900,29 +915,29 @@ export default function NickSpanosLanding() {
                 Bitcoin pioneer, educator, and community builder dedicated to advancing cryptocurrency adoption
                 worldwide.
               </p>
-              <div className="flex gap-4">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 bg-transparent"
-                >
-                  Twitter
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 bg-transparent"
-                >
-                  LinkedIn
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="border-orange-500/50 text-orange-400 hover:bg-orange-500/10 bg-transparent"
-                >
-                  YouTube
-                </Button>
+              <div className="flex gap-4 mb-4">
+                <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
+                  <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
+                <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
+                  <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
+                <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
+                  <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
+                <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
+                  <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
+                <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
+                  <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
+                <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
+                  <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                </Link>
               </div>
+              <p className="text-gray-500 text-sm italic">
+                I will never DM you first
+              </p>
             </div>
 
             <div>

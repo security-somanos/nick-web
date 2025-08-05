@@ -18,6 +18,7 @@ export default function BitcoinCenterScrollSequence() {
   const paragraph2Ref = useRef<HTMLDivElement>(null)
   const paragraph3Ref = useRef<HTMLDivElement>(null)
   const paragraph4Ref = useRef<HTMLDivElement>(null)
+  const paragraph5Ref = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -32,6 +33,7 @@ export default function BitcoinCenterScrollSequence() {
         const paragraph2El = paragraph2Ref.current
         const paragraph3El = paragraph3Ref.current
         const paragraph4El = paragraph4Ref.current
+        const paragraph5El = paragraph5Ref.current
 
         if (triggerEl && pinnedEl && timeIsMoneyEl && btcCenterTextEl && videoEl && paragraph1El && paragraph2El && paragraph3El && paragraph4El) {
           const tl = gsap.timeline({
@@ -50,6 +52,7 @@ export default function BitcoinCenterScrollSequence() {
           gsap.set(paragraph2El, { opacity: 0 });
           gsap.set(paragraph3El, { opacity: 0 });
           gsap.set(paragraph4El, { opacity: 0 });
+          gsap.set(paragraph5El, { opacity: 0 });
 
           tl.to(timeIsMoneyEl, { 
             opacity: 1,
@@ -128,13 +131,18 @@ export default function BitcoinCenterScrollSequence() {
           }, "-=2");
 
           tl.to({}, { duration: durationDelay });
-          
+
           tl.to(paragraph4El, {
-            opacity: 1,
-            duration: fadeInDuration,
+            opacity: 0,
+            duration: fadeOutDuration,
           });
 
-          // tl.to({}, { duration: durationDelay / 3});
+          tl.to(paragraph5El, {
+            opacity: 1,
+            duration: fadeInDuration,
+          }, "-=2");
+
+          tl.to({}, { duration: durationDelay});
         }
       }
 
@@ -158,7 +166,7 @@ export default function BitcoinCenterScrollSequence() {
 
   return (
     <div ref={component}>
-      <div ref={triggerRef} style={{ height: '530vh' }} className="relative">
+      <div ref={triggerRef} style={{ height: '580vh' }} className="relative">
         <section ref={pinnedSectionRef} className="h-screen w-full overflow-hidden relative">
           <div 
             className="absolute top-0 left-0 w-full h-20 z-20"
@@ -170,30 +178,40 @@ export default function BitcoinCenterScrollSequence() {
             <div ref={timeIsMoneyRef} className="absolute text-center">
               <h2 className="max-w-[92vw] md:max-w-full text-2xl sm:text-3xl lg:text-6xl 2xl:text-8xl 2xl:text-[90px] font-semibold text-[#dadada] font-impact leading-[0.9]">
                 <span>IF</span> <span>TIME</span> <span>IS</span> <span className="flicker-effect">MONEY</span>,
-                <br />
-                <span>AND</span> <span>THEY</span> <span>ARE</span> <span className="flicker-effect">PRINTING</span> <span>MORE</span> <span>MONEY.</span>
-                <br />
+                <br/>
+                <span>AND</span> <span>THEY</span> <span>ARE</span> <span className="flicker-effect">PRINTING</span>
+                <span>MORE</span> <span>MONEY.</span>
+                <br/>
                 <span>THEY</span> <span>ARE</span> <span className="flicker-effect">STEALING</span> <span>TIME</span>
-                <br />
+                <br/>
                 <span>FROM</span> <span className="flicker-effect">YOU.</span>
               </h2>
             </div>
-            <div ref={btcCenterTextRef} className="py-32 absolute text-6xl max-w-6xl text-center text-gray-300 font-content opacity-0">
+            <div ref={btcCenterTextRef}
+                 className="py-32 absolute text-6xl max-w-6xl text-center text-gray-300 font-content opacity-0">
               <h2 className="text-3xl sm:text-3xl lg:text-7xl 2xl:text-8xl 2xl:text-[90px] font-semibold text-[#dadada] font-impact leading-[0.9]">
                 <span>THIS</span> <span>IS</span> <span>A</span> <span>MONETARY</span> <span>REVOLUTION</span>
               </h2>
             </div>
             <div ref={paragraph1Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Nick Spanos is a pioneer in the bitcoin and blockchain technology space. In 2013, Spanos founded Bitcoin Center NYC -- the world's first-ever cryptocurrency trading floor, which initially opened directly across from the NYSE in 2013.
+              Nick Spanos is a pioneer in the bitcoin and blockchain technology space. In 2013, Spanos founded Bitcoin
+              Center NYC -- the world's first-ever cryptocurrency trading floor, which initially opened directly across
+              from the NYSE in 2013.
             </div>
             <div ref={paragraph2Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Spanos is also CEO of Blockchain Technologies Corp., which patented VoteWatcher, the first-ever blockchain voting platform.
+              Spanos is also CEO of Blockchain Technologies Corp., which patented VoteWatcher, the first-ever blockchain
+              voting platform.
             </div>
             <div ref={paragraph3Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              He is a co-founder of Zap.org, which solves one of the biggest challenges for blockchain smart contracts, by allowing real-world data and events to trigger smart contract provisions for the first time.
+              He is a co-founder of Zap.org, which solves one of the biggest challenges for blockchain smart contracts,
+              by allowing real-world data and events to trigger smart contract provisions for the first time.
             </div>
             <div ref={paragraph4Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Spanos was featured in the netflix documentary, Banking on Bitcoin, and is a sought-after speaker at blockchain events worldwide.
+              Spanos was featured in the netflix documentary, Banking on Bitcoin, and is a sought-after speaker at
+              blockchain events worldwide.
+            </div>
+            <div ref={paragraph5Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
+              Nick Spanos served as Director of Voter Contact for Ron Paul’s 2008 presidential campaign, leading nationwide phone banking efforts and grassroots mobilization. His work promoting individual liberty and decentralization laid the groundwork for his later involvement in Bitcoin and blockchain advocacy.
             </div>
           </div>
         </section>
