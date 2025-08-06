@@ -142,7 +142,12 @@ export default function BitcoinCenterScrollSequence() {
             duration: fadeInDuration,
           }, "-=2");
 
-          tl.to({}, { duration: durationDelay});
+          tl.to({}, { duration: durationDelay });
+          
+          tl.to(paragraph5El, {
+            opacity: 0,
+            duration: fadeOutDuration,
+          });
         }
       }
 
@@ -207,11 +212,11 @@ export default function BitcoinCenterScrollSequence() {
               by allowing real-world data and events to trigger smart contract provisions for the first time.
             </div>
             <div ref={paragraph4Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Spanos was featured in the netflix documentary, Banking on Bitcoin, and is a sought-after speaker at
-              blockchain events worldwide.
+              Nick Spanos served as Director of Voter Contact for Ron Paul’s 2008 presidential campaign, leading nationwide phone banking efforts and grassroots mobilization. His work promoting individual liberty and decentralization laid the groundwork for his later involvement in Bitcoin and blockchain advocacy.
             </div>
             <div ref={paragraph5Ref} className={`py-32 absolute text-center opacity-0 ${textClasses}`}>
-              Nick Spanos served as Director of Voter Contact for Ron Paul’s 2008 presidential campaign, leading nationwide phone banking efforts and grassroots mobilization. His work promoting individual liberty and decentralization laid the groundwork for his later involvement in Bitcoin and blockchain advocacy.
+              Spanos was featured in the netflix documentary, Banking on Bitcoin, and is a sought-after speaker at
+              blockchain events worldwide.
             </div>
           </div>
         </section>

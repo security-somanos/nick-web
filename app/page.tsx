@@ -14,6 +14,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
 import Image from "next/image"
+import Footer from "@/components/layout/footer";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -77,6 +78,33 @@ export default function NickSpanosLanding() {
         ease: "power2.out" 
       }, "-=0.6");
       
+  }, []);
+
+  // Video section fade in animation
+  useEffect(() => {
+    const videoSection = document.getElementById('conferences-video-section');
+    const video = document.getElementById('conferences-video');
+    
+    if (videoSection && video) {
+      ScrollTrigger.create({
+        trigger: videoSection,
+        start: "top 80%",
+        end: "top 20%",
+        scrub: 1,
+        animation: gsap.fromTo(video, 
+          { opacity: 0 }, 
+          { opacity: 1, duration: 2, ease: "power2.out" }
+        )
+      });
+    }
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars?.trigger === videoSection) {
+          trigger.kill();
+        }
+      });
+    };
   }, []);
 
   // Menu animations
@@ -243,38 +271,44 @@ export default function NickSpanosLanding() {
               {/* Bottom Section */}
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-center md:justify-between items-end pb-8 px-8 mt-auto">
                 {/* Social Links - Centered on mobile, right on desktop */}
-                <div ref={bottomRightRef} className="flex flex-col mx-auto md:mx-0 md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 text-white order-1 md:order-2">
+                <div ref={bottomRightRef}
+                     className="flex flex-col mx-auto md:mx-0 md:flex-col items-center space-y-0 md:space-y-0 md:space-x-6 text-white order-1 md:order-2">
+
+                  <div>
+                    <p className="hidden text-gray-400 text-xs italic font-content mb-1">
+                      I will never DM you first
+                    </p>
+                  </div>
                   <div className="flex items-center space-x-4">
                     <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
-                      <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                     <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
-                      <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
-                      <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                    <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank"
+                          rel="noopener noreferrer">
+                      <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                     <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
-                      <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                     <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
-                      <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                     <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
-                      <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                     <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
-                      <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
+                      <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                   </div>
-                  <p className="text-gray-400 text-sm italic font-content">
-                    I will never DM you first
-                  </p>
                 </div>
 
                 {/* Copyright - At the end on mobile, left on desktop */}
-                <div ref={bottomLeftRef} className="text-white mx-auto md:mx-0 text-xl md:text-2xl font-impact order-2 md:order-1">
-                  © {new Date().getFullYear()} ALL RIGHTS RESERVED
+                <div ref={bottomLeftRef}
+                     className="text-[#dadada] mx-auto md:mx-0 text-xl md:text-xl font-impact order-2 md:order-1">
+                  NICK SPANOS © {new Date().getFullYear()} ALL RIGHTS RESERVED
                 </div>
               </div>
             </div>
@@ -352,7 +386,7 @@ export default function NickSpanosLanding() {
         <div className="flex flex-col justify-center crt absolute z-10 text-center px-4  inset-0 py-6 bg-black/50">
           <div className="mb-6 opacity-0" id="badge-container">
             <Badge variant="outline" className="border-gray-400 text-gray-300 mb-0 py-1 px-3">
-              Bitcoin Pioneer
+              Blockchain Pioneer
             </Badge>
           </div>
 
@@ -389,7 +423,7 @@ export default function NickSpanosLanding() {
                 variant="outlineTech"
               >
                 <ExternalLink className="mr-2 h-5 w-5" />
-                Contact Me
+                Contact
               </Button>
             </Link>
           </div>
@@ -405,9 +439,10 @@ export default function NickSpanosLanding() {
       <BitcoinCenterScrollSequence />
 
       {/* Video Section */}
-      <section className="relative w-full h-[90vh] md:h-[180vh] mt-[-220px] md:mt-[0] overflow-hidden">
+      <section className="relative w-full h-[90vh] md:h-[180vh] mt-[-220px] md:mt-[-150px] 2xl:mt-[-300px] overflow-hidden" id="conferences-video-section">
         <video
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-0"
+          id="conferences-video"
           style={{
             WebkitMaskImage: `
               linear-gradient(
@@ -918,7 +953,7 @@ export default function NickSpanosLanding() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover filter grayscale-70 z-10"
+          className="absolute inset-0 w-full h-full object-cover filter grayscale-70 z-10 opacity-88"
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
@@ -929,96 +964,7 @@ export default function NickSpanosLanding() {
           Your browser does not support the video tag.
         </video>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-4 bg-gradient-to-r from-orange-400 to-yellow-400 bg-clip-text text-transparent font-title">
-                Nick Spanos
-              </h3>
-              <p className="text-gray-400 mb-4 font-content">
-                Bitcoin pioneer, educator, and community builder dedicated to advancing cryptocurrency adoption
-                worldwide.
-              </p>
-              <div className="flex gap-4 mb-4">
-                <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
-                  <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
-                  <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
-                  <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
-                  <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
-                  <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
-                  <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-                <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
-                  <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors" />
-                </Link>
-              </div>
-              <p className="text-gray-500 text-sm italic">
-                I will never DM you first
-              </p>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4 font-title">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400 font-content">
-                <li>
-                  <Link href="#" className="hover:text-orange-400 transition-colors">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-orange-400 transition-colors">
-                    Bitcoin Center NYC
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-orange-400 transition-colors">
-                    Speaking
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-orange-400 transition-colors">
-                    Media Kit
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="text-lg font-semibold text-white mb-4 font-title">Contact</h4>
-              <ul className="space-y-2 text-gray-400 font-content">
-                <li>Speaking Inquiries</li>
-                <li>Media Requests</li>
-                <li>Collaboration</li>
-                <li>
-                  <Link href="/contact">
-                    <Button variant="outlineTech" className="rounded-lg mt-2 border-gray-400 text-gray-300 ">Get In Touch</Button>
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-[#252525] pt-8 text-center">
-            <p className="text-gray-500 font-content">
-              © {new Date().getFullYear()} Nick Spanos. All rights reserved. | Building the future of Bitcoin, one block
-              at a time.
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
