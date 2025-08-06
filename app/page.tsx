@@ -223,21 +223,21 @@ export default function NickSpanosLanding() {
 
   // Video and audio control functions
   const playVideo = () => {
-    if (desktopVideoRef.current && mobileVideoRef.current) {
+    if (desktopVideoRef.current) {
       desktopVideoRef.current.style.opacity = "1";
-      mobileVideoRef.current.style.opacity = "1";
+      //mobileVideoRef.current.style.opacity = "1";
       desktopVideoRef.current.play();
-      mobileVideoRef.current.play();
+      //mobileVideoRef.current.play();
       //audioRef.current.play();
     }
   };
 
   const stopVideo = () => {
-    if (desktopVideoRef.current && mobileVideoRef.current) {
+    if (desktopVideoRef.current) {
       desktopVideoRef.current.style.opacity = "0";
-      mobileVideoRef.current.style.opacity = "0";
+      //mobileVideoRef.current.style.opacity = "0";
       desktopVideoRef.current.pause();
-      mobileVideoRef.current.pause();
+      //mobileVideoRef.current.pause();
       //audioRef.current.pause();
       //audioRef.current.currentTime = 0;
     }
@@ -417,14 +417,14 @@ export default function NickSpanosLanding() {
           </video>
           
           {/* Mobile Video */}
-          <video
+          {/*<video
             ref={mobileVideoRef}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 md:hidden"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 hidden"
             playsInline
             loop
           >
             <source src="/videos/hero-video-responsive.mp4" type="video/mp4" />
-          </video>
+          </video>*/}
           
           {/* Audio */}
           {/* <audio
@@ -650,6 +650,21 @@ export default function NickSpanosLanding() {
                 outlet: "THE VERGE",
                 description: "At the Libertarian Convention, where blockchain evangelists dream of a perfect election",
                 link: "https://www.theverge.com/2016/5/5/11592806/libertarian-bitcoin-blockchain-voting-john-mcafee/"
+              },
+              {
+                outlet: "COINDESK",
+                description: "Bitcoin Center NYC Brings Bitcoin Startup Incubator to Wall Street",
+                link: "https://www.coindesk.com/markets/2014/08/22/bitcoin-center-nyc-brings-bitcoin-startup-incubator-to-wall-street"
+              },
+              {
+                outlet: "COINDESK",
+                description: "Bitcoin Miner Profitability Could Double After Record Drop in Network Difficulty",
+                link: "https://www.coindesk.com/markets/2021/07/06/bitcoin-miner-profitability-could-double-after-record-drop-in-network-difficulty"
+              },
+              {
+                outlet: "COINDESK",
+                description: "Inside New York's Bitcoin Centre",
+                link: "https://www.coindesk.com/markets/2014/03/22/inside-new-yorks-bitcoin-centre"
               },
               {
                 outlet: "BITCOINIS",

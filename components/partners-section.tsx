@@ -5,6 +5,10 @@ import Marquee from "react-fast-marquee";
 
 const partners = [
   {
+    name: "Apple TV",
+    logo: "/images/partners/apple-tv-logo.svg"
+  },
+  {
     name: "Bitcoinist",
     logo: "/images/partners/bitcoinist-net-seek-logo.svg"
   },
@@ -23,6 +27,10 @@ const partners = [
   {
     name: "Forbes",
     logo: "/images/partners/forbes-logo.svg"
+  },
+  {
+    name: "NETFLIX",
+    logo: "/images/partners/netflix-logo.svg"
   },
   {
     name: "The Block",
