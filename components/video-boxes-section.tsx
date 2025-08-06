@@ -81,6 +81,21 @@ const videoBoxes: VideoBox[] = [
   },
 ]
 
+// Filter categories
+const filterCategories = [
+  "Nick Spanos",
+  "Conferences", 
+  "Cryptocurrencies",
+  "Blockchain",
+  "Bitcoin Pioneer",
+  "Decentralization",
+  "Smart Contracts",
+  "Crypto Activism",
+  "Web3",
+  "Libertarian Tech",
+  "Bitcoin Center NYC"
+]
+
 export default function VideoBoxesSection() {
   const [hoveredBox, setHoveredBox] = useState<number | null>(null)
   const [audioEnabled, setAudioEnabled] = useState(false)
@@ -88,6 +103,7 @@ export default function VideoBoxesSection() {
   const [isMobile, setIsMobile] = useState(false)
   const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set())
   const [videoLoadingStates, setVideoLoadingStates] = useState<Record<number, boolean>>({})
+  const [activeFilter, setActiveFilter] = useState<string | null>(null)
   const boxRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -126,6 +142,10 @@ export default function VideoBoxesSection() {
         return newStates
       }
     })
+  }
+
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(activeFilter === filter ? null : filter)
   }
 
   // Detect mobile breakpoint
@@ -232,7 +252,29 @@ export default function VideoBoxesSection() {
   return (
     <section className="pt-4 pb-16 px-6">
       <div className="w-full mx-auto px-0">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-0">
+        
+        {/* Filter Buttons Section */}
+        <div className="mb-8">
+          <div className="flex flex-wrap gap-3 justify-start">
+            {filterCategories.map((filter) => (
+              <Button
+                key={filter}
+                variant="outlineTech"
+                size="sm"
+                onClick={() => handleFilterChange(filter)}
+                className={`transition-all duration-200 ${
+                  activeFilter === filter 
+                    ? 'bg-gray-500/20 border-gray-100 text-white' 
+                    : 'border-gray-400 text-gray-300 hover:bg-gray-500/10 hover:border-gray-200'
+                }`}
+              >
+                {filter}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-0">
            {videoBoxes.map((box, index) => (
              <div
                key={box.id}

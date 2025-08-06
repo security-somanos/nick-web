@@ -17,7 +17,7 @@ import Image from "next/image"
 import Footer from "@/components/layout/footer";
 
 // Lazy load the VideoBoxesSection component for better initial performance
-const VideoBoxesSection = () => import("@/components/video-boxes-section");
+const VideoBoxesSection = lazy(() => import("@/components/video-boxes-section"));
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -61,6 +61,11 @@ export default function NickSpanosLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [conferencesVideoLoaded, setConferencesVideoLoaded] = useState(false);
   const bitcoinCenterRef = useRef<HTMLDivElement>(null);
+  
+  // Anchor animation states
+  const anchorRef = useRef<HTMLDivElement>(null);
+  const anchorAnimationRef = useRef<NodeJS.Timeout | null>(null);
+  const anchorPositionRef = useRef(0);
   
   // Menu refs
   const menuRef = useRef<HTMLDivElement>(null);
@@ -142,6 +147,36 @@ export default function NickSpanosLanding() {
 
     return () => {
       observer.disconnect();
+    };
+  }, []);
+
+  // Anchor sprite animation - similar to HoverTrigger
+  useEffect(() => {
+    const frameWidth = 100; // Frame width in pixels
+    const totalFrames = 120; // Total frames in sprite
+    
+    anchorAnimationRef.current = setInterval(() => {
+      if (anchorRef.current) {
+        anchorPositionRef.current += frameWidth;
+        
+        // Reset position when reaching the end
+        if (anchorPositionRef.current >= frameWidth * totalFrames) {
+          anchorPositionRef.current = 0;
+        }
+
+        gsap.to(anchorRef.current, {
+          duration: 0,
+          ease: 'none',
+          backgroundPositionX: -anchorPositionRef.current,
+        });
+      }
+    }, 30); // 30ms interval for smooth animation
+
+    return () => {
+      if (anchorAnimationRef.current) {
+        clearInterval(anchorAnimationRef.current);
+        anchorAnimationRef.current = null;
+      }
     };
   }, []);
 
@@ -259,12 +294,28 @@ export default function NickSpanosLanding() {
       });
     }
   };
+
+  // Scroll to features section
+  const scrollToFeatures = () => {
+    const featuresSection = document.getElementById('conferences-video-section');
+    if (featuresSection) {
+      closeMenu(); // Close menu first
+      setTimeout(() => {
+        featuresSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 600); // Wait for menu close animation
+    }
+  };
   
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
+
+
       {/* Header with 4 dots */}
       <header 
-        className="rounded-xl p-3 fixed z-[101] top-0 left-1/2 transform -translate-x-1/2 mt-4 md:mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
+        className="rounded-xl p-3 fixed z-[50] top-0 left-1/2 transform -translate-x-1/2 mt-4 md:mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
         onClick={() => setIsMenuOpen(true)}
       >
         <div className="w-[18px] h-[18px] flex flex-col justify-between">
@@ -283,7 +334,7 @@ export default function NickSpanosLanding() {
 
       {/* Menu Overlay */}
       {isMenuOpen && (
-        <div ref={menuRef} className="fixed inset-0 bg-black z-101">
+        <div ref={menuRef} className="fixed inset-0 bg-[#0a0a0a] z-50">
           <div className="relative w-full h-full max-w-[1480px] mx-auto">
             {/* Background Pattern */}
             <div 
@@ -295,6 +346,22 @@ export default function NickSpanosLanding() {
                 backgroundSize: '13px'
               }}
             ></div>
+            
+            {/* Anchor Logo - Top Left in Menu */}
+            <div className="absolute top-8 left-8 z-[60]">
+              <div 
+                ref={anchorRef}
+                className="w-[100px] h-[100px] cursor-pointer transition-transform duration-300 hover:scale-110"
+                style={{
+                  backgroundImage: 'url(/images/sprite-min.png)',
+                  backgroundSize: '12000px 100px', // Maintain exact sprite dimensions
+                  backgroundPosition: '0 0',
+                  backgroundRepeat: 'no-repeat',
+                  pointerEvents: 'none' // Disable click events
+                }}
+                onClick={(e) => e.preventDefault()} // Extra safety to prevent clicks
+              />
+            </div>
             
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col">
@@ -317,20 +384,47 @@ export default function NickSpanosLanding() {
 
               {/* Main Menu Items */}
               <div className="flex-1 flex items-center justify-center overflow-hidden">
-                <div ref={menuItemsRef} className="text-center space-y-4 overflow-hidden">
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
-                    HOME
+                                  <div ref={menuItemsRef} className="text-center space-y-4 overflow-hidden">
+                    <div className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
+                      <span className="mb-0">HOME</span>
+                      <svg 
+                        className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                    <div 
+                      className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
+                      onClick={scrollToFeatures}
+                    >
+                      <span>FEATURES</span>
+                      <svg 
+                        className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </div>
+                    <Link
+                      href="/contact"
+                      className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
+                    >
+                      <span>CONTACT</span>
+                      <svg 
+                        className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </Link>
                   </div>
-                  <div className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
-                    WORK
-                  </div>
-                  <Link
-                    href="/contact"
-                    className="text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px] block"
-                  >
-                    CONTACT
-                  </Link>
-                </div>
               </div>
 
               {/* Bottom Section */}
@@ -372,7 +466,7 @@ export default function NickSpanosLanding() {
 
                 {/* Copyright - At the end on mobile, left on desktop */}
                 <div ref={bottomLeftRef}
-                     className="text-[#dadada] mx-auto md:mx-0 text-xl md:text-xl font-impact order-2 md:order-1">
+                     className="text-[#dadada] mx-auto md:mx-0 text-[14px] font-impact order-2 md:order-1">
                   NICK SPANOS © {new Date().getFullYear()} ALL RIGHTS RESERVED
                 </div>
               </div>
@@ -463,7 +557,7 @@ export default function NickSpanosLanding() {
             Founder of Bitcoin Center NYC • Inventor • Serial Entrepreneur • Blockchain Visionary <br /> Philosopher • Activist
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 z-[101]" id="buttons-container">
             <Link
               href="https://banned.video/watch?id=6887cd20fbec835b8f6e3e4a"
               target="_blank"

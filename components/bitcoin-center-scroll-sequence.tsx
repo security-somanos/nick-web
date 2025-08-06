@@ -184,7 +184,7 @@ export default function BitcoinCenterScrollSequence() {
               <h2 className="max-w-[92vw] md:max-w-full text-2xl sm:text-3xl lg:text-6xl 2xl:text-8xl 2xl:text-[90px] font-semibold text-[#dadada] font-impact leading-[0.9]">
                 <span>IF</span> <span>TIME</span> <span>IS</span> <span className="flicker-effect">MONEY</span>,
                 <br/>
-                <span>AND</span> <span>THEY</span> <span>ARE</span> <span className="flicker-effect">PRINTING</span>
+                <span>AND</span> <span>THEY</span> <span>ARE</span> <span className="flicker-effect">PRINTING </span>
                 <span>MORE</span> <span>MONEY.</span>
                 <br/>
                 <span>THEY</span> <span>ARE</span> <span className="flicker-effect">STEALING</span> <span>TIME</span>
