@@ -223,23 +223,23 @@ export default function NickSpanosLanding() {
 
   // Video and audio control functions
   const playVideo = () => {
-    if (desktopVideoRef.current && mobileVideoRef.current && audioRef.current) {
+    if (desktopVideoRef.current && mobileVideoRef.current) {
       desktopVideoRef.current.style.opacity = "1";
       mobileVideoRef.current.style.opacity = "1";
       desktopVideoRef.current.play();
       mobileVideoRef.current.play();
-      audioRef.current.play();
+      //audioRef.current.play();
     }
   };
 
   const stopVideo = () => {
-    if (desktopVideoRef.current && mobileVideoRef.current && audioRef.current) {
+    if (desktopVideoRef.current && mobileVideoRef.current) {
       desktopVideoRef.current.style.opacity = "0";
       mobileVideoRef.current.style.opacity = "0";
       desktopVideoRef.current.pause();
       mobileVideoRef.current.pause();
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      //audioRef.current.pause();
+      //audioRef.current.currentTime = 0;
     }
   };
 
@@ -410,7 +410,6 @@ export default function NickSpanosLanding() {
           <video
             ref={desktopVideoRef}
             className="absolute inset-0 w-full h-full object-cover opacity-0"
-            muted
             playsInline
             loop
           >
@@ -421,7 +420,6 @@ export default function NickSpanosLanding() {
           <video
             ref={mobileVideoRef}
             className="absolute inset-0 w-full h-full object-cover opacity-0 md:hidden"
-            muted
             playsInline
             loop
           >
@@ -429,13 +427,13 @@ export default function NickSpanosLanding() {
           </video>
           
           {/* Audio */}
-          <audio
+          {/* <audio
             ref={audioRef}
             className="hidden"
             loop
           >
             <source src="/sounds/brainjack.m4a" type="audio/mp4" />
-          </audio>
+          </audio>*/}
           
           {/* Fallback background */}
           <div className="absolute inset-0 bg-transparent" />

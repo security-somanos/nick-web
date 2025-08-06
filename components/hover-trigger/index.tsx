@@ -107,24 +107,22 @@ const HoverTrigger: React.FC<HoverTriggerProps> = ({ onTriggerStart, onTriggerEn
     };
 
     const handleClick = () => {
+        const newVideoState = !isVideoPlaying;
+        setIsVideoPlaying(newVideoState);
+        setIsInteracting(newVideoState);
+        
+        if (newVideoState) {
+            onTriggerStart();
+        } else {
+            onTriggerEnd();
+        }
         if (isMobile) {
-            const newVideoState = !isVideoPlaying;
-            setIsVideoPlaying(newVideoState);
-            setIsInteracting(newVideoState);
-            
-            if (newVideoState) {
-                onTriggerStart();
-            } else {
-                onTriggerEnd();
-            }
         }
     };
 
     return (
         <div
             className="button-hold hoverable"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
             onClick={handleClick}
         >
             <div ref={triggerContainerRef} className="trigger-container" />
