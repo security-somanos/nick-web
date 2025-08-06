@@ -353,9 +353,9 @@ body {
 }
 
 .partner-card {
-  background-color: rgb(40,40,40);
+  /*background-color: rgb(40,40,40);
   border: 1px solid rgb(60,60,60);
-  border-radius: 10px;
+  border-radius: 10px;*/
 }
 
 /* Menu Slide Up Animation */
@@ -396,4 +396,113 @@ body {
 * {
   scrollbar-width: thin;
   scrollbar-color: #333333 #0a0a0a;
+}
+
+/* Video Boxes Section Styles */
+.text-heading-small {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.text-heading-medium {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.text-heading-large {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+}
+
+.rounded-12 {
+  border-radius: 0.75rem;
+}
+
+.bg-fill-glass-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+}
+
+:root {
+  --stroke-angle: 174deg;
+  --stroke-gradient-background: linear-gradient(var(--stroke-angle), #fff6 4.35%, #fff0 34.37%, #fff0 51.16%, #ffffff1a 85.84%);
+}
+
+.stroke-gradient-knockout {
+  position: absolute;
+  inset: 0;
+  background: var(--stroke-gradient-background);
+  border-radius: inherit;
+}
+
+.stroke-gradient-knockout::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border-radius: inherit;
+  z-index: 1;
+}
+
+/* Marquee Animation */
+.rfm-marquee-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: var(--width);
+  transform: var(--transform);
+}
+
+.rfm-marquee {
+  flex: 0 0 auto;
+  min-width: var(--min-width);
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
+  animation-play-state: var(--play);
+  animation-delay: var(--delay);
+  animation-direction: var(--direction);
+}
+
+.rfm-initial-child-container {
+  flex: 0 0 auto;
+  display: flex;
+  min-width: auto;
+  flex-direction: row;
+  align-items: center;
+}
+
+.rfm-child {
+  transform: var(--transform);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* On-air pulse animation */
+@keyframes on-air-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
 }

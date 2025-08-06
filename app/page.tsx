@@ -9,20 +9,58 @@ import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Awar
 import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaTelegram, FaXTwitter } from "react-icons/fa6"
 import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, Suspense, lazy } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
 import Image from "next/image"
 import Footer from "@/components/layout/footer";
 
+// Lazy load the VideoBoxesSection component for better initial performance
+const VideoBoxesSection = lazy(() => import("@/components/video-boxes-section"));
+
 gsap.registerPlugin(ScrollTrigger)
+
+// Skeleton component for VideoBoxesSection loading state
+function VideoBoxesSkeleton() {
+  return (
+    <section className="py-20 px-6">
+      <div className="w-full mx-auto px-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-0">
+          {[...Array(10)].map((_, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-center items-center h-[280px]"
+            >
+              <div className="shadow-md shadow-black/70 border border-[#252525] overflow-hidden rounded-12 h-[200px] w-full relative block">
+                <div className="relative h-full z-10 m-[1px] rounded-12 overflow-hidden bg-fill-glass-secondary backdrop-blur-2xl">
+                  <div className="bg-[#1a1a1a] relative overflow-hidden rounded-12 h-full animate-pulse">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800"></div>
+                    <div className="relative z-[1] h-full flex flex-col justify-center items-center font-mono uppercase">
+                      <div className="w-20 h-4 bg-gray-600 rounded mb-2 animate-pulse"></div>
+                      <div className="w-32 h-8 bg-gray-600 rounded animate-pulse"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2 text-start me-auto px-4 w-full">
+                <div className="w-3/4 h-3 bg-gray-700 rounded animate-pulse"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
 
 export default function NickSpanosLanding() {
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const mobileVideoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [conferencesVideoLoaded, setConferencesVideoLoaded] = useState(false);
+  const bitcoinCenterRef = useRef<HTMLDivElement>(null);
   
   // Menu refs
   const menuRef = useRef<HTMLDivElement>(null);
@@ -80,12 +118,39 @@ export default function NickSpanosLanding() {
       
   }, []);
 
+  // Intersection Observer to load conferences video when BitcoinCenterScrollSequence is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setConferencesVideoLoaded(true);
+            observer.disconnect(); // Only load once
+          }
+        });
+      },
+      {
+        rootMargin: '100px 0px', // Start loading 100px before the section comes into view
+        threshold: 0.1
+      }
+    );
+
+    // Observe the BitcoinCenterScrollSequence section
+    if (bitcoinCenterRef.current) {
+      observer.observe(bitcoinCenterRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   // Video section fade in animation
   useEffect(() => {
     const videoSection = document.getElementById('conferences-video-section');
     const video = document.getElementById('conferences-video');
     
-    if (videoSection && video) {
+    if (videoSection && video && conferencesVideoLoaded) {
       ScrollTrigger.create({
         trigger: videoSection,
         start: "top 80%",
@@ -105,7 +170,7 @@ export default function NickSpanosLanding() {
         }
       });
     };
-  }, []);
+  }, [conferencesVideoLoaded]);
 
   // Menu animations
   useEffect(() => {
@@ -436,41 +501,47 @@ export default function NickSpanosLanding() {
       <NoiseEffect />
       
       {/* Time is Money & Bitcoin Center Section */}
-      <BitcoinCenterScrollSequence />
+      <div ref={bitcoinCenterRef}>
+        <BitcoinCenterScrollSequence />
+      </div>
 
       {/* Video Section */}
       <section className="relative w-full h-[90vh] md:h-[180vh] mt-[-220px] md:mt-[-150px] 2xl:mt-[-300px] overflow-hidden" id="conferences-video-section">
-        <video
-          className="absolute inset-0 w-full h-full object-cover opacity-0"
-          id="conferences-video"
-          style={{
-            WebkitMaskImage: `
-              linear-gradient(
-                to bottom,
-                transparent 0%,
-                black 10%,
-                black 90%,
-                transparent 100%
-              )
-            `,
-            maskImage: `
-              linear-gradient(
-                to bottom,
-                transparent 0%,
-                black 10%,
-                black 90%,
-                transparent 100%
-              )
-            `
-          }}
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/videos/video-section.webm" type="video/webm" />
-          <source src="/videos/video-section.mp4" type="video/mp4" />
-        </video>
+        {conferencesVideoLoaded ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-0"
+            id="conferences-video"
+            style={{
+              WebkitMaskImage: `
+                linear-gradient(
+                  to bottom,
+                  transparent 0%,
+                  black 10%,
+                  black 90%,
+                  transparent 100%
+                )
+              `,
+              maskImage: `
+                linear-gradient(
+                  to bottom,
+                  transparent 0%,
+                  black 10%,
+                  black 90%,
+                  transparent 100%
+                )
+              `
+            }}
+            autoPlay
+            muted
+            loop
+            playsInline
+          >
+            <source src="/videos/video-section.webm" type="video/webm" />
+            <source src="/videos/video-section.mp4" type="video/mp4" />
+          </video>
+        ) : (
+          <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 animate-pulse" />
+        )}
         
         {/* Title Overlay */}
         <div className="absolute inset-0 flex items-center mt-[-10vh] justify-start px-8 md:px-16">
@@ -578,6 +649,11 @@ export default function NickSpanosLanding() {
                 link: "https://www.forbes.com/sites/cbovaird/2021/10/15/bitcoin-breaks-through-60000-building-momentum-to-reach-fresh-highs/"
               },
               {
+                outlet: "THE VERGE",
+                description: "At the Libertarian Convention, where blockchain evangelists dream of a perfect election",
+                link: "https://www.theverge.com/2016/5/5/11592806/libertarian-bitcoin-blockchain-voting-john-mcafee/"
+              },
+              {
                 outlet: "BITCOINIS",
                 description: "BITCOIN CENTER NYC LAUNCHES A STARTUP INCUBATOR",
                 link: "https://bitcoinist.com/bitcoin-center-nyc-launches-startup-incubator/"
@@ -677,11 +753,11 @@ export default function NickSpanosLanding() {
                         <div className="flex flex-col transition-transform duration-350 group-hover:-translate-y-10 md:group-hover:-translate-y-6 group-active:-translate-y-10 md:group-active:-translate-y-6">
                           {/* Description - Original */}
                           <div className="text-white/70 text-xs md:text-sm tracking-wide h-10 md:h-6 flex items-center">
-                            {item.description}
+                            {item.description?.toUpperCase()}
                           </div>
                           {/* Description - Duplicate */}
                           <div className="text-black/70 text-xs md:text-sm tracking-wide h-10 md:h-6 flex items-center">
-                            {item.description}
+                            {item.description?.toUpperCase()}
                           </div>
                         </div>
                       </div>
@@ -712,6 +788,11 @@ export default function NickSpanosLanding() {
           </div>
         </div>
       </section>
+      
+      {/* Video Boxes Section - positioned after media partners, before brands */}
+      <Suspense fallback={<VideoBoxesSkeleton />}>
+        <VideoBoxesSection />
+      </Suspense>
       
       {/* Partners Section - positioned after the scroll sequence */}
       <PartnersSection />
@@ -892,22 +973,6 @@ export default function NickSpanosLanding() {
           </div>
         </div>
       </section>
-
-      {/* Conferences section with full width image and linear gradient mask */}
-      <div className="w-full my-16 relative hidden">
-        <Image
-          src="/images/conferences.png"
-          alt="Conferences"
-          width={1920}
-          height={600}
-          className="w-full h-auto object-cover rounded-xl shadow-lg"
-          priority
-          style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
-          }}
-        />
-      </div>
 
       {/* Water Video Section */}
       <section className="relative w-full h-[350px] md:h-[200px] 2xl:h-[720px] overflow-hidden mt-0 md:mt-0">

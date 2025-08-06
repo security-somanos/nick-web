@@ -58,9 +58,9 @@ export default function PartnersSection() {
               <Image
                 src={partner.logo}
                 alt={`${partner.name} logo`}
-                width={120}
+                width={180}
                 height={0}
-                className="h-8 sm:h-10 md:h-12 lg:h-14 w-[120px] object-contain"
+                className="h-8 sm:h-10 md:h-12 lg:h-14 w-[150px] object-contain"
               />
             </div>
           ))}
