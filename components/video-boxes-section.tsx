@@ -87,9 +87,16 @@ export default function VideoBoxesSection() {
   const [individualAudioStates, setIndividualAudioStates] = useState<Record<number, boolean>>({})
   const [isMobile, setIsMobile] = useState(false)
   const [loadedVideos, setLoadedVideos] = useState<Set<number>>(new Set())
+  const [videoLoadingStates, setVideoLoadingStates] = useState<Record<number, boolean>>({})
   const boxRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
   const observerRef = useRef<IntersectionObserver | null>(null)
+  
+  // Function to generate preview image URL from video source
+  const getPreviewUrl = (videoSrc: string) => {
+    const videoName = videoSrc.split('/').pop()?.replace('.mp4', '') || ''
+    return `/images/conferences/preview-${videoName}.jpg`
+  }
   
   const handleAudioToggle = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -141,6 +148,7 @@ export default function VideoBoxesSection() {
           if (entry.isIntersecting) {
             const videoId = parseInt(entry.target.getAttribute('data-video-id') || '0')
             setLoadedVideos(prev => new Set([...prev, videoId]))
+            setVideoLoadingStates(prev => ({ ...prev, [videoId]: true }))
             observerRef.current?.unobserve(entry.target)
           }
         })
@@ -164,6 +172,11 @@ export default function VideoBoxesSection() {
       observerRef.current?.disconnect()
     }
   }, [])
+
+  // Handle video load events
+  const handleVideoLoaded = (videoId: number) => {
+    setVideoLoadingStates(prev => ({ ...prev, [videoId]: false }))
+  }
 
   // Control audio for videos based on mobile/desktop behavior
   useEffect(() => {
@@ -262,7 +275,19 @@ export default function VideoBoxesSection() {
                         }`}
                         data-video-id={box.id}
                       >
-                        {loadedVideos.has(box.id) ? (
+                        {/* Preview Image */}
+                        <img
+                          src={getPreviewUrl(box.videoSrc)}
+                          alt={`${box.title} preview`}
+                          className={`w-full h-full object-cover object-center brightness-75 transition-opacity duration-300 ${
+                            isMobile 
+                              ? (loadedVideos.has(box.id) && !videoLoadingStates[box.id] ? 'opacity-0' : 'opacity-100')
+                              : (hoveredBox === box.id && loadedVideos.has(box.id) && !videoLoadingStates[box.id] ? 'opacity-0' : 'opacity-100')
+                          }`}
+                        />
+                        
+                        {/* Video */}
+                        {loadedVideos.has(box.id) && (
                           <video
                             key={`video-${box.id}`}
                             ref={(el) => { videoRefs.current[index] = el }}
@@ -270,17 +295,16 @@ export default function VideoBoxesSection() {
                             loop
                             playsInline
                             muted={isMobile ? !individualAudioStates[box.id] : !(hoveredBox === box.id && audioEnabled)}
-                            className={`w-full object-cover object-bottom brightness-75 transition-opacity duration-300 ${
+                            onLoadedData={() => handleVideoLoaded(box.id)}
+                            className={`absolute inset-0 w-full h-full object-cover object-bottom brightness-75 transition-opacity duration-300 ${
                               isMobile 
-                                ? 'h-full opacity-100' 
-                                : 'h-full opacity-0 group-hover:opacity-100'
+                                ? (videoLoadingStates[box.id] ? 'opacity-0' : 'opacity-100')
+                                : (hoveredBox === box.id && !videoLoadingStates[box.id] ? 'opacity-100' : 'opacity-0')
                             }`}
                           >
                             <source src={box.videoSrc} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
-                        ) : (
-                          <div className="h-full w-full bg-gradient-to-br from-gray-800 to-gray-900 animate-pulse" />
                         )}
                         <div
                           className={`absolute inset-0 bg-gradient-to-t from-black/50 to-transparent transition-opacity duration-300 ${
