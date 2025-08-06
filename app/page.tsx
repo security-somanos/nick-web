@@ -295,6 +295,17 @@ export default function NickSpanosLanding() {
     }
   };
 
+  // Scroll to top (home)
+  const scrollToHome = () => {
+    closeMenu(); // Close menu first
+    setTimeout(() => {
+      window.scrollTo({ 
+        top: 0, 
+        behavior: 'smooth' 
+      });
+    }, 600); // Wait for menu close animation
+  };
+
   // Scroll to features section
   const scrollToFeatures = () => {
     const featuresSection = document.getElementById('conferences-video-section');
@@ -385,7 +396,10 @@ export default function NickSpanosLanding() {
               {/* Main Menu Items */}
               <div className="flex-1 flex items-center justify-center overflow-hidden">
                                   <div ref={menuItemsRef} className="text-center space-y-4 overflow-hidden">
-                    <div className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]">
+                    <div 
+                      className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
+                      onClick={scrollToHome}
+                    >
                       <span className="mb-0">HOME</span>
                       <svg 
                         className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
