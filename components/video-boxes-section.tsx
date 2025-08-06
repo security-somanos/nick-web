@@ -11,19 +11,74 @@ interface VideoBox {
   subtitle: string
   videoSrc: string
   link: string
+  subtleText: string
 }
 
 const videoBoxes: VideoBox[] = [
-  { id: 1, title: "London, UK", subtitle: "CryptoCurrency Convention", videoSrc: "/videos/video-conference.mp4", link: "https://www.youtube.com/watch?v=189Q0LJOxHA&ab_channel=CryptoCurrencyConvention" },
-  { id: 2, title: "Innovation", subtitle: "Case Study 002", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 3, title: "Revolution", subtitle: "Case Study 003", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 4, title: "Transformation", subtitle: "Case Study 004", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 5, title: "Evolution", subtitle: "Case Study 005", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 6, title: "Foundation", subtitle: "Case Study 006", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 7, title: "Genesis", subtitle: "Case Study 007", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 8, title: "Pioneer", subtitle: "Case Study 008", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 9, title: "Visionary", subtitle: "Case Study 009", videoSrc: "/videos/hero-video.mp4", link: "#" },
-  { id: 10, title: "Future", subtitle: "Case Study 010", videoSrc: "/videos/hero-video.mp4", link: "#" },
+  { 
+    id: 1, 
+    title: "LONDON, UK", 
+    subtitle: "CryptoCurrency Convention", 
+    videoSrc: "/videos/conferences/london.mp4",
+    link: "https://www.youtube.com/watch?v=189Q0LJOxHA",
+    subtleText: "Face Fears! Learn to Ride Life's Bicycle: Eyes on the Prize!"
+  },
+  { 
+    id: 2, 
+    title: "MIAMI, US", 
+    subtitle: "The revolution has started", 
+    videoSrc: "/videos/conferences/miami.mp4",
+    link: "https://www.youtube.com/watch?v=Ut-mWQOMKZU",
+    subtleText: "Bitcoin's Rise: Breaking Free and Building a Crypto Exchange!"
+  },
+  { 
+    id: 3, 
+    title: "MALTA, EU", 
+    subtitle: "The State Of Crypto", 
+    videoSrc: "/videos/conferences/malta.mp4",
+    link: "https://www.youtube.com/watch?v=Ft1LUJJyUOM",
+    subtleText: "Blockchain vs. Beasts: Take Control of Your Future!"
+  },
+  { 
+    id: 4, 
+    title: "NEW YORK, US", 
+    subtitle: "Wall Street's Cryptocurrency HQ", 
+    videoSrc: "/videos/conferences/new-york.mp4",
+    link: "https://www.youtube.com/watch?v=DS29SnLaKJs",
+    subtleText: "Bitcoin vs Inflation: The Educational Power That Changes Everything!"
+  },
+  { 
+    id: 5, 
+    title: "BALZAN, MALTA",
+    subtitle: "AIBC Eurasia Conference 2024",
+    videoSrc: "/videos/conferences/balzan.mp4",
+    link: "https://www.youtube.com/watch?v=YTLN4AoXfkE",
+    subtleText: "Never Lose Your Power! Don't let anyone take your tharos."
+  },
+  { 
+    id: 6, 
+    title: "DUBAI, UAE",
+    subtitle: "World Blockchain Forum Dubai",
+    videoSrc: "/videos/conferences/dubai.mp4",
+    link: "https://www.youtube.com/watch?v=Jc2LxHfbiLA",
+    subtleText: "Bought 12,000 Domains in the 90s? My Family's Reaction!"
+  },
+  { 
+    id: 7, 
+    title: "MIAMI, US",
+    subtitle: "CBDC's vs Bitcoin",
+    videoSrc: "/videos/conferences/quantum.mp4",
+    link: "https://www.youtube.com/watch?v=VnHPcCXTbh8",
+    subtleText: "CBDC Apocalypse: How AI Controls Your Money & Your Spending!"
+  },
+  { 
+    id: 8, 
+    title: "MIAMI, US", 
+    subtitle: "Nick Spanos launches Miami Bitcoin", 
+    videoSrc: "/videos/conferences/miami-center.mp4", 
+    link: "https://www.youtube.com/watch?v=bQhOD0Qa6No",
+    subtleText: "Nick Spanos launches Miami Bitcoin"
+  },
 ]
 
 export default function VideoBoxesSection() {
@@ -164,7 +219,7 @@ export default function VideoBoxesSection() {
   return (
     <section className="pt-4 pb-16 px-6">
       <div className="w-full mx-auto px-0">
-            <div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-0">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-0">
            {videoBoxes.map((box, index) => (
              <div
                key={box.id}
@@ -313,7 +368,7 @@ export default function VideoBoxesSection() {
             {/* Subtitle below each video */}
             <div className="mt-2 text-center md:text-start me-auto px-4">
               <p className="text-xs text-[#dedede] font-mono">
-                Face Fears! Learn to Ride Life's Bicycle: Eyes on the Prize!
+                {box.subtleText}
               </p>
             </div>
         </div>

@@ -679,12 +679,12 @@ export default function NickSpanosLanding() {
               {
                 outlet: "BITWALA",
                 description: "BITCOIN VISIONARY NICK SPANOS ADVOCATES 'END THE FED' MOVEMENT",
-                link: "https://bitwala.com/blog/bitcoin-visionary-nick-spanos-advocates-end-the-fed-movement?utm_source=chatgpt.com"
+                link: "https://bitwala.com/blog/bitcoin-visionary-nick-spanos-advocates-end-the-fed-movement"
               },
               {
                 outlet: "COINTELEGRAPH",
                 description: "HYBRID SMART CONTRACTS WILL REPLACE THE LEGAL SYSTEM",
-                link: "https://cointelegraph.com/news/hybrid-smart-contracts-will-replace-the-legal-system?utm_source=chatgpt.com"
+                link: "https://cointelegraph.com/news/hybrid-smart-contracts-will-replace-the-legal-system"
               },
               {
                 outlet: "POLITICO MAGAZINE",
@@ -694,27 +694,27 @@ export default function NickSpanosLanding() {
               {
                 outlet: "PARK MAGAZINE NY",
                 description: "How to Embrace Innovation Like Spanos, Weiner & Gallagher",
-                link: "https://parkmagazineny.com/bitcoin-pioneer-nick-spanos-zack-weiner-joe-gallagher/?utm_source=chatgpt.com"
+                link: "https://parkmagazineny.com/bitcoin-pioneer-nick-spanos-zack-weiner-joe-gallagher/"
               },
               {
                 outlet: "BITCOIN MAGAZINE",
                 description: "NICK SPANOS'S ZAP JOLTS REAL ESTATE WITH BLOCKCHAIN-BASED SMART CONTRACTS",
-                link: "https://bitcoinmagazine.com/business/nick-spanoss-zap-jolts-real-estate-blockchain-based-smart-contracts?utm_source=chatgpt.com"
+                link: "https://bitcoinmagazine.com/business/nick-spanoss-zap-jolts-real-estate-blockchain-based-smart-contracts"
               },
               {
                 outlet: "BITCOIN MAGAZINE",
                 description: "NICK SPANOS: SAUDI ARABIA IS 'KICKING THE TIRES — AND THAT'S HUGE'",
-                link: "https://bitcoinmagazine.com/culture/nick-spanos-saudi-arabia-kicking-tires-and-s-huge?utm_source=chatgpt.com"
+                link: "https://bitcoinmagazine.com/culture/nick-spanos-saudi-arabia-kicking-tires-and-s-huge"
               },
               {
                 outlet: "BITCOIN MAGAZINE",
                 description: "OP-ED: BITCOIN DECLARATION OF OUR MONETARY INDEPENDENCE",
-                link: "https://bitcoinmagazine.com/culture/op-ed-bitcoin-declaration-our-monetary-independence?utm_source=chatgpt.com"
+                link: "https://bitcoinmagazine.com/culture/op-ed-bitcoin-declaration-our-monetary-independence"
               },
               {
                 outlet: "NBE NEXT BLOCK EXPO",
                 description: "NICK SPANOS BITCOIN PIONEER, FOUNDER OF BITCOIN CENTER NYC",
-                link: "https://nextblockexpo.com/nick-spanos/?utm_source=chatgpt.com"
+                link: "https://nextblockexpo.com/nick-spanos/"
               },
               {
                 outlet: "THE NATIONAL NEWS",
@@ -724,7 +724,7 @@ export default function NickSpanosLanding() {
               /*{
                 outlet: "BAD CRYPTO PODCAST",
                 description: "BITCOIN CENTER NYC WITH NICK SPANOS",
-                link: "https://badcryptopodcast.com/2020/08/03/bcp-432-bitcoin-center-nyc-with-nick-spanos/?utm_source=chatgpt.com"
+                link: "https://badcryptopodcast.com/2020/08/03/bcp-432-bitcoin-center-nyc-with-nick-spanos/"
               },*/
               {
                 outlet: "MEDIUM",
@@ -1037,7 +1037,7 @@ export default function NickSpanosLanding() {
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
           }}
         >
-          <source src="/videos/water.mp4" type="video/mp4" />
+          <source src='/videos/water.mov' type='video/quicktime; codecs="hevc"' />
           <source src="/videos/water.webm" type="video/webm" />
           Your browser does not support the video tag.
         </video>
