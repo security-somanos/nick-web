@@ -17,7 +17,7 @@ import Image from "next/image"
 import Footer from "@/components/layout/footer";
 
 // Lazy load the VideoBoxesSection component for better initial performance
-const VideoBoxesSection = lazy(() => import("@/components/video-boxes-section"));
+const VideoBoxesSection = () => import("@/components/video-boxes-section");
 
 gsap.registerPlugin(ScrollTrigger)
 
