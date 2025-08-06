@@ -351,10 +351,10 @@ export default function NickSpanosLanding() {
             <div className="absolute top-8 left-8 z-[60]">
               <div 
                 ref={anchorRef}
-                className="w-[100px] h-[100px] cursor-pointer transition-transform duration-300 hover:scale-110"
+                className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] cursor-pointer transition-transform duration-300 hover:scale-110"
                 style={{
                   backgroundImage: 'url(/images/sprite-min.png)',
-                  backgroundSize: '12000px 100px', // Maintain exact sprite dimensions
+                  backgroundSize: 'cover',
                   backgroundPosition: '0 0',
                   backgroundRepeat: 'no-repeat',
                   pointerEvents: 'none' // Disable click events
@@ -557,7 +557,7 @@ export default function NickSpanosLanding() {
             Founder of Bitcoin Center NYC • Inventor • Serial Entrepreneur • Blockchain Visionary <br /> Philosopher • Activist
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 z-[101]" id="buttons-container">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
             <Link
               href="https://banned.video/watch?id=6887cd20fbec835b8f6e3e4a"
               target="_blank"
