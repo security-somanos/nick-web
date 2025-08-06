@@ -257,7 +257,7 @@ body {
 }
 
 .initial-offscreen-top {
-  transform: translateY(-100px);
+  transform: translateY(-120px);
 }
 
 /* Flicker Effect */
