@@ -362,7 +362,7 @@ export default function NickSpanosLanding() {
             <div className="absolute top-8 left-8 z-[60]">
               <div 
                 ref={anchorRef}
-                className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] cursor-pointer transition-transform duration-300 hover:scale-110"
+                className="w-[100px] h-[100px] md:w-[100px] md:h-[100px] cursor-pointer transition-transform duration-300 hover:scale-110"
                 style={{
                   backgroundImage: 'url(/images/sprite-min.png)',
                   backgroundSize: 'cover',
@@ -410,6 +410,20 @@ export default function NickSpanosLanding() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
                     </div>
+                    <Link
+                      href="/videos"
+                      className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
+                    >
+                      <span>MEDIA</span>
+                      <svg 
+                        className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </Link>
                     <div 
                       className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
                       onClick={scrollToFeatures}
