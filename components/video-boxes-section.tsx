@@ -283,8 +283,8 @@ export default function VideoBoxesSection() {
              >
                                               <a
                 ref={(el) => { boxRefs.current[index] = el }}
-                href={box.link}
-                target={box.link === "#" ? "_self" : "_blank"}
+                 href={`/videos/${box.id}`}
+                 target="_self"
                 rel="noopener noreferrer"
                 className={`shadow-md shadow-black/70 border border-[#252525] overflow-hidden rounded-12 cursor-pointer w-full relative block group ${
                   isMobile ? 'h-auto' : 'h-[200px]'
@@ -380,12 +380,12 @@ export default function VideoBoxesSection() {
                           }`}
                         >
                           {/* Watch Full Video Button */}
-                          <button
+                           <button
                            className="w-full bg-[#1f1f1f] transition duration-200 cursor-pointer hover:bg-black/30 hover:backdrop-blur-sm text-white font-mono text-xs py-3 px-4 flex items-center justify-center gap-2"
                            onClick={(e) => {
                              e.preventDefault();
                              e.stopPropagation();
-                             window.open(box.link, box.link === '#' ? '_self' : '_blank');
+                             window.location.href = `/videos/${box.id}`;
                            }}
                          >
                            <span>WATCH FULL VIDEO</span>
@@ -439,6 +439,18 @@ export default function VideoBoxesSection() {
             </div>
         </div>
           ))}
+      </div>
+      {/* See more button */}
+      <div className="mt-6 flex justify-center">
+        <a
+          href="/videos"
+          className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-400 text-gray-200 hover:bg-gray-500/10 hover:border-gray-200 transition-colors text-sm font-mono"
+        >
+          See more
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
       </div>
       </div>
     </section>
