@@ -53,7 +53,7 @@ export default function VideosSidebar({ items, isCollapsed, sidebarOpen, onClose
       {/* Mobile filters */}
       {years && countries && (
         <div className="md:hidden mt-3 border-t border-white/10 pt-3">
-          <div className="flex items-start flex-col gap-2 mb-6">
+          <div className="flex items-start flex-col gap-2 mb-4">
             <label className="text-xs text-gray-400">Year</label>
             <select
               value={activeYear}
@@ -78,10 +78,8 @@ export default function VideosSidebar({ items, isCollapsed, sidebarOpen, onClose
         </div>
       )}
 
-      
-
-{!isCollapsed && (
-        <div className="mt-4 text-[7pt] text-gray-400 px-3">Nick Spanos<br />@ 2025 All rights reserved.</div>
+      {!isCollapsed && (
+        <div className="mt-6 text-[7pt] text-gray-400 px-3">Nick Spanos<br />@ 2025 All rights reserved.</div>
       )}
 
     </aside>

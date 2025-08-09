@@ -123,7 +123,7 @@ export default function VideosGrid({ items }: VideosGridProps) {
       <div className="w-full mx-auto px-0">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-0">
           {items.map((box, index) => (
-            <div key={box.id} className="mb-4 md:mb-6 flex flex-col justify-center items-center w-full md:h-[280px]" style={{ opacity: 1 }}>
+            <div key={box.id} className="mb-6 flex flex-col justify-center items-center w-full md:h-[280px]" style={{ opacity: 1 }}>
               <a
                 ref={(el) => { boxRefs.current[index] = el }}
                 href={`/videos/${box.id}`}
@@ -154,7 +154,7 @@ export default function VideosGrid({ items }: VideosGridProps) {
                               : (hoveredBox === box.id && loadedVideos.has(box.id) && !videoLoadingStates[box.id] ? 'opacity-0' : 'opacity-100')
                           }`}
                         />
-                        {loadedVideos.has(box.id) && (
+                        {loadedVideos.has(box.id) && box.videoSrc && (
                           <video
                             key={`video-${box.id}`}
                             ref={(el) => { videoRefs.current[index] = el }}
