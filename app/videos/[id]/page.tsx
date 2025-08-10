@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation"
 import Html5VideoPlayer from "@/components/html5-video-player"
 import { videos } from "@/lib/videos"
 import RelatedVideosList from "@/components/related-videos-list"
+import { buildCdnUrl, computePreviewUrl, withBase } from "@/lib/utils"
 
 export default function VideoDetailPage() {
   const params = useParams()
@@ -21,13 +22,11 @@ export default function VideoDetailPage() {
     )
   }
 
-  const poster = video.previewUrl || `/images/conferences/preview-${video.videoSrc.split('/').pop()?.replace('.mp4','')}.jpg`
-  const base = process.env.NEXT_PUBLIC_BLOB_BASE_URL || process.env.BLOB_BASE_URL || ""
+  const poster = computePreviewUrl({ previewUrl: video.previewUrl, videoSrc: video.videoSrc })
+  const base = process.env.NEXT_PUBLIC_CDN_VIDEOS_BASE || process.env.NEXT_PUBLIC_BLOB_BASE_URL || process.env.BLOB_BASE_URL || ""
   const blobRelative = video.blobUrl?.replace(/^\/+/, "") || ""
-  debugger
-  const blobSrc = blobRelative ? `${base.replace(/\/$/, "")}/${blobRelative}` : ""
-  const src = blobSrc || video.videoSrc
-  console.log(src)
+  const blobSrc = blobRelative ? withBase(`/${blobRelative}`, base) : ""
+  const src = video.streamUrl || blobSrc || buildCdnUrl(video.videoSrc, "videos")
 
   const related = videos.filter(v => v.id !== video.id).slice(0, 8)
 
@@ -35,7 +34,7 @@ export default function VideoDetailPage() {
     <div className="min-h-screen text-white">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
         <div className="lg:col-span-2 space-y-4">
-          <Html5VideoPlayer src={src} poster={poster} controls autoPlay subtitles={video.subtitles} />
+          <Html5VideoPlayer src={src} poster={poster} controls autoPlay subtitles={video.subtitles?.map(t => ({ ...t, src: buildCdnUrl(t.src, "videos") }))} />
           <div className="space-y-1">
             <h2 className="text-2xl font-impact tracking-widest">{video.title}</h2>
             <p className="text-gray-300 text-sm">{video.subtitle}</p>

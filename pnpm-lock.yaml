@@ -116,6 +116,9 @@ importers:
       gsap:
         specifier: ^3.13.0
         version: 3.13.0
+      hls.js:
+        specifier: ^1.6.9
+        version: 1.6.9
       input-otp:
         specifier: 1.4.1
         version: 1.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1390,6 +1393,9 @@ packages:
 
   gsap@3.13.0:
     resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
+
+  hls.js@1.6.9:
+    resolution: {integrity: sha512-q7qPrri6GRwjcNd7EkFCmhiJ6PBIxeUsdxKbquBkQZpg9jAnp6zSAeN9eEWFlOB09J8JfzAQGoXL5ZEAltjO9g==}
 
   input-otp@1.4.1:
     resolution: {integrity: sha512-+yvpmKYKHi9jIGngxagY9oWiiblPB7+nEO75F2l2o4vs+6vpPZZmUl4tBNYuTCvQjhvEIbdNeJu70bhfYP2nbw==}
@@ -2936,6 +2942,8 @@ snapshots:
   graceful-fs@4.2.11: {}
 
   gsap@3.13.0: {}
+
+  hls.js@1.6.9: {}
 
   input-otp@1.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:

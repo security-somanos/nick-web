@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi"
 import type { VideoBox } from "@/lib/videos"
+import { buildCdnUrl, computePreviewUrl as computePreviewCdnUrl } from "@/lib/utils"
 
 interface VideosGridProps {
   items: VideoBox[]
@@ -21,9 +22,12 @@ export default function VideosGrid({ items }: VideosGridProps) {
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   const computePreviewUrl = (box: VideoBox) => {
-    if (box.previewUrl) return box.previewUrl
-    const videoName = box.videoSrc.split('/').pop()?.replace('.mp4', '') || ''
-    return `/images/conferences/preview-${videoName}.jpg`
+    return computePreviewCdnUrl({ previewUrl: box.previewUrl, videoSrc: box.videoSrc })
+  }
+
+  const buildGridVideoSrc = (box: VideoBox) => {
+    if (!box.videoSrc) return ""
+    return buildCdnUrl(box.videoSrc, "videos")
   }
 
   const handleAudioToggle = (e: React.MouseEvent) => {
@@ -154,7 +158,7 @@ export default function VideosGrid({ items }: VideosGridProps) {
                               : (hoveredBox === box.id && loadedVideos.has(box.id) && !videoLoadingStates[box.id] ? 'opacity-0' : 'opacity-100')
                           }`}
                         />
-                        {loadedVideos.has(box.id) && box.videoSrc && (
+                         {loadedVideos.has(box.id) && box.videoSrc && (
                           <video
                             key={`video-${box.id}`}
                             ref={(el) => { videoRefs.current[index] = el }}
@@ -169,7 +173,7 @@ export default function VideosGrid({ items }: VideosGridProps) {
                                 : (hoveredBox === box.id && !videoLoadingStates[box.id] ? 'opacity-100' : 'opacity-0')
                             }`}
                           >
-                            <source src={box.videoSrc} type="video/mp4" />
+                            <source src={buildGridVideoSrc(box)} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
                         )}

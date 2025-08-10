@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { isHlsUrl } from "@/lib/utils"
 
 interface Html5VideoPlayerProps {
   src: string
@@ -24,11 +25,47 @@ export default function Html5VideoPlayer({ src, poster, autoPlay = false, contro
     }
   }, [autoPlay, src])
 
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    if (!isHlsUrl(src)) return
+
+    let hls: any
+    const setupHls = async () => {
+      // Safari (and some mobile browsers) support HLS natively
+      const canUseNativeHls = video.canPlayType('application/vnd.apple.mpegURL') !== ''
+      if (canUseNativeHls) {
+        video.src = src
+        return
+      }
+      try {
+        const Hls = (await import('hls.js')).default
+        if (Hls.isSupported()) {
+          hls = new Hls({ enableWorker: true })
+          hls.loadSource(src)
+          hls.attachMedia(video)
+        } else {
+          // Fallback to direct src in case
+          video.src = src
+        }
+      } catch {
+        video.src = src
+      }
+    }
+
+    setupHls()
+    return () => {
+      if (hls) {
+        try { hls.destroy() } catch { /* ignore */ }
+      }
+    }
+  }, [src])
+
   return (
     <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden border border-white/10">
       <video
         ref={ref}
-        src={src}
+        src={!isHlsUrl(src) ? src : undefined}
         poster={poster}
         controls={controls}
         autoPlay={autoPlay}
