@@ -518,7 +518,7 @@ export default function NickSpanosLanding() {
 
       {/* Hero Section */}
       <section
-        className="z-100 mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden"
+        className="z-40 mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden"
         style={{
           WebkitMaskImage:
             "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
@@ -600,6 +600,25 @@ export default function NickSpanosLanding() {
                 Latest interview
               </Button>
             </Link>
+            <Link href="/videos" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                className="w-full md:w-auto"
+                variant="outlineTech"
+              >
+                <Tv className="mr-2 h-5 w-5" />
+                Media
+              </Button>
+            </Link>
+            <Button
+              size="lg"
+              className="w-full md:w-auto"
+              variant="outlineTech"
+              onClick={scrollToFeatures}
+            >
+              <Lightbulb className="mr-2 h-5 w-5" />
+              Features
+            </Button>
             <Link href="/contact" className="w-full md:w-auto">
               <Button
                 size="lg"
