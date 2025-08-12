@@ -37,14 +37,14 @@ export default function RelatedVideosList({ items, initialVisible = 8, title = "
             <div className="relative w-44 aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
               <img
                 src={getPreviewUrl(v.videoSrc)}
-                alt={`${v.title} preview`}
+                alt={`${v.subtleText} preview`}
                 className="absolute inset-0 w-full h-full object-cover object-center brightness-75 transition-transform duration-300 group-hover:scale-[1.02]"
                 loading="lazy"
               />
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-semibold line-clamp-2 group-hover:underline">
-                {v.title}
+                {v.subtleText}
               </div>
               <div className="text-xs text-gray-400 mt-1 line-clamp-2">
                 {v.subtitle}

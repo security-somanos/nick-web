@@ -53,6 +53,20 @@ const rawVideos = [
     ]
   },
   { 
+    id: 39, 
+    title: "LONDON, UK", 
+    subtitle: "American Journal", 
+    videoSrc: "https://nick-spanos-pull.b-cdn.net/london.mp4",
+    //blobUrl: "/CryptoCurrency%20Convention/20140421%20-%20%5BOFFICIAL%20SPONSOR%5D%20Nick%20Spanos%2C%20Bitcoin%20Center%20NYC%20%40%20CryptoCurrency%20Convention%204%E2%A7%B89%E2%A7%B814.mp4",
+    streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/b5793c49-b465-4a30-bd82-cf6b4ffaf419/playlist.m3u8",
+    author: "Amercian Journal",
+    link: "https://banned.video/watch?id=6887cd20fbec835b8f6e3e4a",
+    subtleText: "Blockchain Creator Tells All on Fame, Fortune, and Politics",
+    year: 2025,
+    country: "United States",
+    subtitles: []
+  },
+  { 
     id: 2, 
     title: "MIAMI, US", 
     subtitle: "The revolution has started", 
@@ -148,7 +162,7 @@ const rawVideos = [
   },
   
   // ==== New entries appended ====
-  {
+  /*{
     id: 9,
     title: "Polycon 2018 Talk",
     subtitle: "Conference Highlight",
@@ -596,7 +610,8 @@ const rawVideos = [
     country: "United States",
     author: "Nick Spanos",
     subtitles: []
-  },
+  },*/
+  //39 is already done
 ]
 
 export const videos: VideoBox[] = rawVideos;

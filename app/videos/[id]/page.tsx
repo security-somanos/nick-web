@@ -36,7 +36,7 @@ export default function VideoDetailPage() {
         <div className="lg:col-span-2 space-y-4">
           <Html5VideoPlayer src={src} poster={poster} controls autoPlay subtitles={video.subtitles?.map(t => ({ ...t, src: buildCdnUrl(t.src, "videos") }))} />
           <div className="space-y-1">
-            <h2 className="text-2xl font-impact tracking-widest">{video.title}</h2>
+            <h2 className="text-2xl font-impact tracking-widest">{video.subtleText}</h2>
             <p className="text-gray-300 text-sm">{video.subtitle}</p>
             {video.link && (
               <a className="text-xs text-gray-400 underline" href={video.link} target="_blank" rel="noopener noreferrer">Open external link</a>

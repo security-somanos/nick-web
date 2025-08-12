@@ -518,7 +518,7 @@ export default function NickSpanosLanding() {
 
       {/* Hero Section */}
       <section
-        className="mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden"
+        className="z-100 mb-[-50vh] md:mb-[-30vh] bg-[#111111] crt relative h-screen flex items-center justify-center overflow-hidden"
         style={{
           WebkitMaskImage:
             "linear-gradient(to bottom, rgba(0,0,0,1) 85%, rgba(0,0,0,0) 100%)",
@@ -587,8 +587,7 @@ export default function NickSpanosLanding() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="buttons-container">
             <Link
-              href="https://banned.video/watch?id=6887cd20fbec835b8f6e3e4a"
-              target="_blank"
+              href="/videos/39"
               rel="noopener noreferrer"
               className="w-full md:w-auto"
             >
@@ -1132,7 +1131,7 @@ export default function NickSpanosLanding() {
           }}
         >
           <span>
-            A beast you will never become unless you eat beasts
+            A beast you will never become until you eat beasts
           </span>
           <span
             className="text-sm md:text-[1rem]"
