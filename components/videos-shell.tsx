@@ -17,6 +17,7 @@ export default function VideosShell({ children }: { children: React.ReactNode })
   } = useVideosLayout()
 
   const showCategories = pathname === "/videos" || pathname === "/videos/"
+  const brandHref = showCategories ? "/" : "/videos"
 
   return (
     <div className="min-h-screen text-white">
@@ -38,7 +39,7 @@ export default function VideosShell({ children }: { children: React.ReactNode })
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           </button>
-          <Link href="/videos" className="font-impact tracking-widest text-xl hover:opacity-90 transition-opacity">Nick Spanos</Link>
+          <Link href={brandHref} className="font-impact tracking-widest text-xl hover:opacity-90 transition-opacity">Nick Spanos</Link>
           {/* Desktop search */}
           <div className="hidden md:flex flex-1 items-center justify-center">
             <div className="w-full max-w-3xl flex items-center gap-2 bg-[#121212] border border-white/10 rounded-full px-4 py-2">
