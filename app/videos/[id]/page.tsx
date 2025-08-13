@@ -52,3 +52,7 @@ export default function VideoDetailPage() {
 }
 
 
+export function generateStaticParams() {
+  return videos.map(v => ({ id: String(v.id) }))
+}
+
