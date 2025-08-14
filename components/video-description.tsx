@@ -32,13 +32,21 @@ export default function VideoDescription({ video }: VideoDescriptionProps) {
   const [copied, setCopied] = useState(false)
 
   const publishedDate = useMemo(() => formatPublishedDate(video.publishedAt), [video.publishedAt])
-  const location = useMemo(() => (video.location && video.location.trim().length > 0 ? video.location : null), [video.author])
+  const location = useMemo(() => (video.location && video.location.trim().length > 0 ? video.location : null), [video.location])
 
   const handleShare = async (e: React.MouseEvent) => {
     e.stopPropagation()
+    const shareDate = video.publishedAt
+      ? new Intl.DateTimeFormat("en-US", { day: "numeric", month: "short", year: "numeric" }).format(new Date(video.publishedAt))
+      : null
+    const dateForShare = shareDate ? ` · ${shareDate}` : ""
+    const locForShare = location ? ` · ${location}` : ""
+    const baseTitle = video.subtleText || video.title
+    // Build a more compelling share text
+    const textMsg = `${baseTitle}${locForShare}${dateForShare}\n\n${video.subtitle}\n\nWatch here:`
     const shareData = {
-      title: video.subtleText || video.title,
-      text: video.subtitle,
+      title: baseTitle,
+      text: textMsg,
       url: typeof window !== "undefined" ? window.location.href : undefined,
     }
     const ua = typeof navigator !== "undefined" ? navigator.userAgent || "" : ""
@@ -55,11 +63,11 @@ export default function VideoDescription({ video }: VideoDescriptionProps) {
 
     try {
       if (shareData.url && navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
-        await navigator.clipboard.writeText(shareData.url)
+        await navigator.clipboard.writeText(`${textMsg}\n${shareData.url}`)
       } else if (shareData.url) {
         // Legacy fallback for iOS/Safari: hidden textarea + execCommand
         const textarea = document.createElement("textarea")
-        textarea.value = shareData.url
+        textarea.value = `${textMsg}\n${shareData.url}`
         textarea.setAttribute("readonly", "")
         textarea.style.position = "absolute"
         textarea.style.left = "-9999px"
@@ -106,7 +114,7 @@ export default function VideoDescription({ video }: VideoDescriptionProps) {
           className="min-w-[110px]"
         >
           <Share2Icon className="size-4" />
-          {copied ? "Copiado" : "Compartir"}
+          {copied ? "Copied" : "Share"}
         </Button>
       </div>
 

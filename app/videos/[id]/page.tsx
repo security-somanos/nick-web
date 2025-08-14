@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import Html5VideoPlayer from "@/components/html5-video-player"
 import RelatedVideosList from "@/components/related-videos-list"
 import { videos } from "@/lib/videos"
@@ -9,6 +10,62 @@ import VideoDescription from "@/components/video-description"
 
 export function generateStaticParams() {
   return videos.map(v => ({ id: String(v.id) }))
+}
+
+export function generateMetadata({ params }: { params: { id: string } }): Metadata {
+  const id = Number(params.id)
+  const video = videos.find(v => v.id === id)
+  if (!video) return {}
+
+  const poster = computePreviewUrl({ previewUrl: video.previewUrl, videoSrc: video.videoSrc })
+  const pagePath = `/videos/${id}`
+  const siteFromEnv = process.env.NEXT_PUBLIC_SITE_URL || process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL || ""
+  const site = siteFromEnv ? (siteFromEnv.startsWith("http") ? siteFromEnv : `https://${siteFromEnv}`) : ""
+  const url = site ? `${site}${pagePath}` : pagePath
+
+  const titleMain = video.subtleText || video.title || video.subtitle
+  const dateStr = video.publishedAt ? new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "short", year: "numeric" }).format(new Date(video.publishedAt)).toLowerCase() : undefined
+  const locationAndDate = [video.location, dateStr].filter(Boolean).join(" · ")
+  const title = locationAndDate ? `${titleMain} — ${locationAndDate}` : titleMain
+  const description = video.description || video.subtitle
+
+  const videoOgUrl = video.streamUrl || video.videoSrc
+
+  // Extract hashtags from description to use as keywords
+  const hashtagRegex = /(^|\s)#([A-Za-z0-9_]+)/g
+  const tagSet = new Set<string>()
+  let match: RegExpExecArray | null
+  if (video.description) {
+    while ((match = hashtagRegex.exec(video.description)) !== null) {
+      const tag = match[2]
+      if (tag) tagSet.add(tag)
+    }
+  }
+  const keywords = Array.from(tagSet)
+
+  return {
+    title,
+    description,
+    keywords: keywords.length ? keywords : undefined,
+    authors: video.author ? [{ name: video.author }] : undefined,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "video.other",
+      url,
+      siteName: "Nick Spanos",
+      title,
+      description,
+      images: poster ? [{ url: poster }] : undefined,
+      videos: videoOgUrl ? [{ url: videoOgUrl }] : undefined,
+      locale: "es_ES",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: poster ? [poster] : undefined,
+    },
+  }
 }
 
 export default function VideoDetailPage({ params }: { params: { id: string } }) {
