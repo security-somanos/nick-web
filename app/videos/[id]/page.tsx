@@ -5,6 +5,7 @@ import RelatedVideosList from "@/components/related-videos-list"
 import { videos } from "@/lib/videos"
 import type { SubtitleTrack } from "@/lib/videos"
 import { buildCdnUrl, computePreviewUrl, withBase } from "@/lib/utils"
+import VideoDescription from "@/components/video-description"
 
 export function generateStaticParams() {
   return videos.map(v => ({ id: String(v.id) }))
@@ -32,12 +33,10 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
         <div className="lg:col-span-2 space-y-4">
           <Html5VideoPlayer src={src} poster={poster} controls autoPlay subtitles={video!.subtitles?.map((t: SubtitleTrack) => ({ ...t, src: buildCdnUrl(t.src, "videos") }))} />
           <div className="space-y-1">
-            <h2 className="text-2xl font-impact tracking-widest">{video!.subtleText}</h2>
+            <h2 className="text-2xl font-impact tracking-widest">{video!.realTitle || video.subtitle}</h2>
             <p className="text-gray-300 text-sm">{video!.subtitle}</p>
-            {video!.link && (
-              <a className="text-xs text-gray-400 underline" href={video!.link} target="_blank" rel="noopener noreferrer">Open external link</a>
-            )}
           </div>
+          <VideoDescription video={video!} />
         </div>
         <div className="lg:col-span-1">
           <RelatedVideosList items={related} />

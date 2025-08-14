@@ -218,7 +218,7 @@ export default function VideosGrid({ items }: VideosGridProps) {
               </a>
 
               <div className="mt-2 w-full px-2">
-                <div className="text-sm md:text-base text-[#f0f0f0] font-mono font-semibold line-clamp-2">{box.subtleText}</div>
+                <div className="text-sm md:text-base text-[#f0f0f0] font-mono font-semibold line-clamp-2">{box.realTitle || box.subtleText}</div>
                 {box.author && (
                   <div className="text-[11px] text-gray-400 font-mono mt-1">{box.author}</div>
                 )}

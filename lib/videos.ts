@@ -1,6 +1,7 @@
 export interface VideoBox {
   id: number
-  title: string
+  title: string,
+  realTitle?: string,
   subtitle: string
   videoSrc: string
   blobUrl?: string
@@ -12,6 +13,9 @@ export interface VideoBox {
   subtitles?: SubtitleTrack[]
   author: string
   previewUrl?: string
+  publishedAt?: string
+  description?: string
+  location?: string
 }
 
 export interface SubtitleTrack {
@@ -47,6 +51,7 @@ const rawVideos = [
     subtleText: "Face Fears! Learn to Ride Life's Bicycle: Eyes on the Prize!",
     year: 2016,
     country: "United Kingdom",
+    location: "London, United Kingdom",
     subtitles: [
       { lang: "en", label: "English", src: "/videos/subtitles/london.en.vtt", default: true },
       { lang: "es", label: "Español", src: "/videos/subtitles/london.es.vtt" }
@@ -55,6 +60,7 @@ const rawVideos = [
   { 
     id: 39, 
     title: "LONDON, UK", 
+    realTitle: "Blockchain Creator Tells All – Fame, Fortune & Politics with Nick Spano",
     subtitle: "American Journal", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/Blockchain%20Creator%20preview.mp4",
     previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/b5793c49-b465-4a30-bd82-cf6b4ffaf419/thumbnail.jpg",
@@ -65,11 +71,25 @@ const rawVideos = [
     subtleText: "Blockchain Creator Tells All on Fame, Fortune, and Politics",
     year: 2025,
     country: "United States",
-    subtitles: []
+    subtitles: [],
+    publishedAt: "2025-07-29",
+    location: "Austin, United States",
+    description: `From the heart of Wall Street to the frontlines of the crypto revolution, Nick Spanos has seen it all. As the inventor of the multibranch blockchain and founder of the first live cryptocurrency exchange—opened in 2013 just 100 feet from the New York Stock Exchange—Spanos has been a driving force in bringing Bitcoin and blockchain technology into the global spotlight.
+
+But his story doesn’t stop at technology. A committed Libertarian and political strategist, Spanos served as Senior Advisor to Ron Paul during the 2008 and 2012 U.S. Presidential campaigns, championing freedom, decentralization, and financial sovereignty.
+
+In this exclusive conversation, Spanos opens up about:
+* The creation of multibranch blockchain technology
+* Building the first physical crypto exchange near Wall Street
+* His role in shaping political campaigns for liberty and decentralization
+* The future of blockchain, Bitcoin, and global finance
+
+#Nick Spanos, #blockchain, #Bitcoin, #multibranch blockchain, crypto exchange, first crypto exchange, Bitcoin Center NYC, Wall Street Bitcoin, Ron Paul, Libertarian, cryptocurrency history, Bitcoin history, blockchain technology, crypto pioneer, Bitcoin adoption, decentralization, crypto politics, blockchain innovation, Bitcoin NYC, political freedom, financial sovereignty, crypto revolution, Bitcoin speech, Bitcoin interview`
   },
   { 
     id: 2, 
     title: "MIAMI, US", 
+    realTitle: "Bitcoin’s Rise: Breaking Free & Building a Crypto Exchange – Nick Spanos in Miami, 2022",
     subtitle: "The revolution has started", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/miami.mp4",
     //blobUrl: "//MyTransmedia/20220215%20-%20Nick%20Spanos%20in%20Miami.mkv",
@@ -77,15 +97,26 @@ const rawVideos = [
     author: "MyTransmedia",
     link: "https://www.youtube.com/watch?v=Ut-mWQOMKZU",
     subtleText: "Bitcoin's Rise: Breaking Free and Building a Crypto Exchange!",
-    year: 2018,
+    year: 2022,
     country: "United States",
     subtitles: [
       { lang: "en", label: "English", src: "/videos/subtitles/miami.en.vtt", default: true }
-    ]
+    ],
+    location: "Miami, United States",
+    description: `Journey back to the heart of Miami in 2022, where pioneering founder Nick Spanos unpacks the revolution that is Bitcoin. As the inventor of the multibranch blockchain and creator of the very first live cryptocurrency exchange—launched in 2013 just 100 feet from the New York Stock Exchange—Spanos brings us into the epicenter of crypto innovation at the Blockchain Center Miami.
+In this powerful session, Nick reveals:
+* The birth of a vision: How multibranch blockchain technology emerged to empower decentralization.
+* From the ground up: The audacious story of launching a live crypto exchange next to Wall Street—and what that meant for mainstream adoption.
+* Miami’s rising role: How the city became a new frontier for crypto growth and innovation.
+* Bitcoin’s bigger picture: How breaking free from traditional financial constraints reshaped the global narrative.
+If you’re fascinated by crypto’s evolution—or want to better understand the forces shaping the future of money—this video is your front-row seat to a pivotal chapter in financial history.
+
+#Bitcoin #NickSpanos #BitcoinCenterNYC #CryptoHistory #Blockchain #WallStreet #CryptoConvention`
   },
   { 
     id: 3, 
     title: "MALTA, EU", 
+    realTitle: "The State Of Crypto with Nick Spanos, Founder at Bitcoin Center NYC | Europe 2022",
     subtitle: "The State Of Crypto", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/malta.mp4",
     //blobUrl: "//AIBC%20World/20221128%20-%20The%20State%20Of%20Crypto%20with%20Nick%20Spanos%2C%20Founder%20at%20Bitcoin%20Center%20NYC%20%EF%BD%9C%20Europe%202022.mkv",
@@ -93,12 +124,19 @@ const rawVideos = [
     author: "AIBC World",
     link: "https://www.youtube.com/watch?v=Ft1LUJJyUOM",
     subtleText: "Blockchain vs. Beasts: Take Control of Your Future!",
-    year: 2019,
-    country: "Malta"
+    year: 2022,
+    location: "Malta, Europe",
+    country: "Malta",
+    description: `Nick Spanos, the visionary founder behind the Bitcoin Center NYC and pioneer of the first live cryptocurrency exchange near Wall Street, spoke at Malta Week 2022.
+In this talk, Nick shares his unique perspective on the evolving world of crypto, reflecting on his journey and the role innovation plays in shaping the future. Known for blending technology with a libertarian spirit, Nick’s insights offer a thoughtful look at the crypto space from one of its earliest advocates.
+This video is perfect for anyone interested in the story behind the scenes and the people driving the crypto movement forward.
+Follow Nick’s journey and ideas here!
+#NickSpanos #BitcoinCenterNYC #MaltaWeek #CryptoPioneer #BlockchainInnovation`
   },
   { 
     id: 4, 
     title: "NEW YORK, US", 
+    realTitle: "Wall Street's Cryptocurrency Headquarters: Inside Bitcoin Center NYC",
     subtitle: "Wall Street's Cryptocurrency HQ", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/new-york.mp4",
     //blobUrl: "//ReasonTV/20140128%20-%20Wall%20Street%27s%20Cryptocurrency%20Headquarters%EF%BC%9A%20Inside%20Bitcoin%20Center%20NYC.mkv",
@@ -107,11 +145,22 @@ const rawVideos = [
     link: "https://www.youtube.com/watch?v=DS29SnLaKJs",
     subtleText: "Bitcoin vs Inflation: The Educational Power That Changes Everything!",
     year: 2014,
-    country: "United States"
+    location: "New York, United States",
+    country: "United States",
+    description: `"I was in college, and now instead of going to college I'm doing Bitcoin," says Louis Parker, an entrepreneur who has set up shop at the Bitcoin Center NYC, a cavernous storefront in lower Manhattan's financial district that's become a central gathering spot for New York City's cryptocurrency traders, programmers, and enthusiasts. "There's no college class on Bitcoin, except in Cyprus, and I wasn't ready to move there," he says.
+
+Every Monday night, the Bitcoin community holds a meet up called Satoshi Square, named in honor of Satoshi Nakamoto, the mysterious creator of Bitcoin, in which traders exchange virtual currencies for U.S. dollars. Before Satoshi Square relocated to the Bitcoin Center NYC a couple weeks ago, it was held in the shopping aisles of a Whole Foods grocery store on the Lower East Side.
+
+Why convert Bitcoins to dollars in person when it's simple to do so on the web? For one thing, online trades require a bank account, which some Bitcoin users lack. Trading in person also reduces transaction fees and enables haggling. "There's a lot of benefits to coming together on an exchange," says Scott Tuddenham, who helps manage the order book during Satoshi Square. "Commerce has been conducted in city centers since the beginning of time," he says.
+
+The cofounder of the Bitcoin Center NYC is Nick Spanos, a tech entrepreneur and the owner of the New York City real estate brokerage firm Bapple. He says his interest in Bitcoin and other virtual currencies is partly driven by concern that over printing of money by the U.S. government could lead to runaway inflation.
+
+"Maybe people just by learning about Bitcoin will slowdown the dollars being printed as an educational function of its existence," says Spanos.`
   },
   { 
     id: 5, 
     title: "BALZAN, MALTA",
+    realTitle: "The State Of Crypto with Nick Spanos, Founder at Bitcoin Center NYC | Europe 2022",
     subtitle: "AIBC Eurasia Conference 2024",
     videoSrc: "https://nick-spanos-pull.b-cdn.net/balzan.mp4",
     //blobUrl: "/AIBC%20World/20240419%20-%20The%20State%20of%20Crypto%EF%BC%9A%20Insights%20from%20Nick%20Spanos%20%EF%BD%9C%20AIBC%20Eurasia%20Conference%202024.mkv",
@@ -120,11 +169,20 @@ const rawVideos = [
     link: "https://www.youtube.com/watch?v=YTLN4AoXfkE",
     subtleText: "Never Lose Your Power! Don't let anyone take your tharos.",
     year: 2024,
-    country: "Malta"
+    location: "Balzan, Malta",
+    country: "Malta",
+    description: `
+    Nick Spanos, the visionary founder behind the Bitcoin Center NYC and pioneer of the first live cryptocurrency exchange near Wall Street, spoke at Malta Week 2022.
+In this talk, Nick shares his unique perspective on the evolving world of crypto, reflecting on his journey and the role innovation plays in shaping the future. Known for blending technology with a libertarian spirit, Nick’s insights offer a thoughtful look at the crypto space from one of its earliest advocates.
+This video is perfect for anyone interested in the story behind the scenes and the people driving the crypto movement forward.
+Follow Nick’s journey and ideas here!
+#NickSpanos #BitcoinCenterNYC #MaltaWeek #CryptoPioneer #BlockchainInnovation
+    `
   },
   { 
     id: 6, 
     title: "DUBAI, UAE",
+    realTitle: "",
     subtitle: "World Blockchain Forum Dubai",
     videoSrc: "https://nick-spanos-pull.b-cdn.net/dubai.mp4",
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/b96e9b45-df7f-4126-9bae-6400c32044fe/playlist.m3u8",
@@ -132,12 +190,26 @@ const rawVideos = [
     author: "WAGMI Events",
     link: "https://www.youtube.com/watch?v=Jc2LxHfbiLA",
     subtleText: "Bought 12,000 Domains in the 90s? My Family's Reaction!",
-    year: 2017,
-    country: "United Arab Emirates"
+    year: 2018,
+    country: "United Arab Emirates",
+    location: "Dubai, United Arab Emirates",
+    description: `Nick Spanos at World Blockchain Forum Dubai | Visionary Insights on the Future of Crypto
+Join crypto pioneer Nick Spanos, founder of the iconic Bitcoin Center NYC, as he takes the stage at the World Blockchain Forum Dubai to share his bold vision for blockchain’s transformative power.
+
+In this keynote, Nick dives into:
+    * How blockchain is reshaping industries through transparency and decentralization
+    * The critical role of clear regulation in fueling innovation
+    * His passionate commitment to advancing a decentralized future
+
+Whether you’re a crypto enthusiast or just curious about where blockchain technology is headed, Nick’s insights offer a front-row seat to the future of finance.
+
+Watch now and get inspired by one of crypto’s earliest innovators!
+#NickSpanos #Blockchain #CryptoFuture #WorldBlockchainForum #BitcoinCenterNYC #Decentralization #CryptoInnovation`
   },
   { 
     id: 7, 
     title: "MIAMI, US",
+    realTitle: "The Hidden Danger of Central Bank Digital Currencies (CBDCs) | Protect Your Financial Freedom",
     subtitle: "CBDC's vs Bitcoin",
     videoSrc: "https://nick-spanos-pull.b-cdn.net/quantum.mp4",
     //blobUrl: "/Nick%20Spanos/20230220%20-%20CBDC%27s%20vs%20Bitcoin%20with%20Nick%20Spanos%20%20Quantum%20Miami%202023.mkv",
@@ -146,11 +218,20 @@ const rawVideos = [
     link: "https://www.youtube.com/watch?v=VnHPcCXTbh8",
     subtleText: "CBDC Apocalypse: How AI Controls Your Money & Your Spending!",
     year: 2023,
-    country: "United States"
+    country: "United States",
+    location: "Miami, United States",
+    description: `    * Central Bank Digital Currencies (CBDCs) might sound like a step toward financial inclusion and transparency — but beneath the surface lies a massive threat to your privacy and freedom.
+    * CBDCs give governments unprecedented power to track and control every transaction, opening the door to invasive surveillance and potential abuse. This isn’t just about money; it’s about your personal freedom at risk.
+
+    * At Bitcoin Center, we stand firmly for financial sovereignty. We believe in decentralized, censorship-resistant cryptocurrencies like Bitcoin that protect your privacy and empower individuals — not governments.
+    * Stay informed. Stay vigilant. Join the movement to defend your financial rights.
+
+#CBDC #FinancialFreedom #Bitcoin #PrivacyMatters #Decentralization #BitcoinCenter #CryptoRights`
   },
   { 
     id: 8, 
     title: "MIAMI, US", 
+    realTitle: "🔥 Nick Spanos Launches Miami Bitcoin Center | Miami Blockchain Week 2023",
     subtitle: "Nick Spanos launches Miami Bitcoin", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/miami-center.mp4", 
     //blobUrl: "/Nick%20Spanos/20190123%20-%20Nick%20Spanos%20launches%20Miami%20Bitcoin%20Center%20during%20miami%20blockchain%20week.mkv",
@@ -158,12 +239,23 @@ const rawVideos = [
     author: "Nick Spanos",
     link: "https://www.youtube.com/watch?v=bQhOD0Qa6No",
     subtleText: "Nick Spanos launches Miami Bitcoin",
-    year: 2013,
-    country: "United States"
+    year: 2023,
+    location: "Miami, United States",
+    country: "United States",
+    description: `    * Crypto pioneer Nick Spanos, founder of the groundbreaking Bitcoin Center NYC, brings his visionary spirit to Miami with the launch of the Miami Bitcoin Center during Miami Blockchain Week!
+
+    * This exciting new hub aims to be a beacon for Bitcoin education, adoption, and community in one of the world’s fastest-growing crypto cities. Watch as Nick shares his passion for empowering individuals through decentralized finance and takes the next big step in the global Bitcoin movement.
+
+    * Discover how the Miami Bitcoin Center plans to inspire innovation, foster collaboration, and build a stronger crypto ecosystem in the heart of Miami’s vibrant blockchain scene.
+
+    * Whether you’re a Bitcoin veteran or just curious about the crypto revolution, this launch marks a thrilling moment you won’t want to miss!
+
+
+    * #NickSpanos #MiamiBitcoinCenter #MiamiBlockchainWeek #Bitcoin #Crypto #Blockchain #CryptoCommunity`,
   },
   
   // ==== New entries appended ====
-  /*{
+  {
     id: 9,
     title: "Polycon 2018 Talk",
     subtitle: "Conference Highlight",
@@ -172,7 +264,7 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/37a2fa13-521c-4704-a173-c5a25e187d1f/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=7CyecPgw3xk",
     subtleText: "Nick Spanos on Zap and the State of the Crypto at Polycon 2018",
-    previewUrl: "/images/previews/Nick Spanos on Zap and the State of the Crypto at Polycon 2018.webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/37a2fa13-521c-4704-a173-c5a25e187d1f/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
@@ -187,7 +279,7 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/dbdf7d4a-f52a-4695-aa93-b97c3c4a0827/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=8LCeKkTI058",
     subtleText: "Crypto Whales, first shark tank for crypto",
-    previewUrl: "/images/previews/Crypto Whales, first shark tank for crypto..webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/dbdf7d4a-f52a-4695-aa93-b97c3c4a0827/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
@@ -202,7 +294,7 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/a3dab2d3-8d03-4af4-8cf0-1f1d92f98119/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=a9tdEEhQ0cw",
     subtleText: "CNBC Arabia $zap interview Nick Spanos",
-    previewUrl: "/images/previews/CNBC Arabia $zap interview Nick Spanos.webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/a3dab2d3-8d03-4af4-8cf0-1f1d92f98119/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
@@ -216,7 +308,7 @@ const rawVideos = [
     blobUrl: "/CryptoCurrency%20Convention/20140421%20-%20%5BOFFICIAL%20SPONSOR%5D%20Nick%20Spanos%2C%20Bitcoin%20Center%20NYC%20%40%20CryptoCurrency%20Convention%204%E2%A7%B89%E2%A7%B814.mp4",
     link: "https://www.youtube.com/watch?v=BEtISynPwxc",
     subtleText: "Nick Spanos launching DogeCoin at the Bitcoin Center 2013 on Wall Street",
-    previewUrl: "/images/previews/Nick Spanos launching DogeCoin at the Bitcoin Center 2013 on Wall Street..webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/030b6c84-1526-4601-86df-db9bbcbe8225/thumbnail.jpg",
     year: 2013,
     country: "United States",
     author: "Nick Spanos",
@@ -231,7 +323,7 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/db28a468-1aa9-442c-8016-b020722d3bd2/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=BWbnjITWg78",
     subtleText: "6/22/18  4_12 pm Zap Protocol coders in action",
-    previewUrl: "/images/previews/6⧸22⧸18  4_12 pm Zap Protocol coders in action.webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/db28a468-1aa9-442c-8016-b020722d3bd2/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
@@ -246,7 +338,7 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/a2da9fae-240a-49f0-9484-61eec2cb8ac6/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=By0MHhdWiNk",
     subtleText: "Bringing Real World Data to Smart Contracts  Nick Spanos",
-    previewUrl: "/images/previews/Bringing Real World Data to Smart Contracts  Nick Spanos.webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/a2da9fae-240a-49f0-9484-61eec2cb8ac6/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
@@ -261,13 +353,13 @@ const rawVideos = [
     streamUrl: "https://vz-960ce3f8-aff.b-cdn.net/2ee73c44-c686-4e93-a62f-d750822c0b65/playlist.m3u8",
     link: "https://www.youtube.com/watch?v=dAr2W7TNVeQ",
     subtleText: "IMG 1198",
-    previewUrl: "/images/previews/IMG 1198.webp",
+    previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/2ee73c44-c686-4e93-a62f-d750822c0b65/thumbnail.jpg",
     year: 2018,
     country: "",
     author: "Nick Spanos",
     subtitles: []
   },
-  {
+  /*{
     id: 16,
     title: "TNABC Talk",
     subtitle: "Revolution Won't Be Centralized",
@@ -415,7 +507,22 @@ const rawVideos = [
     year: 2014,
     country: "United States",
     author: "Nick Spanos",
-    subtitles: []
+    subtitles: [],
+    publishedAt: "2014-04-21",
+    description: `(2014) New York, United states
+From Wall Street’s Doorstep to Bitcoin’s Frontline – Nick Spanos Live at CryptoCurrency Convention 2014
+
+In April 2014, before Bitcoin became a global headline, Nick Spanos—founder of the legendary Bitcoin Center NYC—took the stage at the CryptoCurrency Convention to deliver a bold message: The future of money is here, and it’s unstoppable.
+
+📍 Just steps away from the New York Stock Exchange, Spanos turned his Bitcoin Center into a buzzing hub where traders, innovators, and curious minds met face-to-face to shape the future of finance.
+In this talk, you’ll discover:
+
+* How Spanos brought Bitcoin into the mainstream spotlight
+* Why physical spaces were key to crypto’s early adoption
+* The raw energy of the 2014 Bitcoin movement—uncensored and unforgettable
+Whether you’re a crypto veteran or just curious about how it all began, this is a time capsule of the moment Bitcoin went from underground to undeniable.
+
+#Bitcoin #NickSpanos #BitcoinCenterNYC #CryptoHistory #Blockchain #WallStreet #CryptoConvention`
   },
   {
     id: 26,
