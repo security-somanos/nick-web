@@ -61,7 +61,7 @@ const rawVideos = [
   { 
     id: 39, 
     title: "LONDON, UK", 
-    realTitle: "Blockchain Creator Tells All – Fame, Fortune & Politics with Nick Spano",
+    realTitle: "Blockchain Creator Tells All – Fame, Fortune & Politics with Nick Spanos",
     subtitle: "American Journal", 
     videoSrc: "https://nick-spanos-pull.b-cdn.net/Blockchain%20Creator%20preview.mp4",
     previewUrl: "https://vz-960ce3f8-aff.b-cdn.net/b5793c49-b465-4a30-bd82-cf6b4ffaf419/thumbnail.jpg",
