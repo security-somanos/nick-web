@@ -12,6 +12,13 @@ const nextConfig = {
   output: 'export',
   basePath: '',
   assetPrefix: '',
+  browserslist: {
+    "production": [
+      "defaults",
+      "safari >= 13",
+      "ios_saf >= 13"
+    ],
+  },
 }
 
 export default nextConfig
