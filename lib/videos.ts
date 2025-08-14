@@ -52,6 +52,7 @@ const rawVideos = [
     year: 2016,
     country: "United Kingdom",
     location: "London, United Kingdom",
+    publishedAt: "9/4/14",
     subtitles: [
       { lang: "en", label: "English", src: "/videos/subtitles/london.en.vtt", default: true },
       { lang: "es", label: "Español", src: "/videos/subtitles/london.es.vtt" }
@@ -72,7 +73,7 @@ const rawVideos = [
     year: 2025,
     country: "United States",
     subtitles: [],
-    publishedAt: "2025-07-29",
+    publishedAt: "8/28/2025",
     location: "Austin, United States",
     description: `From the heart of Wall Street to the frontlines of the crypto revolution, Nick Spanos has seen it all. As the inventor of the multibranch blockchain and founder of the first live cryptocurrency exchange—opened in 2013 just 100 feet from the New York Stock Exchange—Spanos has been a driving force in bringing Bitcoin and blockchain technology into the global spotlight.
 
@@ -103,6 +104,7 @@ In this exclusive conversation, Spanos opens up about:
       { lang: "en", label: "English", src: "/videos/subtitles/miami.en.vtt", default: true }
     ],
     location: "Miami, United States",
+    publishedAt: "2/15/22",
     description: `Journey back to the heart of Miami in 2022, where pioneering founder Nick Spanos unpacks the revolution that is Bitcoin. As the inventor of the multibranch blockchain and creator of the very first live cryptocurrency exchange—launched in 2013 just 100 feet from the New York Stock Exchange—Spanos brings us into the epicenter of crypto innovation at the Blockchain Center Miami.
 In this powerful session, Nick reveals:
 * The birth of a vision: How multibranch blockchain technology emerged to empower decentralization.
@@ -127,6 +129,7 @@ If you’re fascinated by crypto’s evolution—or want to better understand th
     year: 2022,
     location: "Malta, Europe",
     country: "Malta",
+    publishedAt: "11/28/22",
     description: `Nick Spanos, the visionary founder behind the Bitcoin Center NYC and pioneer of the first live cryptocurrency exchange near Wall Street, spoke at Malta Week 2022.
 In this talk, Nick shares his unique perspective on the evolving world of crypto, reflecting on his journey and the role innovation plays in shaping the future. Known for blending technology with a libertarian spirit, Nick’s insights offer a thoughtful look at the crypto space from one of its earliest advocates.
 This video is perfect for anyone interested in the story behind the scenes and the people driving the crypto movement forward.
@@ -147,6 +150,7 @@ Follow Nick’s journey and ideas here!
     year: 2014,
     location: "New York, United States",
     country: "United States",
+    publishedAt: "1/28/14",
     description: `"I was in college, and now instead of going to college I'm doing Bitcoin," says Louis Parker, an entrepreneur who has set up shop at the Bitcoin Center NYC, a cavernous storefront in lower Manhattan's financial district that's become a central gathering spot for New York City's cryptocurrency traders, programmers, and enthusiasts. "There's no college class on Bitcoin, except in Cyprus, and I wasn't ready to move there," he says.
 
 Every Monday night, the Bitcoin community holds a meet up called Satoshi Square, named in honor of Satoshi Nakamoto, the mysterious creator of Bitcoin, in which traders exchange virtual currencies for U.S. dollars. Before Satoshi Square relocated to the Bitcoin Center NYC a couple weeks ago, it was held in the shopping aisles of a Whole Foods grocery store on the Lower East Side.
@@ -171,6 +175,7 @@ The cofounder of the Bitcoin Center NYC is Nick Spanos, a tech entrepreneur and 
     year: 2024,
     location: "Balzan, Malta",
     country: "Malta",
+    publishedAt: "4/19/24",
     description: `
     Nick Spanos, the visionary founder behind the Bitcoin Center NYC and pioneer of the first live cryptocurrency exchange near Wall Street, spoke at Malta Week 2022.
 In this talk, Nick shares his unique perspective on the evolving world of crypto, reflecting on his journey and the role innovation plays in shaping the future. Known for blending technology with a libertarian spirit, Nick’s insights offer a thoughtful look at the crypto space from one of its earliest advocates.
@@ -193,6 +198,7 @@ Follow Nick’s journey and ideas here!
     year: 2018,
     country: "United Arab Emirates",
     location: "Dubai, United Arab Emirates",
+    publishedAt: "5/3/18",
     description: `Nick Spanos at World Blockchain Forum Dubai | Visionary Insights on the Future of Crypto
 Join crypto pioneer Nick Spanos, founder of the iconic Bitcoin Center NYC, as he takes the stage at the World Blockchain Forum Dubai to share his bold vision for blockchain’s transformative power.
 
@@ -220,6 +226,7 @@ Watch now and get inspired by one of crypto’s earliest innovators!
     year: 2023,
     country: "United States",
     location: "Miami, United States",
+    publishedAt: "2/20/23",
     description: `    * Central Bank Digital Currencies (CBDCs) might sound like a step toward financial inclusion and transparency — but beneath the surface lies a massive threat to your privacy and freedom.
     * CBDCs give governments unprecedented power to track and control every transaction, opening the door to invasive surveillance and potential abuse. This isn’t just about money; it’s about your personal freedom at risk.
 
@@ -242,6 +249,7 @@ Watch now and get inspired by one of crypto’s earliest innovators!
     year: 2023,
     location: "Miami, United States",
     country: "United States",
+    publishedAt: "1/23/2023",
     description: `    * Crypto pioneer Nick Spanos, founder of the groundbreaking Bitcoin Center NYC, brings his visionary spirit to Miami with the launch of the Miami Bitcoin Center during Miami Blockchain Week!
 
     * This exciting new hub aims to be a beacon for Bitcoin education, adoption, and community in one of the world’s fastest-growing crypto cities. Watch as Nick shares his passion for empowering individuals through decentralized finance and takes the next big step in the global Bitcoin movement.
