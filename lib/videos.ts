@@ -367,7 +367,7 @@ Watch now and get inspired by one of crypto’s earliest innovators!
     author: "Nick Spanos",
     subtitles: []
   },
-  /*{
+  {
     id: 16,
     title: "TNABC Talk",
     subtitle: "Revolution Won't Be Centralized",
@@ -726,7 +726,7 @@ Whether you’re a crypto veteran or just curious about how it all began, this i
     country: "United States",
     author: "Nick Spanos",
     subtitles: []
-  },*/
+  },
   //39 is already done
 ]
 
