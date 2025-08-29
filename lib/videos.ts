@@ -607,7 +607,7 @@ Whether you’re a crypto veteran or just curious about how it all began, this i
     author: "Nick Spanos",
     subtitles: []
   },
-  {
+  /*{
     id: 31,
     title: "Slidechain 2013",
     subtitle: "White Video",
@@ -621,7 +621,7 @@ Whether you’re a crypto veteran or just curious about how it all began, this i
     country: "United States",
     author: "Nick Spanos",
     subtitles: []
-  },
+  },*/
   {
     id: 32,
     title: "Unlock Dubai Keynote",
