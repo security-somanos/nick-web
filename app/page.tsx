@@ -1175,7 +1175,7 @@ export default function NickSpanosLanding() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover filter grayscale-70 z-10 opacity-88"
+          className="hidden md:block absolute inset-0 w-full h-full object-cover filter grayscale-70 z-10 opacity-88"
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
             maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%)',
