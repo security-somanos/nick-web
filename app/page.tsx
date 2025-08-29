@@ -13,6 +13,7 @@ import { useEffect, useRef, useState, Suspense, lazy } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
+import MerchSection from "@/components/merch-section";
 import Image from "next/image"
 import Footer from "@/components/layout/footer";
 
@@ -949,6 +950,9 @@ export default function NickSpanosLanding() {
       
       {/* Partners Section - positioned after the scroll sequence */}
       <PartnersSection />
+
+      {/* Merch Section - before the water video */}
+      <MerchSection />
 
       {/* Quote Section */}
       <section className="hidden py-20 px-4 bg-gray-900">

@@ -11,9 +11,13 @@ interface Html5VideoPlayerProps {
   loop?: boolean
   muted?: boolean
   subtitles?: Array<{ lang: string; label: string; src: string; default?: boolean }>
+  aspect?: "video" | "square"
+  fit?: "contain" | "cover"
+  containerClassName?: string
+  videoClassName?: string
 }
 
-export default function Html5VideoPlayer({ src, poster, autoPlay = false, controls = true, loop = false, muted = false, subtitles = [] }: Html5VideoPlayerProps) {
+export default function Html5VideoPlayer({ src, poster, autoPlay = false, controls = true, loop = false, muted = false, subtitles = [], aspect = "video", fit = "contain", containerClassName = "", videoClassName = "" }: Html5VideoPlayerProps) {
   const ref = useRef<HTMLVideoElement | null>(null)
 
   useEffect(() => {
@@ -62,7 +66,7 @@ export default function Html5VideoPlayer({ src, poster, autoPlay = false, contro
   }, [src])
 
   return (
-    <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden border border-white/10">
+    <div className={`relative w-full ${aspect === 'square' ? 'aspect-square' : 'aspect-video'} bg-black rounded-2xl overflow-hidden border border-white/10 ${containerClassName}`}>
       <video
         ref={ref}
         src={!isHlsUrl(src) ? src : undefined}
@@ -72,7 +76,7 @@ export default function Html5VideoPlayer({ src, poster, autoPlay = false, contro
         loop={loop}
         muted={muted}
         playsInline
-        className="w-full h-full object-contain bg-black"
+        className={`w-full h-full ${fit === 'cover' ? 'object-cover' : 'object-contain'} bg-black ${videoClassName}`}
       >
         {subtitles.map((track) => (
           <track
