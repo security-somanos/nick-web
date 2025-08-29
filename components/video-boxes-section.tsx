@@ -17,10 +17,10 @@ interface VideoBox {
 const videoBoxes: VideoBox[] = [
   { 
     id: 1, 
-    title: "LONDON, UK", 
+    title: "NEW YORK, US", 
     subtitle: "CryptoCurrency Convention", 
     videoSrc: "/videos/conferences/london.mp4",
-    link: "https://www.youtube.com/watch?v=189Q0LJOxHA",
+    link: "/videos/1",
     subtleText: "Face Fears! Learn to Ride Life's Bicycle: Eyes on the Prize!"
   },
   { 
@@ -28,7 +28,7 @@ const videoBoxes: VideoBox[] = [
     title: "MIAMI, US", 
     subtitle: "The revolution has started", 
     videoSrc: "/videos/conferences/miami.mp4",
-    link: "https://www.youtube.com/watch?v=Ut-mWQOMKZU",
+    link: "/videos/2",
     subtleText: "Bitcoin's Rise: Breaking Free and Building a Crypto Exchange!"
   },
   { 
@@ -36,7 +36,7 @@ const videoBoxes: VideoBox[] = [
     title: "MALTA, EU", 
     subtitle: "The State Of Crypto", 
     videoSrc: "/videos/conferences/malta.mp4",
-    link: "https://www.youtube.com/watch?v=Ft1LUJJyUOM",
+    link: "",
     subtleText: "Blockchain vs. Beasts: Take Control of Your Future!"
   },
   { 
@@ -44,7 +44,7 @@ const videoBoxes: VideoBox[] = [
     title: "NEW YORK, US", 
     subtitle: "Wall Street's Cryptocurrency HQ", 
     videoSrc: "/videos/conferences/new-york.mp4",
-    link: "https://www.youtube.com/watch?v=DS29SnLaKJs",
+    link: "/videos/4",
     subtleText: "Bitcoin vs Inflation: The Educational Power That Changes Everything!"
   },
   { 
@@ -52,7 +52,7 @@ const videoBoxes: VideoBox[] = [
     title: "BALZAN, MALTA",
     subtitle: "AIBC Eurasia Conference 2024",
     videoSrc: "/videos/conferences/balzan.mp4",
-    link: "https://www.youtube.com/watch?v=YTLN4AoXfkE",
+    link: "/videos/5",
     subtleText: "Never Lose Your Power! Don't let anyone take your tharos."
   },
   { 
@@ -60,7 +60,7 @@ const videoBoxes: VideoBox[] = [
     title: "DUBAI, UAE",
     subtitle: "World Blockchain Forum Dubai",
     videoSrc: "/videos/conferences/dubai.mp4",
-    link: "https://www.youtube.com/watch?v=Jc2LxHfbiLA",
+    link: "/videos/6",
     subtleText: "Bought 12,000 Domains in the 90s? My Family's Reaction!"
   },
   { 
@@ -68,7 +68,7 @@ const videoBoxes: VideoBox[] = [
     title: "MIAMI, US",
     subtitle: "CBDC's vs Bitcoin",
     videoSrc: "/videos/conferences/quantum.mp4",
-    link: "https://www.youtube.com/watch?v=VnHPcCXTbh8",
+    link: "/videos/7",
     subtleText: "CBDC Apocalypse: How AI Controls Your Money & Your Spending!"
   },
   { 
@@ -76,7 +76,7 @@ const videoBoxes: VideoBox[] = [
     title: "MIAMI, US", 
     subtitle: "Nick Spanos launches Miami Bitcoin", 
     videoSrc: "/videos/conferences/miami-center.mp4", 
-    link: "https://www.youtube.com/watch?v=bQhOD0Qa6No",
+    link: "/videos/8",
     subtleText: "Nick Spanos launches Miami Bitcoin"
   },
 ]
