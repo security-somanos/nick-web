@@ -472,7 +472,7 @@ Watch now and get inspired by one of crypto’s earliest innovators!
     author: "Nick Spanos",
     subtitles: []
   },
-  {
+  /*{
     id: 23,
     title: "SIMM Jacking",
     subtitle: "Cure Bitcoin?",
@@ -486,7 +486,7 @@ Watch now and get inspired by one of crypto’s earliest innovators!
     country: "",
     author: "Nick Spanos",
     subtitles: []
-  },
+  },*/
   {
     id: 24,
     title: "Archive Clip",
