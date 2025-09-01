@@ -42,6 +42,7 @@ export function VideosLayoutProvider({ children }: { children: React.ReactNode }
 
   const filteredVideos = useMemo(() => {
     const q = query.trim().toLowerCase()
+    return allVideosData;
     return allVideosData.filter(v => {
       const matchQuery = !q || [v.title, v.subtitle, v.subtleText].some(s => s.toLowerCase().includes(q))
       const matchCat = activeCategory === "All" || v.subtitle.toLowerCase().includes(activeCategory.toLowerCase())
