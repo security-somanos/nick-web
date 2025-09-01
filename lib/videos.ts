@@ -562,7 +562,7 @@ Whether you’re a crypto veteran or just curious about how it all began, this i
     author: "Nick Spanos",
     subtitles: []
   },
-  {
+  /*{
     id: 28,
     title: "To Wharton",
     subtitle: "Blockchain & Zap",
@@ -576,7 +576,7 @@ Whether you’re a crypto veteran or just curious about how it all began, this i
     country: "United States",
     author: "Nick Spanos",
     subtitles: []
-  },
+  },*/
   {
     id: 29,
     title: "Buying Bitcoin",
