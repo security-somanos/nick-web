@@ -23,7 +23,7 @@ const HoverTrigger: React.FC<HoverTriggerProps> = ({ onTriggerStart, onTriggerEn
     const svgAnimationRef = useRef<gsap.core.Tween | null>(null);
     const positionRef = useRef(0);
 
-    const frameWidth = isMobile ? 80 : 100;
+    const frameWidth = isMobile ? 70 : 100;
     const totalFrames = 120;
 
     useEffect(() => {

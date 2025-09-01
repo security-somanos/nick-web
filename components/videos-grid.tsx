@@ -5,6 +5,7 @@ import { gsap } from "gsap"
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi"
 import type { VideoBox } from "@/lib/videos"
 import { buildCdnUrl, computePreviewUrl as computePreviewCdnUrl } from "@/lib/utils"
+import { BoxHelper } from "three/src/Three.Core.js"
 
 interface VideosGridProps {
   items: VideoBox[]
@@ -182,14 +183,14 @@ export default function VideosGrid({ items }: VideosGridProps) {
 
                       {/* Title/subtitle overlay removed for /videos grid */}
 
-                      <div className={`absolute bottom-0 left-0 right-0 z-30 transition-opacity duration-300 ${isMobile || hoveredBox === box.id ? 'opacity-100' : 'opacity-0'}`}>
+                      <div className={`absolute bottom-0 left-0 right-0 z-30 transition-opacity duration-300`}>
                         {box.link && (
                           <button
                           className="w-full bg-[#1f1f1f] transition duration-200 cursor-pointer hover:bg-black/30 hover:backdrop-blur-sm text-white font-mono text-xs py-3 px-4 flex items-center justify-center gap-2"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            window.open(box.link, box.link === '#' ? '_self' : '_blank');
+                            window.open(`/videos/${box.id}`, '_self');
                           }}
                         >
                           <span>WATCH FULL VIDEO</span>

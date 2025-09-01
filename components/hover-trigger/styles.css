@@ -63,15 +63,15 @@
 /* On mobile devices, show mobile svg and hide desktop svg */
 @media (max-width: 768px) {
     .button-hold {
-        top: 2rem;
-        right: 1rem;
+        top: 0.5rem;
+        right: 0;
         width: 120px;
         height: 120px;
     }
     
     .trigger-container {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
     }
     
     .hold_mask {
