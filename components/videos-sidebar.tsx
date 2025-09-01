@@ -61,7 +61,7 @@ export default function VideosSidebar({ items, isCollapsed, sidebarOpen, onClose
               className="flex-1 w-full bg-[#121212] border border-white/10 rounded-md text-sm px-2 py-1"
             >
               <option value="All">All</option>
-              {years.map(y => (<option key={y} value={String(y)}>{y}</option>))}
+              {/*years.map(y => (<option key={y} value={String(y)}>{y}</option>))}*/}
             </select>
           </div>
           <div className="flex items-start flex-col gap-2">
@@ -72,7 +72,7 @@ export default function VideosSidebar({ items, isCollapsed, sidebarOpen, onClose
               className="flex-1 w-full bg-[#121212] border border-white/10 rounded-md text-sm px-2 py-1"
             >
               <option value="All">All</option>
-              {countries.map(c => (<option key={c} value={c}>{c}</option>))}
+              {/*countries.map(c => (<option key={c} value={c}>{c}</option>))}*/}
             </select>
           </div>
         </div>

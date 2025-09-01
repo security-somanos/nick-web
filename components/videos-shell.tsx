@@ -72,7 +72,7 @@ export default function VideosShell({ children }: { children: React.ReactNode })
               className="bg-[#121212] border border-white/10 rounded-md text-sm px-2 py-1"
             >
               <option value="All">All</option>
-              {years.map(y => (<option key={y} value={String(y)}>{y}</option>))}
+              {/*years.map(y => (<option key={y} value={String(y)}>{y}</option>))}*/}
             </select>
             <label className="text-xs text-gray-400">Country</label>
             <select
@@ -81,7 +81,7 @@ export default function VideosShell({ children }: { children: React.ReactNode })
               className="bg-[#121212] border border-white/10 rounded-md text-sm px-2 py-1"
             >
               <option value="All">All</option>
-              {countries.map(c => (<option key={c} value={c}>{c}</option>))}
+              {/*countries.map(c => (<option key={c} value={c}>{c}</option>))}*/}
             </select>
           </div>
         </div>
