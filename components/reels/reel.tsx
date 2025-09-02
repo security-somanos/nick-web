@@ -60,14 +60,8 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
       const tryPlay = async () => {
         try {
           if (userInteractedRef.current) {
-            // With prior interaction, honor autoSound: play with sound if enabled
-            if (autoSound) {
-              await playWithMute(false)
-              setIsMuted(false)
-            } else {
-              await playWithMute(true)
-              setIsMuted(true)
-            }
+            // After user interaction, honor their chosen mute state
+            await playWithMute(isMuted)
             return
           }
           if (!attemptedAutoStartRef.current) {
@@ -191,6 +185,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
     if (!v) return
     userInteractedRef.current = true
     if (v.paused) {
+      console.log("trigger handleVideoClick")
       // On play, always unmute per requirement
       setIsMuted(false)
       try { await playWithMute(false) } catch { /* ignore */ }
@@ -202,12 +197,12 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   }
 
   return (
-    <div ref={containerRef} className="relative max-h-[calc(100vh-64px)] h-[calc(100vh-64px)] snap-start flex items-center justify-center overflow-hidden px-3 md:px-8 py-4 md:py-8">
+    <div ref={containerRef} className="relative max-h-[calc(100vh-64px)] h-[calc(100vh-64px)] snap-start flex items-center justify-center overflow-hidden px-0 md:px-8 py-4 md:py-8">
       <div className="relative w-full h-full flex items-center justify-center">
         <div className="absolute inset-0 -z-10 blur-3xl opacity-20" aria-hidden>
           <div className="w-[60vw] h-[60vh] bg-gradient-to-b from-purple-500/30 to-blue-500/30 rounded-full" />
         </div>
-        <div className="relative w-full h-auto aspect-[9/16] md:w-auto md:h-full mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black">
+        <div className="relative w-full h-auto aspect-[9/16] md:w-auto md:h-full mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black translate-y-[-3%] md:translate-y-0">
           <video
             ref={videoRef}
             src={!isHlsUrl(reel.videoUrl) && isActive ? reel.videoUrl : undefined}
@@ -231,8 +226,12 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
             className="absolute right-2 top-2 z-20 rounded-full border border-white/10 bg-black/30 backdrop-blur px-3 py-1 text-xs hover:bg-black/50"
             onClick={async () => {
               userInteractedRef.current = true
-              setIsMuted((m) => !m)
-              try { await playWithMute(false) } catch { /* ignore */ }
+              setIsMuted((prev) => {
+                const next = !prev
+                // Apply the new mute state immediately
+                playWithMute(next).catch(() => {})
+                return next
+              })
             }}
           >
             {isMuted ? "Sound" : "Mute"}
@@ -295,8 +294,8 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
           </div>
           {/* Title overlay aligned to video bounds */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0">
-            <div className="bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 md:p-4">
-              <div className="font-semibold text-base md:text-lg drop-shadow line-clamp-3">{reel.title}</div>
+            <div className="bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 pb-6 md:p-4 md:pb-6">
+              <div className="font-semibold leading-tight text-base md:text-lg drop-shadow line-clamp-3">{reel.title}</div>
             </div>
           </div>
         </div>
