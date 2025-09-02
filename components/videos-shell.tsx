@@ -142,6 +142,12 @@ export default function VideosShell({ children }: { children: React.ReactNode })
               }
             },
             {
+              id: 'shorts',
+              label: 'In the loop',
+              icon: (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5v14l11-7z"/></svg>),
+              href: '/videos/shorts?autosound=1'
+            },
+            {
               id: 'return',
               label: 'Return to site',
               icon: (<svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>),
