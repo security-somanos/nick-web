@@ -202,7 +202,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
         <div className="absolute inset-0 -z-10 blur-3xl opacity-20" aria-hidden>
           <div className="w-[60vw] h-[60vh] bg-gradient-to-b from-purple-500/30 to-blue-500/30 rounded-full" />
         </div>
-        <div className="relative w-full h-auto aspect-[9/16] md:w-auto md:h-full mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black translate-y-[-3%] md:translate-y-0">
+        <div className="relative h-full aspect-[9/16] w-auto mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black">
           <video
             ref={videoRef}
             src={!isHlsUrl(reel.videoUrl) && isActive ? reel.videoUrl : undefined}
