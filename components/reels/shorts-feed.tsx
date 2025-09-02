@@ -14,6 +14,8 @@ export default function ShortsFeed() {
   const isAppendingRef = useRef(false)
   const remainingOrderRef = useRef<number[]>([])
   const lastAppendedIdRef = useRef<string | null>(null)
+  const nextPreloadTriggerRef = useRef(3) // 0-based: 3, 8, 13, ... (4th of each batch)
+  const lastActiveIndexRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (baseLength === 0) return
@@ -49,8 +51,11 @@ export default function ShortsFeed() {
   }
 
   const handleActive = (idx: number) => {
-    if (feed.length - idx <= 2) {
+    if (lastActiveIndexRef.current === idx) return
+    lastActiveIndexRef.current = idx
+    if (idx === nextPreloadTriggerRef.current) {
       appendChunk(5)
+      nextPreloadTriggerRef.current += 5
     }
   }
 
