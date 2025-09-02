@@ -19,20 +19,11 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   const userInteractedRef = useRef(false)
   const attemptedAutoStartRef = useRef(false)
 
-  function waitForLoadedData(video: HTMLVideoElement): Promise<void> {
-    if (video.readyState >= 2) return Promise.resolve()
-    return new Promise((resolve) => {
-      const onLoaded = () => { video.removeEventListener('loadeddata', onLoaded); resolve() }
-      video.addEventListener('loadeddata', onLoaded, { once: true })
-    })
-  }
-
   async function playWithMute(desiredMuted: boolean) {
     const v = videoRef.current
     if (!v) return
     v.muted = desiredMuted
-    await waitForLoadedData(v)
-    await v.play()
+    try { await v.play() } catch { /* ignore */ }
   }
 
   useEffect(() => {
@@ -197,7 +188,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   }
 
   return (
-    <div ref={containerRef} className="relative max-h-[calc(100vh-64px)] h-[calc(100vh-64px)] snap-start flex items-center justify-center overflow-hidden px-0 md:px-8 py-4 md:py-8">
+    <div ref={containerRef} className="relative max-h-[calc(96vh-64px)] h-[calc(96vh-64px)] snap-start flex items-center justify-center overflow-hidden px-0 md:px-8 py-4 md:py-8">
       <div className="relative w-full h-full flex items-center justify-center">
         <div className="absolute inset-0 -z-10 blur-3xl opacity-20" aria-hidden>
           <div className="w-[60vw] h-[60vh] bg-gradient-to-b from-purple-500/30 to-blue-500/30 rounded-full" />
@@ -210,6 +201,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
             muted={isMuted}
             loop
             playsInline
+            autoPlay
             preload="none"
             className="w-full h-full object-cover cursor-pointer"
             onClick={handleVideoClick}
@@ -294,7 +286,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
           </div>
           {/* Title overlay aligned to video bounds */}
           <div className="pointer-events-none absolute inset-x-0 bottom-0">
-            <div className="bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 pb-6 md:p-4 md:pb-6">
+            <div className="bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 pb-10 md:p-4 md:pb-6">
               <div className="font-semibold leading-tight text-base md:text-lg drop-shadow line-clamp-3">{reel.title}</div>
             </div>
           </div>
