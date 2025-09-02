@@ -213,12 +213,12 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
             <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-black">
               <video
                 ref={videoRef}
-                src={!isHlsUrl(reel.videoUrl) ? reel.videoUrl : undefined}
+                src={!isHlsUrl(reel.videoUrl) && isActive ? reel.videoUrl : undefined}
                 poster={reel.previewUrl}
                 muted={isMuted}
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 className="w-full h-full object-cover cursor-pointer"
                 onClick={handleVideoClick}
               />
