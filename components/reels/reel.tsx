@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { ThumbsUp, ThumbsDown, Share2, Play } from "lucide-react"
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import type { Reel as ReelData } from "@/lib/reels"
 import { isHlsUrl } from "@/lib/utils"
 
@@ -203,107 +202,102 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   }
 
   return (
-    <div ref={containerRef} className="relative max-h-[calc(100vh-64px)] h-[calc(100vh-64px)] snap-start flex items-center justify-center overflow-hidden">
+    <div ref={containerRef} className="relative max-h-[calc(100vh-64px)] h-[calc(100vh-64px)] snap-start flex items-center justify-center overflow-hidden px-3 md:px-8 py-4 md:py-8">
       <div className="relative w-full h-full flex items-center justify-center">
         <div className="absolute inset-0 -z-10 blur-3xl opacity-20" aria-hidden>
           <div className="w-[60vw] h-[60vh] bg-gradient-to-b from-purple-500/30 to-blue-500/30 rounded-full" />
         </div>
-        <div className="w-[min(440px,92vw)] max-h-full">
-          <AspectRatio ratio={9 / 16}>
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-black">
-              <video
-                ref={videoRef}
-                src={!isHlsUrl(reel.videoUrl) && isActive ? reel.videoUrl : undefined}
-                poster={reel.previewUrl}
-                muted={isMuted}
-                loop
-                playsInline
-                preload="none"
-                className="w-full h-full object-cover cursor-pointer"
-                onClick={handleVideoClick}
-              />
-              {/* Center play overlay (animated, transient) */}
-              <div className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${showPlayOverlay ? 'opacity-100' : 'opacity-0'}`}>
-                <div className="bg-black/40 rounded-full p-4 animate-[pulse_0.7s_ease-out_1]">
-                  <Play className="w-10 h-10 text-white" />
-                </div>
-              </div>
-              {/* Audio toggle (inside video on all breakpoints) */}
-              <button
-                aria-label={isMuted ? "Unmute" : "Mute"}
-                className="absolute right-2 top-2 z-20 rounded-full border border-white/10 bg-black/30 backdrop-blur px-3 py-1 text-xs hover:bg-black/50"
-                onClick={async () => {
-                  userInteractedRef.current = true
-                  setIsMuted((m) => !m)
-                  try { await playWithMute(false) } catch { /* ignore */ }
-                }}
-              >
-                {isMuted ? "Sound" : "Mute"}
-              </button>
-              {/* Mobile overlay controls (inside video) */}
-              <div className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-10">
-                <button
-                  aria-label="Like"
-                  className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${liked ? "text-emerald-400" : "text-white"}`}
-                  onClick={toggleLike}
-                >
-                  <ThumbsUp className="w-6 h-6" />
-                  <span className="text-xs opacity-80">{likeCount}</span>
-                </button>
-                <button
-                  aria-label="Dislike"
-                  className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${disliked ? "text-rose-400" : "text-white"}`}
-                  onClick={toggleDislike}
-                >
-                  <ThumbsDown className="w-6 h-6" />
-                  <span className="text-xs opacity-80">{dislikeCount}</span>
-                </button>
-                <button
-                  aria-label="Share"
-                  className="cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10"
-                  onClick={handleShare}
-                >
-                  <Share2 className="w-6 h-6" />
-                  <span className="text-xs opacity-80">Share</span>
-                  {copied && <span className="text-[10px] text-emerald-400">Copied</span>}
-                </button>
-              </div>
-              {/* Desktop overlay controls (inside video, right side) */}
-              <div className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 flex-col items-center gap-5 z-10">
-                <button
-                  aria-label="Like"
-                  className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${liked ? "text-emerald-400" : "text-white"}`}
-                  onClick={toggleLike}
-                >
-                  <ThumbsUp className="w-6 h-6" />
-                  <span className="text-xs opacity-80">{likeCount}</span>
-                </button>
-                <button
-                  aria-label="Dislike"
-                  className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${disliked ? "text-rose-400" : "text-white"}`}
-                  onClick={toggleDislike}
-                >
-                  <ThumbsDown className="w-6 h-6" />
-                  <span className="text-xs opacity-80">{dislikeCount}</span>
-                </button>
-                <button
-                  aria-label="Share"
-                  className="cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10"
-                  onClick={handleShare}
-                >
-                  <Share2 className="w-6 h-6" />
-                  <span className="text-xs opacity-80">Share</span>
-                  {copied && <span className="text-[10px] text-emerald-400">Copied</span>}
-                </button>
-              </div>
+        <div className="relative w-full h-auto aspect-[9/16] md:w-auto md:h-full mx-auto rounded-2xl overflow-hidden border border-white/10 bg-black">
+          <video
+            ref={videoRef}
+            src={!isHlsUrl(reel.videoUrl) && isActive ? reel.videoUrl : undefined}
+            poster={reel.previewUrl}
+            muted={isMuted}
+            loop
+            playsInline
+            preload="none"
+            className="w-full h-full object-cover cursor-pointer"
+            onClick={handleVideoClick}
+          />
+          {/* Center play overlay (animated, transient) */}
+          <div className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${showPlayOverlay ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="bg-black/40 rounded-full p-4 animate-[pulse_0.7s_ease-out_1]">
+              <Play className="w-10 h-10 text-white" />
             </div>
-          </AspectRatio>
-        </div>
-
-        <div className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-4 w-[min(440px,92vw)] max-w-full">
-          <div className="bg-gradient-to-t from-black/70 via-black/10 to-transparent p-4 rounded-b-2xl">
-            <div className="font-semibold text-lg drop-shadow">{reel.title}</div>
-            {/*<div className="mt-1 text-sm text-white/80 whitespace-pre-wrap">{reel.description}</div>*/}
+          </div>
+          {/* Audio toggle (inside video on all breakpoints) */}
+          <button
+            aria-label={isMuted ? "Unmute" : "Mute"}
+            className="absolute right-2 top-2 z-20 rounded-full border border-white/10 bg-black/30 backdrop-blur px-3 py-1 text-xs hover:bg-black/50"
+            onClick={async () => {
+              userInteractedRef.current = true
+              setIsMuted((m) => !m)
+              try { await playWithMute(false) } catch { /* ignore */ }
+            }}
+          >
+            {isMuted ? "Sound" : "Mute"}
+          </button>
+          {/* Mobile overlay controls (inside video) */}
+          <div className="md:hidden absolute right-2 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-10">
+            <button
+              aria-label="Like"
+              className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${liked ? "text-emerald-400" : "text-white"}`}
+              onClick={toggleLike}
+            >
+              <ThumbsUp className="w-6 h-6" />
+              <span className="text-xs opacity-80">{likeCount}</span>
+            </button>
+            <button
+              aria-label="Dislike"
+              className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${disliked ? "text-rose-400" : "text-white"}`}
+              onClick={toggleDislike}
+            >
+              <ThumbsDown className="w-6 h-6" />
+              <span className="text-xs opacity-80">{dislikeCount}</span>
+            </button>
+            <button
+              aria-label="Share"
+              className="cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10"
+              onClick={handleShare}
+            >
+              <Share2 className="w-6 h-6" />
+              <span className="text-xs opacity-80">Share</span>
+              {copied && <span className="text-[10px] text-emerald-400">Copied</span>}
+            </button>
+          </div>
+          {/* Desktop overlay controls (inside video, right side) */}
+          <div className="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 flex-col items-center gap-5 z-10">
+            <button
+              aria-label="Like"
+              className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${liked ? "text-emerald-400" : "text-white"}`}
+              onClick={toggleLike}
+            >
+              <ThumbsUp className="w-6 h-6" />
+              <span className="text-xs opacity-80">{likeCount}</span>
+            </button>
+            <button
+              aria-label="Dislike"
+              className={`cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10 ${disliked ? "text-rose-400" : "text-white"}`}
+              onClick={toggleDislike}
+            >
+              <ThumbsDown className="w-6 h-6" />
+              <span className="text-xs opacity-80">{dislikeCount}</span>
+            </button>
+            <button
+              aria-label="Share"
+              className="cursor-pointer flex flex-col items-center gap-1 rounded-full p-3 border border-white/10 bg-black/20 backdrop-blur-sm hover:bg-white/10"
+              onClick={handleShare}
+            >
+              <Share2 className="w-6 h-6" />
+              <span className="text-xs opacity-80">Share</span>
+              {copied && <span className="text-[10px] text-emerald-400">Copied</span>}
+            </button>
+          </div>
+          {/* Title overlay aligned to video bounds */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0">
+            <div className="bg-gradient-to-t from-black/70 via-black/20 to-transparent p-3 md:p-4">
+              <div className="font-semibold text-base md:text-lg drop-shadow line-clamp-3">{reel.title}</div>
+            </div>
           </div>
         </div>
       </div>
