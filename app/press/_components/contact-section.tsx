@@ -5,14 +5,14 @@ import { Textarea } from "@/components/ui/textarea"
 
 export function ContactSection() {
   return (
-    <section className="space-y-8">
+    <section id="contact" className="space-y-8">
       <div className="flex items-center gap-3">
         <MessageCircle size={24} />
         <h2 className="text-2xl font-bold">Contact</h2>
       </div>
 
 
-      <div className="grid grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
         {/* Contact Info */}
         <div className="space-y-6">
           <div className="bg-[#101010] border border-[#ffffff1a] rounded-2xl p-3 flex items-center gap-4">

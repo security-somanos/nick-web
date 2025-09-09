@@ -25,7 +25,7 @@ const merchItems: MerchItem[] = [
 
 export function ProjectsSection() {
   return (
-    <section className="space-y-8">
+    <section id="projects" className="space-y-8">
       <div className="flex items-center gap-3">
         <ShoppingBag className="w-6 h-6" />
         <h2 className="text-2xl font-bold">Merchandising</h2>

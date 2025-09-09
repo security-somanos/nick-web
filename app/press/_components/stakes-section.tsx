@@ -57,7 +57,7 @@ export function StakesSection() {
   ]
 
   return (
-    <section className="space-y-8">
+    <section id="stakes" className="space-y-8">
       <div className="flex items-center gap-3">
         <Newspaper className="w-6 h-6" />
         <h2 className="text-2xl font-bold">Media partners</h2>

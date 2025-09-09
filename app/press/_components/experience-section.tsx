@@ -2,7 +2,7 @@ import { User, Star, Award, Mic } from "lucide-react"
 
 export function ExperienceSection() {
   return (
-    <section className="space-y-8">
+    <section id="experience" className="space-y-8">
       <div className="flex items-center gap-3">
         <User className="w-6 h-6" />
         <h2 className="text-2xl font-bold">About / Bio</h2>

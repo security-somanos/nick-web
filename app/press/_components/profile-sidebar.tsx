@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Download, Mail } from "lucide-react"
+import { Download, User, Briefcase, GraduationCap, Building, MessageSquare, Home, Star } from "lucide-react"
 import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaTelegram, FaXTwitter } from "react-icons/fa6"
 import { SiClubhouse } from "react-icons/si"
 import Image from "next/image"
@@ -59,15 +59,42 @@ export function ProfileSidebar() {
         </Link>
       </div>
 
-      {/* Action Buttons */}
+      {/* Navigation Menu */}
       <div className="space-y-3">
-        <Button variant="outline" className="hidden w-full bg-transparent border-gray-600 text-gray-300 hover:bg-gray-800">
-          <Download size={16} className="mr-2" />
-          Download CV
+        <Button 
+          className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors"
+          onClick={() => document.getElementById('hello')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <Home size={16} className="mr-2" />
+          About
         </Button>
-        <Button className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors">
-          <Mail size={16} className="mr-2" />
-          Contact Me
+        <Button 
+          className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors"
+          onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <Star size={16} className="mr-2" />
+          Key Highlights & Stats
+        </Button>
+        <Button 
+          className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors"
+          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <Building size={16} className="mr-2" />
+          Merchandising
+        </Button>
+        <Button 
+          className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors"
+          onClick={() => document.getElementById('stakes')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <MessageSquare size={16} className="mr-2" />
+          Media partners
+        </Button>
+        <Button 
+          className="cursor-pointer w-full border border-white text-white hover:bg-white hover:text-black font-medium transition-colors"
+          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <MessageSquare size={16} className="mr-2" />
+          Contact
         </Button>
       </div>
     </div>

@@ -19,7 +19,7 @@ export function EducationSection() {
   ]
 
   return (
-    <section className="space-y-8 hidden">
+    <section id="education" className="space-y-8 hidden">
       <div className="flex items-center gap-3">
         <GraduationCap className="w-6 h-6" />
         <h2 className="text-2xl font-bold">Education</h2>

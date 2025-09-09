@@ -4,19 +4,19 @@ import Link from "next/link";
 
 export function HelloSection() {
   return (
-    <section className="space-y-8 mt-20">
+    <section id="hello" className="space-y-8 mt-20">
       <div className="flex items-center gap-2 text-lg border-1 border-white w-fit rounded-lg pe-4 ps-3">
           <FiArrowDown />
         <span className="font-mono text-gray-300 ">Personal Brand Media Kit</span>
       </div>
 
       <div className="space-y-4 font-mono">
-        <h1 className="text-2xl mb-0 font-bold leading-tight">
+        <h1 className="text-xl sm:text-2xl mb-0 font-bold leading-tight">
           Nick Spanos,
         </h1>
         <TypewriterText
           words={["Bitcoin Pioneer", "Bitcoin Center NYC", "Blockchain Innovator"]}
-          className="text-gray-300 text-5xl font-bold"
+          className="text-gray-300 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold"
         />
         <h2 className="text-4xl font-bold text-gray-300 hidden">Based in New York, NY.</h2>
       </div>
@@ -33,7 +33,7 @@ export function HelloSection() {
       {/* Downloadable Resources */}
       <div className="pt-8">
         <h3 className="text-xl font-bold mb-6">Downloadable Resources</h3>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link 
             href="https://nick-spanos-pull.b-cdn.net/media/logos.zip"
             target="_blank"

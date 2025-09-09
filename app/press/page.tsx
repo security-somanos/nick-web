@@ -1,7 +1,9 @@
+"use client"
+
 import NoiseEffect from "@/components/noise-effect"
 import { ProfileSidebar } from "./_components/profile-sidebar"
 import { HelloSection } from "./_components/hello-section"
-import { ExperienceSection } from "./_components/experience-section"
+import { ExperienceAccordion } from "./_components/experience-accordion"
 import { ProjectsSection } from "./_components/projects-section"
 import { EducationSection } from "./_components/education-section"
 import { StakesSection } from "./_components/stakes-section"
@@ -13,16 +15,16 @@ export default function PressPage() {
     <>
       <NoiseEffect />
       <div className="min-h-screen text-white">
-        <div className="flex max-w-7xl mx-auto gap-[70px]">
+        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto gap-6 lg:gap-[70px]">
           {/* Left Sidebar */}
-          <div className="max-w-[360px] w-full p-6 sticky top-0 h-screen flex-shrink-0">
+          <div className="w-full lg:max-w-[360px] lg:w-auto p-4 lg:p-6 lg:sticky lg:top-0 lg:h-screen lg:flex-shrink-0">
             <ProfileSidebar />
           </div>
 
           {/* Right Content */}
-          <div className="flex-1 p-6 space-y-16">
+          <div className="flex-1 p-4 lg:p-6 space-y-12 lg:space-y-16">
             <HelloSection />
-            <ExperienceSection />
+            <ExperienceAccordion />
             <ProjectsSection />
             <EducationSection />
             <StakesSection />
