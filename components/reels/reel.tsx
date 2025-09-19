@@ -47,41 +47,65 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    if (isActive) {
-      const tryPlay = async () => {
-        try {
-          if (userInteractedRef.current) {
-            // After user interaction, honor their chosen mute state
-            await playWithMute(isMuted)
-            return
-          }
-          if (!attemptedAutoStartRef.current) {
-            attemptedAutoStartRef.current = true
-            if (autoSound) {
-              try {
-                await playWithMute(false)
-                setIsMuted(false)
-                return
-              } catch {
-                await playWithMute(true)
-                setIsMuted(true)
-                return
-              }
-            } else {
+
+    let didAttachListeners = false
+    const tryPlay = async () => {
+      try {
+        if (userInteractedRef.current) {
+          await playWithMute(isMuted)
+          return
+        }
+        if (!attemptedAutoStartRef.current) {
+          attemptedAutoStartRef.current = true
+          if (autoSound) {
+            try {
+              await playWithMute(false)
+              setIsMuted(false)
+              return
+            } catch {
               await playWithMute(true)
               setIsMuted(true)
               return
             }
+          } else {
+            await playWithMute(true)
+            setIsMuted(true)
+            return
           }
-          // After first attempt, do not spam play; just ensure mute state is applied
-          v.muted = isMuted
-        } catch {
-          // swallow errors to avoid console noise
         }
+        v.muted = isMuted
+      } catch {
+        // ignore
       }
-      tryPlay()
+    }
+
+    if (isActive) {
+      // If the video is not ready yet, wait for it to become playable
+      if (v.readyState < 2) {
+        const onReady = () => {
+          v.removeEventListener('canplay', onReady)
+          v.removeEventListener('loadeddata', onReady)
+          tryPlay()
+        }
+        v.addEventListener('canplay', onReady, { once: true } as any)
+        v.addEventListener('loadeddata', onReady, { once: true } as any)
+        didAttachListeners = true
+      } else {
+        tryPlay()
+      }
     } else {
       try { v.pause() } catch { /* noop */ }
+    }
+
+    return () => {
+      if (didAttachListeners) {
+        try {
+          v.removeEventListener('canplay', tryPlay as any)
+          v.removeEventListener('loadeddata', tryPlay as any)
+        } catch {
+          // ignore
+        }
+      }
     }
   }, [isActive, autoSound, isMuted])
 
@@ -95,6 +119,20 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+
+    // Only prepare video source when this reel is active in view
+    if (!isActive) {
+      try {
+        // Stop and clear source to prevent background playback
+        video.pause?.()
+        video.removeAttribute('src')
+        video.load?.()
+      } catch {
+        // ignore
+      }
+      return
+    }
+
     if (!isHlsUrl(reel.videoUrl)) {
       video.src = reel.videoUrl
       return
@@ -121,8 +159,17 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
       }
     }
     setup()
-    return () => { try { hls?.destroy?.() } catch { /* ignore */ } }
-  }, [reel.videoUrl])
+    return () => {
+      try { hls?.destroy?.() } catch { /* ignore */ }
+      try {
+        video.pause?.()
+        video.removeAttribute('src')
+        video.load?.()
+      } catch {
+        // ignore
+      }
+    }
+  }, [reel.videoUrl, isActive])
 
   function toggleLike() {
     if (liked) {
@@ -201,8 +248,7 @@ export default function ReelView({ reel, index, onActive, autoSound = false }: {
             muted={isMuted}
             loop
             playsInline
-            autoPlay
-            preload="none"
+            preload={isActive ? "auto" : "none"}
             className="w-full h-full object-cover cursor-pointer"
             onClick={handleVideoClick}
           />
