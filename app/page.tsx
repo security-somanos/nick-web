@@ -620,6 +620,16 @@ export default function NickSpanosLanding() {
               <Lightbulb className="mr-2 h-5 w-5" />
               Features
             </Button>
+            <Link href="/press" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                className="w-full md:w-auto"
+                variant="outlineTech"
+              >
+                <Newspaper className="mr-2 h-5 w-5" />
+                Press
+              </Button>
+            </Link>
             <Link href="/contact" className="w-full md:w-auto">
               <Button
                 size="lg"
