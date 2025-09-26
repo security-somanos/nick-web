@@ -16,6 +16,7 @@ import PartnersSection from "@/components/partners-section";
 import MerchSection from "@/components/merch-section";
 import Image from "next/image"
 import Footer from "@/components/layout/footer";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 // Lazy load the VideoBoxesSection component for better initial performance
 const VideoBoxesSection = lazy(() => import("@/components/video-boxes-section"));
@@ -74,6 +75,7 @@ export default function NickSpanosLanding() {
   const contactButtonRef = useRef<HTMLDivElement>(null);
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Timeline for hero animations
@@ -153,7 +155,7 @@ export default function NickSpanosLanding() {
 
   // Anchor sprite animation - similar to HoverTrigger
   useEffect(() => {
-    const frameWidth = 100; // Frame width in pixels
+    const frameWidth = isMobile ? 70 : 100; // Frame width in pixels
     const totalFrames = 120; // Total frames in sprite
     
     anchorAnimationRef.current = setInterval(() => {
