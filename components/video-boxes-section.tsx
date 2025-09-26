@@ -364,10 +364,10 @@ export default function VideoBoxesSection() {
                         }`}
                       >
                          <div className="pt-[0em]" style={{ transform: "none" }}>
-                           <div className="font-impact text-sm text-center text-[#dadada]">
+                           <div className="font-impact text-xs text-center text-[#dadada]">
                              {box.subtitle}
                            </div>
-                           <div className="font-impact text-4xl text-[#fff] tracking-widest sm:text-heading-large text-center">
+                           <div className="font-impact text-xl text-[#fff] tracking-widest sm:text-heading-large text-center">
                              {box.title}
                            </div>
                          </div>
