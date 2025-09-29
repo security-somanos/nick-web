@@ -9,7 +9,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'export',
+  //output: 'export',
+
+  experimental: {
+    reactCompiler: true,
+  },
   basePath: '',
   assetPrefix: '',
 }
