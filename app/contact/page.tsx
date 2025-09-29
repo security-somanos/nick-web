@@ -18,6 +18,18 @@ import Footer from "@/components/layout/footer";
 export default function ContactPage() {
   const [hasInteracted, setHasInteracted] = useState<string>("")
   const [showTooltip, setShowTooltip] = useState(false)
+  const [fullName, setFullName] = useState("")
+  const [company, setCompany] = useState("")
+  const [email, setEmail] = useState("")
+  const [contact, setContact] = useState("")
+  const [proposalType, setProposalType] = useState("")
+  const [subject, setSubject] = useState("")
+  const [message, setMessage] = useState("")
+  const [linksRaw, setLinksRaw] = useState("")
+  const [consentConfirmed, setConsentConfirmed] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
       {/* Noise Effect */}
@@ -77,7 +89,58 @@ export default function ContactPage() {
                    </div>
                    <span className="text-lg">Submit Your Proposal</span>
                  </Badge>
-                <form className="space-y-6">
+               <form
+                 className="space-y-6"
+                 onSubmit={async (e) => {
+                   e.preventDefault()
+                   setSubmitError(null)
+                   setSubmitSuccess(false)
+                   setIsSubmitting(true)
+                   try {
+                     const relevantLinks = linksRaw
+                       .split(/[\n,]/)
+                       .map((s) => s.trim())
+                       .filter(Boolean)
+                   
+                     const payload = {
+                       fullName,
+                       company: company || undefined,
+                       email,
+                       phoneOrHandle: contact || undefined,
+                       proposalType,
+                       subject,
+                       message,
+                       relevantLinks,
+                       metBefore: hasInteracted || "no",
+                       consentConfirmed,
+                     }
+                     const res = await fetch("/api/contact", {
+                       method: "POST",
+                       headers: { "Content-Type": "application/json" },
+                       body: JSON.stringify(payload),
+                     })
+                     if (!res.ok) {
+                       const data = await res.json().catch(() => ({}))
+                       throw new Error(data?.error || `Failed with ${res.status}`)
+                     }
+                     setSubmitSuccess(true)
+                     setFullName("")
+                     setCompany("")
+                     setEmail("")
+                     setContact("")
+                     setProposalType("")
+                     setSubject("")
+                     setMessage("")
+                     setLinksRaw("")
+                     setHasInteracted("")
+                     setConsentConfirmed(false)
+                   } catch (err: any) {
+                     setSubmitError(err?.message || "Submission failed")
+                   } finally {
+                     setIsSubmitting(false)
+                   }
+                 }}
+               >
                   {/* Full Name */}
                   <div>
                     <Label htmlFor="fullName" className="text-white font-impact flex items-center gap-2">
@@ -89,6 +152,8 @@ export default function ContactPage() {
                       type="text" 
                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
                       placeholder="Your full name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
                       required
                     />
                   </div>
@@ -99,12 +164,14 @@ export default function ContactPage() {
                        <Building className="w-4 h-4" />
                        Company / Affiliation
                      </Label>
-                     <Input 
-                       id="company" 
-                       type="text" 
-                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
-                       placeholder="Company name or 'Independent'"
-                     />
+                    <Input 
+                      id="company" 
+                      type="text" 
+                      className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
+                      placeholder="Company name or 'Independent'"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                    />
                    </div>
 
                    {/* Email */}
@@ -113,13 +180,15 @@ export default function ContactPage() {
                        <Mail className="w-4 h-4" />
                        Email Address *
                      </Label>
-                     <Input 
-                       id="email" 
-                       type="email" 
-                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
-                       placeholder="your.email@example.com"
-                       required
-                     />
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
+                      placeholder="your.email@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
                    </div>
 
                    {/* Phone / Telegram / X */}
@@ -128,12 +197,14 @@ export default function ContactPage() {
                        <Phone className="w-4 h-4" />
                        Phone / Telegram / X (Optional)
                      </Label>
-                     <Input 
-                       id="contact" 
-                       type="text" 
-                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
-                       placeholder="For faster follow-up"
-                     />
+                    <Input 
+                      id="contact" 
+                      type="text" 
+                      className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
+                      placeholder="For faster follow-up"
+                      value={contact}
+                      onChange={(e) => setContact(e.target.value)}
+                    />
                    </div>
 
                    {/* Type of Proposal */}
@@ -142,21 +213,21 @@ export default function ContactPage() {
                        <FileText className="w-4 h-4" />
                        Type of Proposal *
                      </Label>
-                     <Select required>
-                       <SelectTrigger className="cursor-pointer w-full mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400">
-                         <SelectValue placeholder="Select proposal type" />
-                       </SelectTrigger>
-                       <SelectContent className="bg-[#1f1f1f] border-[#c0c0c0] text-[#f0f0f0]">
-                         <SelectItem value="speaking">Speaking Invitation</SelectItem>
-                         <SelectItem value="panel">Panel Collaboration</SelectItem>
-                         <SelectItem value="podcast">Podcast Guest</SelectItem>
-                         <SelectItem value="investment">Investment Proposal</SelectItem>
-                         <SelectItem value="tech">Tech/Product Pitch</SelectItem>
-                         <SelectItem value="partnership">Strategic Partnership</SelectItem>
-                         <SelectItem value="press">Press/Media Inquiry</SelectItem>
-                         <SelectItem value="other">Other</SelectItem>
-                       </SelectContent>
-                     </Select>
+                    <Select value={proposalType} onValueChange={setProposalType} required>
+                      <SelectTrigger className="cursor-pointer w-full mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400">
+                        <SelectValue placeholder="Select proposal type" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-[#1f1f1f] border-[#c0c0c0] text-[#f0f0f0]">
+                        <SelectItem value="speaking">Speaking Invitation</SelectItem>
+                        <SelectItem value="panel">Panel Collaboration</SelectItem>
+                        <SelectItem value="podcast">Podcast Guest</SelectItem>
+                        <SelectItem value="investment">Investment Proposal</SelectItem>
+                        <SelectItem value="tech">Tech/Product Pitch</SelectItem>
+                        <SelectItem value="partnership">Strategic Partnership</SelectItem>
+                        <SelectItem value="press">Press/Media Inquiry</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
                    </div>
 
                    {/* Subject */}
@@ -165,13 +236,15 @@ export default function ContactPage() {
                        <MessageSquare className="w-4 h-4" />
                        Subject or Title of Proposal *
                      </Label>
-                                          <Input 
-                        id="subject" 
-                        type="text" 
-                        className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
-                        placeholder="Brief title of your proposal"
-                        required
-                      />
+                     <Input 
+                       id="subject" 
+                       type="text" 
+                       className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
+                       placeholder="Brief title of your proposal"
+                       value={subject}
+                       onChange={(e) => setSubject(e.target.value)}
+                       required
+                     />
                    </div>
 
                    {/* Detailed Message */}
@@ -180,13 +253,15 @@ export default function ContactPage() {
                        <MessageSquare className="w-4 h-4" />
                        Detailed Message / Proposal Overview *
                      </Label>
-                                          <Textarea 
-                        id="message" 
-                        rows={8}
-                        className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 resize-none"
-                        placeholder="Please include who you are, what you're proposing, and why you believe it aligns with Nick's values or vision..."
-                        required
-                      />
+                     <Textarea 
+                       id="message" 
+                       rows={8}
+                       className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 resize-none"
+                       placeholder="Please include who you are, what you're proposing, and why you believe it aligns with Nick's values or vision..."
+                       value={message}
+                       onChange={(e) => setMessage(e.target.value)}
+                       required
+                     />
                    </div>
 
                    {/* Relevant Links */}
@@ -195,12 +270,14 @@ export default function ContactPage() {
                        <LinkIcon className="w-4 h-4" />
                        Relevant Links (Optional)
                      </Label>
-                                          <Textarea 
-                        id="links" 
-                        rows={3}
-                        className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 resize-none"
-                        placeholder="LinkedIn, company site, pitch deck, X profile, etc."
-                      />
+                     <Textarea 
+                       id="links" 
+                       rows={3}
+                       className="mt-3 !normal-case bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 resize-none"
+                       placeholder="LinkedIn, company site, pitch deck, X profile, etc."
+                       value={linksRaw}
+                       onChange={(e) => setLinksRaw(e.target.value)}
+                     />
                    </div>
 
                                      {/* Previous Interaction */}
@@ -244,9 +321,9 @@ export default function ContactPage() {
                       )}
                    </div>
 
-                  {/* Serious Business Checkbox */}
+                 {/* Serious Business Checkbox */}
                   <div className="flex items-start space-x-3 pt-4">
-                    <Checkbox id="serious-business" className="mt-1" />
+                    <Checkbox id="serious-business" className="mt-1" checked={consentConfirmed} onCheckedChange={(v) => setConsentConfirmed(Boolean(v))} />
                     <Label htmlFor="serious-business" className="text-gray-300 text-sm leading-relaxed">
                       I understand this is for serious business inquiries only. Spam, personal messages, and unrelated requests will be ignored.
                     </Label>
@@ -257,10 +334,17 @@ export default function ContactPage() {
                     size="lg"
                     variant="outlineTech"
                     className="w-full font-impact"
+                    disabled={isSubmitting}
                   >
                     <Send className="mr-2 h-5 w-5" />
-                    Submit Proposal
+                    {isSubmitting ? "Submitting..." : "Submit Proposal"}
                   </Button>
+                  {submitSuccess && (
+                    <p className="text-green-400 text-sm text-center">Thanks! Your proposal was submitted.</p>
+                  )}
+                  {submitError && (
+                    <p className="text-red-400 text-sm text-center">{submitError}</p>
+                  )}
                 </form>
               </div>
             </div>
