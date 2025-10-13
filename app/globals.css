@@ -506,3 +506,54 @@ body {
     transform: scale(1.1);
   }
 }
+
+/* Blog prose styles - restore list styling and use console font for WordPress content */
+.prose {
+  font-family: console, monospace;
+}
+
+.prose ul {
+  list-style-type: disc;
+  padding-left: 1.5em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5em;
+}
+
+.prose ul ul,
+.prose ol ul {
+  list-style-type: circle;
+}
+
+.prose ol ol,
+.prose ul ol {
+  list-style-type: lower-alpha;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose ul > li,
+.prose ol > li {
+  padding-left: 0.25em;
+}
+
+.prose .has-small-font-size {
+  font-size: 12px;
+}
+
+.prose {
+  text-align: justify;
+}
+
+.prose .wp-block-heading {
+  font-weight: 700;
+}
+
+.prose .wp-block-spacer {
+  height: 2em;
+}

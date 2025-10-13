@@ -1,12 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { MessageCircle, Mail, Send, Globe } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { Send } from "lucide-react"
 
-export function ContactSection() {
+export default function BlogContactForm() {
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
@@ -16,37 +17,13 @@ export function ContactSection() {
   const [submitSuccess, setSubmitSuccess] = useState(false)
 
   return (
-    <section id="contact" className="space-y-8">
-      <div className="flex items-center gap-3">
-        <MessageCircle size={24} />
-        <h2 className="text-2xl font-bold">Contact</h2>
-      </div>
-
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-        {/* Contact Info */}
-        <div className="space-y-6">
-          <div className="bg-[#101010] border border-[#ffffff1a] rounded-2xl p-3 flex items-center gap-4">
-            <div className="w-12 h-12 border border-white rounded-xl flex items-center justify-center">
-              <Mail size={24} className="text-white" />
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm">Media Contact</p>
-              <a href="mailto:media@nickspanos.com" className="font-semibold">media@nickspanos.com</a>
-            </div>
-          </div>
-          <div className="bg-[#101010] border border-[#ffffff1a] rounded-2xl p-3 flex items-center gap-4">
-            <div className="w-12 h-12 border border-white rounded-xl flex items-center justify-center">
-              <Globe size={24} className="text-white" />
-            </div>
-            <div>
-              <p className="text-gray-400 text-sm">Official Website</p>
-              <a href="https://www.nickspanos.com" className="font-semibold">www.nickspanos.com</a>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Form */}
+    <div className="mt-12 pt-8 border-t border-white/10">
+      <div className="max-w-3xl mx-auto">
+        <Badge variant="outline" className="border-gray-400 text-gray-300 mb-4">
+          Get In Touch
+        </Badge>
+        <h2 className="text-2xl md:text-3xl font-title mb-6">CONTACT NICK SPANOS</h2>
+        
         <form
           className="space-y-4"
           onSubmit={async (e) => {
@@ -121,19 +98,19 @@ export function ContactSection() {
           </Button>
 
           {submitError && (
-            <div className="p-3 bg-red-500/10 border border-red-500/50 rounded text-red-400 text-sm">
+            <div className="p-3 bg-red-500/10 border border-red-500/50 rounded text-red-400 text-sm font-content">
               {submitError}
             </div>
           )}
 
           {submitSuccess && (
-            <div className="p-3 bg-green-500/10 border border-green-500/50 rounded text-green-400 text-sm">
+            <div className="p-3 bg-green-500/10 border border-green-500/50 rounded text-green-400 text-sm font-content">
               Thank you! Your message has been sent successfully.
             </div>
           )}
         </form>
       </div>
-
-    </section>
+    </div>
   )
 }
+

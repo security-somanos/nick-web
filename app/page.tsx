@@ -5,7 +5,7 @@ import HoverTrigger from "@/components/hover-trigger";
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award, Lightbulb } from "lucide-react"
+import { Play, ExternalLink, Calendar, Tv, Radio, Newspaper, MapPin, Users, Award, Lightbulb, BookOpen } from "lucide-react"
 import { FaFacebook, FaInstagram, FaYoutube, FaLinkedin, FaTelegram, FaXTwitter } from "react-icons/fa6"
 import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
@@ -427,6 +427,20 @@ export default function NickSpanosLanding() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
                       </svg>
                     </Link>
+                    <Link
+                      href="/blog"
+                      className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
+                    >
+                      <span>BLOG</span>
+                      <svg 
+                        className="w-[40px] h-[40px] md:w-[120px] md:h-[120px] transition-transform hover:translate-x-1 hover:-translate-y-1" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7V17" />
+                      </svg>
+                    </Link>
                     <div 
                       className="mb-0 flex items-center justify-center gap-4 md:gap-8 text-[40px] md:text-[120px] font-bold text-white font-impact cursor-pointer hover:text-[#7f7f7f] active:text-[#7f7f7f] touch-manipulation overflow-hidden leading-[30px] md:leading-[90px]"
                       onClick={scrollToFeatures}
@@ -611,6 +625,16 @@ export default function NickSpanosLanding() {
               >
                 <Tv className="mr-2 h-5 w-5" />
                 Media
+              </Button>
+            </Link>
+            <Link href="/blog" className="w-full md:w-auto">
+              <Button
+                size="lg"
+                className="w-full md:w-auto"
+                variant="outlineTech"
+              >
+                <BookOpen className="mr-2 h-5 w-5" />
+                Blog
               </Button>
             </Link>
             <Button
