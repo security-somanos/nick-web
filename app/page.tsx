@@ -913,6 +913,11 @@ export default function NickSpanosLanding() {
                 description: "EXPLORING THE INSIGHTS OF NICK SPANOS: A BITCOIN PIONEER",
                 link: "https://medium.com/%40nickspanos/exploring-the-insights-of-nick-spanos-a-bitcoin-pioneer-dda881e8d570"
               },
+              {
+                outlet: "iPROUP",
+                description: "CRYPTO LEGEND OPENS LABITCONF 2025: 'ARGENTINA WILL BE THE SWITZERLAND OF THE SOUTH' (SPANISH)",
+                link: "https://www.iproup.com/labitconf/61777-leyenda-cripto-se-proclamo-libertario-y-dice-que-argentina-sera-la-suiza-del-sur"
+              },
             ].map((item, index) => (
               <a 
                 key={index}
