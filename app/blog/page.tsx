@@ -53,7 +53,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams?: P
             <article key={post.id} className="group shadow-md shadow-black/50 border border-white/10 rounded-12 overflow-hidden bg-black/40 backdrop-blur hover:border-white/30 transition-all">
               <Link href={`/blog/${post.slug}`} className="block p-6">
                 <div className="mb-3 text-xs text-gray-500 font-mono uppercase">{formatDate(post.date)}</div>
-                <h2 className="text-xl font-semibold mb-3 group-hover:text-gray-300 transition-colors font-title">
+                <h2 className="text-xl font-semibold mb-3 group-hover:text-gray-300 transition-colors font-content">
                   {post.title.rendered.replace(/<[^>]+>/g, "")}
                 </h2>
                 {post.excerpt?.rendered ? (

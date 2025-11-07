@@ -323,6 +323,17 @@ export default function NickSpanosLanding() {
       }, 600); // Wait for menu close animation
     }
   };
+
+  // Scroll to events section
+  const scrollToEvents = () => {
+    const eventsSection = document.getElementById('events-section');
+    if (eventsSection) {
+      eventsSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
   
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
@@ -638,6 +649,15 @@ export default function NickSpanosLanding() {
                 Blog
               </Button>
             </Link>
+            <Button
+              size="lg"
+              className="w-full md:w-auto"
+              variant="outlineTech"
+              onClick={scrollToEvents}
+            >
+              <Calendar className="mr-2 h-5 w-5" />
+              Events
+            </Button>
             <Button
               size="lg"
               className="w-full md:w-auto"
