@@ -14,6 +14,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import PartnersSection from "@/components/partners-section";
 import MerchSection from "@/components/merch-section";
+import EventsSection from "@/components/events-section";
 import Image from "next/image"
 import Footer from "@/components/layout/footer";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -993,62 +994,7 @@ export default function NickSpanosLanding() {
       <PartnersSection />
 
       {/* Upcoming Events Section */}
-      <section className="py-16 px-0">
-        <div className="w-full">
-          <div className="flex items-end justify-between mb-8 px-3 md:px-4 lg:px-6">
-            <div>
-              <Badge variant="outline" className="border-gray-400 text-gray-300 mb-3">Upcoming</Badge>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-title text-white leading-tight">
-                EVENTS
-              </h2>
-              <p className="text-gray-400 text-sm md:text-base mt-2 font-content">
-                Join Nick Spanos at upcoming conferences and speaking engagements
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-3 md:px-4 lg:px-6">
-            {/* BTC in DC Event */}
-            <a
-              href="https://btcindc.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group cursor-pointer"
-            >
-              <div className="shadow-md shadow-black/50 border border-white/10 rounded-12 overflow-hidden bg-black/40 backdrop-blur hover:border-white/30 transition-all">
-                <div className="relative aspect-video">
-                  <Image
-                    src="/images/events/bdc.jpg"
-                    alt="BTC in DC"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-4">
-                  <div className="flex flex-col gap-2 mb-2">
-                    <Badge variant="outline" className="border-green-500/50 text-green-400 bg-green-500/10 w-fit text-xs">
-                      Upcoming
-                    </Badge>
-                    <span className="text-xs text-gray-500 font-mono">11/30/2025 • 4:45 PM</span>
-                  </div>
-                  <h3 className="text-base md:text-lg font-semibold mb-2 group-hover:text-gray-300 transition-colors font-title line-clamp-2">
-                    Consumer Protection Trends in Bitcoin
-                  </h3>
-                  <p className="text-gray-400 text-sm font-content mb-3">
-                    BTC in DC
-                  </p>
-                  <div className="flex items-center gap-1 text-xs text-gray-500 group-hover:text-gray-300 transition-colors">
-                    Learn more
-                    <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
+      <EventsSection />
 
       {/* Merch Section - before the water video */}
       <MerchSection />
