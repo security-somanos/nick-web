@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { protoMono, lomoCopy, clashDisplay } from '@/lib/fonts'
 import './globals.css'
+import FacebookPixel from '@/components/facebook-pixel'
 
 export const metadata: Metadata = {
   title: 'Nick Spanos - Bitcoin Pioneer & Bitcoin Center NYC Founder',
@@ -111,6 +112,7 @@ html {
         `}</style>
       </head>
       <body className="overflow-x-hidden">
+        <FacebookPixel />
         {children}
       </body>
     </html>
