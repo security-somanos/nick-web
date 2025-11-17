@@ -5,6 +5,7 @@ import { fetchPosts } from "@/lib/wp"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
+import BlogPageTracking from "./blog-page-tracking"
 
 export const metadata: Metadata = {
   title: "Blog - Nick Spanos | Bitcoin Pioneer & Blockchain Insights",
@@ -30,6 +31,7 @@ export default async function BlogIndexPage({ searchParams }: { searchParams?: P
 
   return (
     <div className="min-h-screen text-white pt-24 md:pt-32">
+      <BlogPageTracking page={page} totalPages={totalPages} />
       <div className="max-w-6xl mx-auto px-6 pb-16">
         <div className="mb-6">
           <Link href="/">
@@ -86,13 +88,22 @@ export default async function BlogIndexPage({ searchParams }: { searchParams?: P
 function Pagination({ page, totalPages }: { page: number; totalPages: number }) {
   const prev = page > 1 ? page - 1 : 1
   const next = page < totalPages ? page + 1 : totalPages
+  
   return (
     <div className="inline-flex items-center gap-3 text-sm font-mono">
-      <Link href={`/blog?page=${prev}`} className="px-4 py-2 rounded-full border border-gray-600 text-gray-200 hover:border-gray-300 hover:bg-white/5 transition-all">← Prev</Link>
+      <Link 
+        href={`/blog?page=${prev}`} 
+        className="px-4 py-2 rounded-full border border-gray-600 text-gray-200 hover:border-gray-300 hover:bg-white/5 transition-all"
+      >
+        ← Prev
+      </Link>
       <span className="text-gray-400 px-2">Page {page} / {totalPages}</span>
-      <Link href={`/blog?page=${next}`} className="px-4 py-2 rounded-full border border-gray-600 text-gray-200 hover:border-gray-300 hover:bg-white/5 transition-all">Next →</Link>
+      <Link 
+        href={`/blog?page=${next}`} 
+        className="px-4 py-2 rounded-full border border-gray-600 text-gray-200 hover:border-gray-300 hover:bg-white/5 transition-all"
+      >
+        Next →
+      </Link>
     </div>
   )
 }
-
-

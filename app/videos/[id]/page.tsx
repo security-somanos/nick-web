@@ -7,6 +7,7 @@ import { videos } from "@/lib/videos"
 import type { SubtitleTrack } from "@/lib/videos"
 import { buildCdnUrl, computePreviewUrl, withBase } from "@/lib/utils"
 import VideoDescription from "@/components/video-description"
+import VideoPageTracking from "./video-page-tracking"
 
 export function generateStaticParams() {
   return videos.map(v => ({ id: String(v.id) }))
@@ -86,9 +87,18 @@ export default function VideoDetailPage({ params }: { params: { id: string } }) 
 
   return (
     <div className="min-h-screen text-white">
+      <VideoPageTracking video={video!} />
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
         <div className="lg:col-span-2 space-y-4">
-          <Html5VideoPlayer src={src} poster={poster} controls autoPlay subtitles={video!.subtitles?.map((t: SubtitleTrack) => ({ ...t, src: buildCdnUrl(t.src, "videos") }))} />
+          <Html5VideoPlayer 
+            src={src} 
+            poster={poster} 
+            controls 
+            autoPlay 
+            subtitles={video!.subtitles?.map((t: SubtitleTrack) => ({ ...t, src: buildCdnUrl(t.src, "videos") }))}
+            videoId={String(video!.id)}
+            videoTitle={video!.realTitle || video!.subtitle || video!.title}
+          />
           <div className="space-y-1">
             <h2 className="text-2xl font-impact tracking-widest">{video!.realTitle || video.subtitle}</h2>
             <p className="text-gray-300 text-sm">{video!.subtitle}</p>

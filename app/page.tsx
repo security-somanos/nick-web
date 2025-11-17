@@ -18,6 +18,7 @@ import EventsSection from "@/components/events-section";
 import Image from "next/image"
 import Footer from "@/components/layout/footer";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useFacebookPixel } from "@/hooks/use-facebook-pixel";
 
 // Lazy load the VideoBoxesSection component for better initial performance
 const VideoBoxesSection = lazy(() => import("@/components/video-boxes-section"));
@@ -77,6 +78,11 @@ export default function NickSpanosLanding() {
   const bottomLeftRef = useRef<HTMLDivElement>(null);
   const bottomRightRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const pixel = useFacebookPixel();
+  const mediaPartnersRef = useRef<HTMLDivElement>(null);
+  const partnersRef = useRef<HTMLDivElement>(null);
+  const eventsRef = useRef<HTMLDivElement>(null);
+  const merchRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     // Timeline for hero animations
@@ -211,6 +217,42 @@ export default function NickSpanosLanding() {
     };
   }, [conferencesVideoLoaded]);
 
+  // Track section views
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    }
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target === mediaPartnersRef.current) {
+            pixel.handleSectionView("Media Partners", "home")
+          } else if (entry.target === partnersRef.current) {
+            pixel.handleSectionView("Partners", "home")
+          } else if (entry.target === eventsRef.current) {
+            pixel.handleSectionView("Events", "home")
+          } else if (entry.target === merchRef.current) {
+            pixel.handleSectionView("Merch", "home")
+          }
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+    if (mediaPartnersRef.current) observer.observe(mediaPartnersRef.current)
+    if (partnersRef.current) observer.observe(partnersRef.current)
+    if (eventsRef.current) observer.observe(eventsRef.current)
+    if (merchRef.current) observer.observe(merchRef.current)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [pixel])
+
   // Menu animations
   useEffect(() => {
     if (isMenuOpen && menuRef.current) {
@@ -342,7 +384,10 @@ export default function NickSpanosLanding() {
       {/* Header with 4 dots */}
       <header 
         className="rounded-xl p-3 fixed z-[50] top-0 left-1/2 transform -translate-x-1/2 mt-4 md:mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
-        onClick={() => setIsMenuOpen(true)}
+        onClick={() => {
+          setIsMenuOpen(true)
+          pixel.handleMenuOpen("home")
+        }}
       >
         <div className="w-[18px] h-[18px] flex flex-col justify-between">
           {/* Top row - 2 dots */}
@@ -496,26 +541,60 @@ export default function NickSpanosLanding() {
                     </p>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.facebook.com/RealNickSpanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("Facebook", "https://www.facebook.com/RealNickSpanos", "menu")}
+                    >
                       <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://instagram.com/realnickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("Instagram", "https://instagram.com/realnickspanos", "menu")}
+                    >
                       <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank"
-                          rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("YouTube", "https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg", "menu")}
+                    >
                       <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.linkedin.com/in/nick-spanos/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("LinkedIn", "https://www.linkedin.com/in/nick-spanos/", "menu")}
+                    >
                       <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.clubhouse.com/@nickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("Clubhouse", "https://www.clubhouse.com/@nickspanos", "menu")}
+                    >
                       <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://t.me/bitcoin_for_sale" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("Telegram", "https://t.me/bitcoin_for_sale", "menu")}
+                    >
                       <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://x.com/nickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => pixel.handleSocialLinkClick("Twitter", "https://x.com/nickspanos", "menu")}
+                    >
                       <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                   </div>
@@ -619,6 +698,7 @@ export default function NickSpanosLanding() {
               href="/videos/39"
               rel="noopener noreferrer"
               className="w-full md:w-auto"
+              onClick={() => pixel.handleButtonClick("Latest interview", "hero", "cta")}
             >
               <Button
                 size="lg"
@@ -629,7 +709,11 @@ export default function NickSpanosLanding() {
                 Latest interview
               </Button>
             </Link>
-            <Link href="/videos" className="w-full md:w-auto">
+            <Link 
+              href="/videos" 
+              className="w-full md:w-auto"
+              onClick={() => pixel.handleButtonClick("Media", "hero", "cta")}
+            >
               <Button
                 size="lg"
                 className="w-full md:w-auto"
@@ -639,7 +723,11 @@ export default function NickSpanosLanding() {
                 Media
               </Button>
             </Link>
-            <Link href="/blog" className="w-full md:w-auto">
+            <Link 
+              href="/blog" 
+              className="w-full md:w-auto"
+              onClick={() => pixel.handleButtonClick("Blog", "hero", "cta")}
+            >
               <Button
                 size="lg"
                 className="w-full md:w-auto"
@@ -653,7 +741,10 @@ export default function NickSpanosLanding() {
               size="lg"
               className="w-full md:w-auto"
               variant="outlineTech"
-              onClick={scrollToEvents}
+              onClick={() => {
+                scrollToEvents()
+                pixel.handleButtonClick("Events", "hero", "cta")
+              }}
             >
               <Calendar className="mr-2 h-5 w-5" />
               Events
@@ -662,12 +753,19 @@ export default function NickSpanosLanding() {
               size="lg"
               className="w-full md:w-auto"
               variant="outlineTech"
-              onClick={scrollToFeatures}
+              onClick={() => {
+                scrollToFeatures()
+                pixel.handleButtonClick("Features", "hero", "cta")
+              }}
             >
               <Lightbulb className="mr-2 h-5 w-5" />
               Features
             </Button>
-            <Link href="/press" className="w-full md:w-auto">
+            <Link 
+              href="/press" 
+              className="w-full md:w-auto"
+              onClick={() => pixel.handleButtonClick("Press", "hero", "cta")}
+            >
               <Button
                 size="lg"
                 className="w-full md:w-auto"
@@ -677,7 +775,11 @@ export default function NickSpanosLanding() {
                 Press
               </Button>
             </Link>
-            <Link href="/contact" className="w-full md:w-auto">
+            <Link 
+              href="/contact" 
+              className="w-full md:w-auto"
+              onClick={() => pixel.handleButtonClick("Contact", "hero", "cta")}
+            >
               <Button
                 size="lg"
                 className="w-full md:w-auto"
@@ -765,6 +867,7 @@ export default function NickSpanosLanding() {
                   href="https://tv.apple.com/us/movie/banking-on-bitcoin/umc.cmc.61gus6jq1w8py6echnpktyjan" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => pixel.handleExternalLinkClick("external_resource", "https://tv.apple.com/us/movie/banking-on-bitcoin/umc.cmc.61gus6jq1w8py6echnpktyjan", "Watch Banking on Bitcoin", "features_section")}
                 >
                   <Play className="mr-2 h-4 w-4" />
                   Watch Banking on Bitcoin
@@ -781,6 +884,7 @@ export default function NickSpanosLanding() {
                   href="https://scholar.google.com/citations?user=0aWFyQgAAAAJ" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => pixel.handleExternalLinkClick("external_resource", "https://scholar.google.com/citations?user=0aWFyQgAAAAJ", "View Research Profile", "features_section")}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   View Research Profile
@@ -797,6 +901,7 @@ export default function NickSpanosLanding() {
                   href="https://bitcoinwiki.org/wiki/nick-spanos" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => pixel.handleExternalLinkClick("external_resource", "https://bitcoinwiki.org/wiki/nick-spanos", "BitcoinWiki Profile", "features_section")}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
                   BitcoinWiki Profile
@@ -813,6 +918,7 @@ export default function NickSpanosLanding() {
                   href="https://www.youtube.com/watch?v=tepwPaYE0Ro" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  onClick={() => pixel.handleExternalLinkClick("external_resource", "https://www.youtube.com/watch?v=tepwPaYE0Ro", "Inventor of slidechain", "features_section")}
                 >
                   <Lightbulb className="mr-2 h-4 w-4" />
                   Inventor of slidechain
@@ -824,7 +930,7 @@ export default function NickSpanosLanding() {
       </section>
 
       {/* Media Appearances Section */}
-      <section className="py-20 px-0">
+      <section ref={mediaPartnersRef} className="py-20 px-0">
         <div className="">
           <div className="text-left mb-12 px-6">
             <Badge variant="outline" className="border-gray-400 text-gray-300  mb-4">
@@ -946,6 +1052,7 @@ export default function NickSpanosLanding() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group cursor-pointer transition-all duration-350 hover:bg-white active:bg-white touch-manipulation overflow-hidden block"
+                onClick={() => pixel.handleExternalLinkClick("external_article", item.link, item.outlet, "media_partners_section")}
               >
                                   <div className="border-t border-white/20 group-hover:border-black/40 group-active:border-black/40 transition-colors">
                   <div className="flex items-center justify-between py-4 md:py-6 px-3 md:px-10 relative">
@@ -1011,13 +1118,19 @@ export default function NickSpanosLanding() {
       </Suspense>
       
       {/* Partners Section - positioned after the scroll sequence */}
-      <PartnersSection />
+      <div ref={partnersRef}>
+        <PartnersSection />
+      </div>
 
       {/* Upcoming Events Section */}
-      <EventsSection />
+      <div ref={eventsRef}>
+        <EventsSection />
+      </div>
 
       {/* Merch Section - before the water video */}
-      <MerchSection />
+      <div ref={merchRef}>
+        <MerchSection />
+      </div>
 
       {/* Quote Section */}
       <section className="hidden py-20 px-4 bg-gray-900">

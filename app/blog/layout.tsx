@@ -116,7 +116,12 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       {/* Header with 4 dots */}
       <header 
         className="rounded-xl p-3 fixed z-[50] top-0 left-1/2 transform -translate-x-1/2 mt-4 md:mt-8 cursor-pointer hover:rotate-45 transition-transform duration-300"
-        onClick={() => setIsMenuOpen(true)}
+        onClick={() => {
+          setIsMenuOpen(true)
+          if (typeof window !== 'undefined' && window.fbq) {
+            window.fbq('trackCustom', 'MenuOpen', { menu_location: 'blog' })
+          }
+        }}
       >
         <div className="w-[18px] h-[18px] flex flex-col justify-between">
           <div className="flex justify-between">
@@ -244,25 +249,88 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 justify-center md:justify-between items-end pb-8 px-8 mt-auto">
                 <div ref={bottomRightRef} className="flex flex-col mx-auto md:mx-0 md:flex-col items-center space-y-0 md:space-y-0 md:space-x-6 text-white order-1 md:order-2">
                   <div className="flex items-center space-x-4">
-                    <Link href="https://www.facebook.com/RealNickSpanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.facebook.com/RealNickSpanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'Facebook', link_url: 'https://www.facebook.com/RealNickSpanos', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaFacebook className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://instagram.com/realnickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'Instagram', link_url: 'https://instagram.com/realnickspanos', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaInstagram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'YouTube', link_url: 'https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaYoutube className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.linkedin.com/in/nick-spanos/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'LinkedIn', link_url: 'https://www.linkedin.com/in/nick-spanos/', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaLinkedin className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://www.clubhouse.com/@nickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://www.clubhouse.com/@nickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'Clubhouse', link_url: 'https://www.clubhouse.com/@nickspanos', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <SiClubhouse className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://t.me/bitcoin_for_sale" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'Telegram', link_url: 'https://t.me/bitcoin_for_sale', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaTelegram className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
-                    <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
+                    <Link 
+                      href="https://x.com/nickspanos" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      onClick={() => {
+                        if (typeof window !== 'undefined' && window.fbq) {
+                          window.fbq('trackCustom', 'SocialLinkClick', { social_platform: 'Twitter', link_url: 'https://x.com/nickspanos', link_location: 'blog_menu' })
+                        }
+                      }}
+                    >
                       <FaXTwitter className="w-6 h-6 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                     </Link>
                   </div>

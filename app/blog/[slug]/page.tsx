@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 import { fetchPostBySlug } from "@/lib/wp"
 import { Badge } from "@/components/ui/badge"
 import BlogContactForm from "@/components/blog-contact-form"
+import BlogPostTracking from "./blog-post-tracking"
 
 export const revalidate = 60
 
@@ -59,6 +60,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen text-white pt-24 md:pt-32">
+      <BlogPostTracking post={post} />
       <div className="max-w-4xl mx-auto px-6 pb-16">
         <div className="mb-8">
           <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-gray-200 transition-colors font-mono group">

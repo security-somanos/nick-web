@@ -1,8 +1,11 @@
+"use client"
+
 import React from 'react';
 import Link from "next/link";
 import {FaFacebook, FaInstagram, FaLinkedin, FaTelegram, FaXTwitter, FaYoutube} from "react-icons/fa6";
 import {SiClubhouse} from "react-icons/si";
 import {Button} from "@/components/ui/button";
+import { trackSocialLinkClick } from "@/lib/facebook-pixel";
 
 const Footer = () => {
     return (
@@ -19,29 +22,60 @@ const Footer = () => {
                             worldwide.
                         </p>
                         <div className="flex gap-4 mb-2">
-                            <Link href="https://www.facebook.com/RealNickSpanos" target="_blank"
-                                  rel="noopener noreferrer">
+                            <Link 
+                              href="https://www.facebook.com/RealNickSpanos" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "Facebook", link_url: "https://www.facebook.com/RealNickSpanos", link_location: "footer" })}
+                            >
                                 <FaFacebook className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://instagram.com/realnickspanos" target="_blank" rel="noopener noreferrer">
+                            <Link 
+                              href="https://instagram.com/realnickspanos" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "Instagram", link_url: "https://instagram.com/realnickspanos", link_location: "footer" })}
+                            >
                                 <FaInstagram className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" target="_blank"
-                                  rel="noopener noreferrer">
+                            <Link 
+                              href="https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "YouTube", link_url: "https://www.youtube.com/channel/UCOznMq4wNdaHYsOb2LUCGjg", link_location: "footer" })}
+                            >
                                 <FaYoutube className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://www.linkedin.com/in/nick-spanos/" target="_blank"
-                                  rel="noopener noreferrer">
+                            <Link 
+                              href="https://www.linkedin.com/in/nick-spanos/" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "LinkedIn", link_url: "https://www.linkedin.com/in/nick-spanos/", link_location: "footer" })}
+                            >
                                 <FaLinkedin className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://www.clubhouse.com/@nickspanos" target="_blank"
-                                  rel="noopener noreferrer">
+                            <Link 
+                              href="https://www.clubhouse.com/@nickspanos" 
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "Clubhouse", link_url: "https://www.clubhouse.com/@nickspanos", link_location: "footer" })}
+                            >
                                 <SiClubhouse className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://t.me/bitcoin_for_sale" target="_blank" rel="noopener noreferrer">
+                            <Link 
+                              href="https://t.me/bitcoin_for_sale" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "Telegram", link_url: "https://t.me/bitcoin_for_sale", link_location: "footer" })}
+                            >
                                 <FaTelegram className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
-                            <Link href="https://x.com/nickspanos" target="_blank" rel="noopener noreferrer">
+                            <Link 
+                              href="https://x.com/nickspanos" 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              onClick={() => trackSocialLinkClick({ social_platform: "Twitter", link_url: "https://x.com/nickspanos", link_location: "footer" })}
+                            >
                                 <FaXTwitter className="w-5 h-5 text-[#dadada] hover:text-[#fafafa] transition-colors"/>
                             </Link>
                         </div>

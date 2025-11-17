@@ -190,6 +190,12 @@ export default function VideosGrid({ items }: VideosGridProps) {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            trackVideoGridClick({
+                              video_id: String(box.id),
+                              video_title: box.title || box.subtitle,
+                              category: box.category,
+                              grid_location: "videos_page",
+                            });
                             window.open(`/videos/${box.id}`, '_self');
                           }}
                         >

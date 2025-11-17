@@ -12,8 +12,9 @@ import { FaArrowRight, FaExclamationTriangle, FaRegClock, FaFacebook, FaInstagra
 import { SiClubhouse } from "react-icons/si"
 import Link from "next/link"
 import NoiseEffect from "@/components/noise-effect"
-import { useState } from "react"
-import Footer from "@/components/layout/footer";
+import { useState, useEffect } from "react"
+import Footer from "@/components/layout/footer"
+import { trackLead, trackInitiateCheckout, trackCompleteRegistration, trackViewContent } from "@/lib/facebook-pixel"
 
 export default function ContactPage() {
   const [hasInteracted, setHasInteracted] = useState<string>("")
@@ -30,6 +31,28 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [hasTrackedInitiate, setHasTrackedInitiate] = useState(false)
+
+  // Track page view
+  useEffect(() => {
+    trackViewContent({
+      content_name: "Contact Page",
+      content_category: "contact",
+      content_type: "page",
+    })
+  }, [])
+
+  const handleFieldInteraction = () => {
+    if (!hasTrackedInitiate) {
+      setHasTrackedInitiate(true)
+      trackInitiateCheckout({
+        content_name: "Contact Form",
+        content_category: "contact_form",
+        form_type: "contact",
+        form_location: "contact_page",
+      })
+    }
+  }
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
       {/* Noise Effect */}
@@ -123,6 +146,21 @@ export default function ContactPage() {
                        const data = await res.json().catch(() => ({}))
                        throw new Error(data?.error || `Failed with ${res.status}`)
                      }
+                     
+                     // Track successful form submission
+                     trackLead({
+                       content_name: "Contact Form",
+                       content_category: "contact_form",
+                       form_type: "contact",
+                       form_location: "contact_page",
+                     })
+                     
+                     trackCompleteRegistration({
+                       content_name: "Contact Form",
+                       status: "success",
+                       form_type: "contact",
+                     })
+                     
                      setSubmitSuccess(true)
                      setFullName("")
                      setCompany("")
@@ -134,6 +172,7 @@ export default function ContactPage() {
                      setLinksRaw("")
                      setHasInteracted("")
                      setConsentConfirmed(false)
+                     setHasTrackedInitiate(false)
                    } catch (err: any) {
                      setSubmitError(err?.message || "Submission failed")
                    } finally {
@@ -153,7 +192,11 @@ export default function ContactPage() {
                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
                       placeholder="Your full name"
                       value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
+                      onChange={(e) => {
+                        setFullName(e.target.value)
+                        handleFieldInteraction()
+                      }}
+                      onFocus={handleFieldInteraction}
                       required
                     />
                   </div>
@@ -186,7 +229,11 @@ export default function ContactPage() {
                       className="mt-3 bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400"
                       placeholder="your.email@example.com"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) => {
+                        setEmail(e.target.value)
+                        handleFieldInteraction()
+                      }}
+                      onFocus={handleFieldInteraction}
                       required
                     />
                    </div>

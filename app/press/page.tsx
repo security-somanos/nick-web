@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import NoiseEffect from "@/components/noise-effect"
 import { ProfileSidebar } from "./_components/profile-sidebar"
 import { HelloSection } from "./_components/hello-section"
@@ -9,8 +10,18 @@ import { EducationSection } from "./_components/education-section"
 import { StakesSection } from "./_components/stakes-section"
 import { ContactSection } from "./_components/contact-section"
 import { FooterSection } from "./_components/footer-section"
+import { trackViewContent } from "@/lib/facebook-pixel"
 
 export default function PressPage() {
+  // Track page view
+  useEffect(() => {
+    trackViewContent({
+      content_name: "Press Page",
+      content_category: "press",
+      content_type: "page",
+    })
+  }, [])
+
   return (
     <>
       <NoiseEffect />

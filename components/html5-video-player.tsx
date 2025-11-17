@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { isHlsUrl } from "@/lib/utils"
+import { trackVideoView, trackVideoPlay, trackVideoProgress } from "@/lib/facebook-pixel"
 
 interface Html5VideoPlayerProps {
   src: string
@@ -15,10 +16,15 @@ interface Html5VideoPlayerProps {
   fit?: "contain" | "cover"
   containerClassName?: string
   videoClassName?: string
+  videoId?: string
+  videoTitle?: string
 }
 
-export default function Html5VideoPlayer({ src, poster, autoPlay = false, controls = true, loop = false, muted = false, subtitles = [], aspect = "video", fit = "contain", containerClassName = "", videoClassName = "" }: Html5VideoPlayerProps) {
+export default function Html5VideoPlayer({ src, poster, autoPlay = false, controls = true, loop = false, muted = false, subtitles = [], aspect = "video", fit = "contain", containerClassName = "", videoClassName = "", videoId, videoTitle }: Html5VideoPlayerProps) {
   const ref = useRef<HTMLVideoElement | null>(null)
+  const [hasTrackedView, setHasTrackedView] = useState(false)
+  const [hasTrackedPlay, setHasTrackedPlay] = useState(false)
+  const [progressTracked, setProgressTracked] = useState(new Set<number>())
 
   useEffect(() => {
     if (autoPlay && ref.current) {
@@ -28,6 +34,64 @@ export default function Html5VideoPlayer({ src, poster, autoPlay = false, contro
       tryPlay()
     }
   }, [autoPlay, src])
+
+  useEffect(() => {
+    const video = ref.current
+    if (!video || !videoId) return
+
+    // Track video view when video starts playing
+    const handlePlay = () => {
+      if (!hasTrackedView) {
+        setHasTrackedView(true)
+        trackVideoView({
+          video_id: videoId,
+          video_title: videoTitle,
+          video_type: "video/mp4",
+          video_duration: video.duration || undefined,
+          content_category: "video",
+        })
+      }
+      
+      if (!hasTrackedPlay) {
+        setHasTrackedPlay(true)
+        trackVideoPlay({
+          video_id: videoId,
+          video_title: videoTitle,
+          video_type: "video/mp4",
+        })
+      }
+    }
+
+    // Track video progress
+    const handleTimeUpdate = () => {
+      if (!video.duration) return
+      const currentProgress = (video.currentTime / video.duration) * 100
+      const milestones = [25, 50, 75, 100]
+      
+      milestones.forEach((milestone) => {
+        if (currentProgress >= milestone && !progressTracked.has(milestone)) {
+          const newProgressTracked = new Set(progressTracked)
+          newProgressTracked.add(milestone)
+          setProgressTracked(newProgressTracked)
+          
+          trackVideoProgress({
+            video_id: videoId,
+            video_title: videoTitle,
+            progress_percentage: milestone,
+            video_duration: video.duration,
+          })
+        }
+      })
+    }
+
+    video.addEventListener("play", handlePlay)
+    video.addEventListener("timeupdate", handleTimeUpdate)
+
+    return () => {
+      video.removeEventListener("play", handlePlay)
+      video.removeEventListener("timeupdate", handleTimeUpdate)
+    }
+  }, [videoId, videoTitle, hasTrackedView, hasTrackedPlay, progressTracked])
 
   useEffect(() => {
     const video = ref.current

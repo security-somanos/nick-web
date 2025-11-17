@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Send } from "lucide-react"
+import { trackLead, trackInitiateCheckout, trackCompleteRegistration } from "@/lib/facebook-pixel"
 
 export default function BlogContactForm() {
   const [fullName, setFullName] = useState("")
@@ -15,6 +16,19 @@ export default function BlogContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [hasTrackedInitiate, setHasTrackedInitiate] = useState(false)
+
+  const handleFieldInteraction = () => {
+    if (!hasTrackedInitiate) {
+      setHasTrackedInitiate(true)
+      trackInitiateCheckout({
+        content_name: "Blog Contact Form",
+        content_category: "contact_form",
+        form_type: "blog_contact",
+        form_location: "blog_post",
+      })
+    }
+  }
 
   return (
     <div className="mt-12 pt-8 border-t border-white/10">
@@ -47,11 +61,27 @@ export default function BlogContactForm() {
                 const data = await res.json().catch(() => ({}))
                 throw new Error(data?.error || `Failed with ${res.status}`)
               }
+              
+              // Track successful form submission
+              trackLead({
+                content_name: "Blog Contact Form",
+                content_category: "contact_form",
+                form_type: "blog_contact",
+                form_location: "blog_post",
+              })
+              
+              trackCompleteRegistration({
+                content_name: "Blog Contact Form",
+                status: "success",
+                form_type: "blog_contact",
+              })
+              
               setSubmitSuccess(true)
               setFullName("")
               setEmail("")
               setPhone("")
               setMessage("")
+              setHasTrackedInitiate(false)
             } catch (err: any) {
               setSubmitError(err?.message || "Submission failed")
             } finally {
@@ -63,7 +93,11 @@ export default function BlogContactForm() {
             placeholder="Full Name" 
             className="bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 placeholder:text-gray-400"
             value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={(e) => {
+              setFullName(e.target.value)
+              handleFieldInteraction()
+            }}
+            onFocus={handleFieldInteraction}
             required
           />
           <Input
@@ -71,21 +105,33 @@ export default function BlogContactForm() {
             type="email"
             className="bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 placeholder:text-gray-400"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value)
+              handleFieldInteraction()
+            }}
+            onFocus={handleFieldInteraction}
             required
           />
           <Input
             placeholder="Phone Number"
             className="bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 placeholder:text-gray-400"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              setPhone(e.target.value)
+              handleFieldInteraction()
+            }}
+            onFocus={handleFieldInteraction}
           />
           <Textarea
             placeholder="Message"
             rows={6}
             className="bg-transparent border-[#c0c0c0] text-[#f0f0f0] focus:border-gray-400 placeholder:text-gray-400 resize-none"
             value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            onChange={(e) => {
+              setMessage(e.target.value)
+              handleFieldInteraction()
+            }}
+            onFocus={handleFieldInteraction}
             required
           />
           <Button 
