@@ -17,6 +17,16 @@ type Event = {
 
 const events: Event[] = [
   {
+    title: "Connecting Minds and Creating the Future",
+    eventName: "GFOIS/MIAMI",
+    date: "11/19/2025",
+    time: "9:00 AM",
+    location: "Miami, FL",
+    link: "https://www.gfois.com/",
+    image: "/images/events/miami.jpg",
+    alt: "GFOIS/MIAMI",
+  },
+  {
     title: "Why We Are Unstoppable: The Bitcoin Revolution",
     eventName: "LABITCONF",
     date: "11/7/2025",
