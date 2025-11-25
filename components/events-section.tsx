@@ -3,6 +3,7 @@
 import { useMemo } from "react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
+import Marquee from "react-fast-marquee"
 
 type Event = {
   title: string
@@ -101,7 +102,7 @@ function EventCard({ event }: { event: Event }) {
       onClick={event.link === "#" ? (e) => e.preventDefault() : undefined}
       className="group cursor-pointer h-full flex"
     >
-      <div className="shadow-md shadow-black/50 border border-white/10 rounded-12 overflow-hidden bg-black/40 backdrop-blur hover:border-white/30 transition-all flex flex-col w-full">
+      <div className="shadow-md shadow-black/50 border border-white/10 rounded-12 overflow-hidden bg-black/40 backdrop-blur hover:border-white/30 transition-all flex flex-col w-full h-full">
         <div className="relative aspect-video grayscale flex-shrink-0">
           <Image
             src={event.image}
@@ -148,6 +149,9 @@ function EventCard({ event }: { event: Event }) {
 }
 
 export default function EventsSection() {
+  // Duplicate events for seamless infinite loop
+  const duplicatedEvents = [...events, ...events]
+
   return (
     <section id="events-section" className="py-16 px-0">
       <div className="w-full">
@@ -163,10 +167,21 @@ export default function EventsSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 px-3 md:px-4 lg:px-6 items-stretch">
-          {events.map((event, index) => (
-            <EventCard key={index} event={event} />
-          ))}
+        <div className="mx-auto md:max-w-[96vw] flex">
+          <Marquee
+            gradient={false}
+            speed={30}
+            pauseOnHover={true}
+            autoFill={true}
+            direction="left"
+            className="h-full"
+          >
+            {duplicatedEvents.map((event, index) => (
+              <div key={`${event.eventName}-${index}`} className="flex-shrink-0 mr-6 w-[30vw] min-w-[280px] max-w-[500px] h-full">
+                <EventCard event={event}  />
+              </div>
+            ))}
+          </Marquee>
         </div>
       </div>
     </section>

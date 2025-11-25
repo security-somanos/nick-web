@@ -1119,17 +1119,17 @@ export default function NickSpanosLanding() {
       
       {/* Partners Section - positioned after the scroll sequence */}
       <div ref={partnersRef}>
-        <PartnersSection />
+      <PartnersSection />
       </div>
 
       {/* Upcoming Events Section */}
       <div ref={eventsRef}>
-        <EventsSection />
+      <EventsSection />
       </div>
 
       {/* Merch Section - before the water video */}
       <div ref={merchRef}>
-        <MerchSection />
+      <MerchSection />
       </div>
 
       {/* Quote Section */}
